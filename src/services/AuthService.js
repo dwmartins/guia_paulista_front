@@ -1,9 +1,13 @@
 import axios from '@/http';
 import { userStore } from '@/store/userStore';
-import router from '@/router';
 import { showAlert } from '@/helpers/showAlert';
+import { router } from '@/router';
 
 class AuthService {
+    teste() {
+        router.push("/")
+        console.log("teste")
+    }
     getUserLogged() {
         const user = localStorage.getItem('userData');
         return user ? JSON.parse(user) : null;

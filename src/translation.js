@@ -1,21 +1,18 @@
 let translations = {};
 
-function loadTranslations(lang) {
+async function loadTranslations(lang) {
     try {
-        translations = require(`./translations/${lang}.js`);
+        const module = await import(`./translations/${lang}.js`);
+        translations = module;
     } catch (error) {
         console.error(`Failed to load translations for language: ${lang}`, error);
     }
 }
 
-export function setLanguage(lang = null) {
-    try {
-        loadTranslations(lang);
-    } catch (error) {
-        console.error(error.message)
-    }
+export async function setLanguage(lang) {
+    await loadTranslations(lang);
 }
 
 export function showText(key) {
-    return translations[key] || key
+    return translations[key] || key;
 }

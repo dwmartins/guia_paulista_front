@@ -13,9 +13,9 @@ export default async function loadApp() {
         const [language] = data.settings.filter(item => item.name === "language");
 
         if (language) {
-            setLanguage(language.value);
+            await setLanguage(language.value);
         } else {
-            setLanguage('pt-br');
+            await setLanguage('pt-br');
         }
 
         return Promise.resolve();
