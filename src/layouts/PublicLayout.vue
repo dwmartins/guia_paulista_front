@@ -1,7 +1,6 @@
 <template>
     <section id="publicLayout" class="position-relative" >
-        <router-link to="/">Home</router-link>
-        <router-link :to="showText('PATH_LOGIN')">{{ showText('PAGE_LOGIN_NAME') }}</router-link>
+        <AppHeader />
         <main>
             <router-view></router-view>
         </main>
@@ -9,10 +8,14 @@
 </template>
 
 <script>
+import AppHeader from '@/components/public/appHeader.vue';
 import { showText } from '@/translation';
 
 export default {
     name: 'PublicLayout',
+    components: {
+        AppHeader
+    },
     data() {
         return {
             showText
