@@ -30,9 +30,12 @@ export const userStore = reactive({
             this.user.permissions = { ...this.user.permissions, ...data.permissions };
         }
         this.user = { ...this.user, ...data };
+        this.userLogged = true;
     },
 
     clean() {
+        this.userLogged = false;
+        
         for (let key in this.user) {
             if (typeof this.user[key] === 'object') {
                 for (let subKey in this.user[key]) {

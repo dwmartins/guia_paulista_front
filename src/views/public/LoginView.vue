@@ -4,6 +4,7 @@
             <div class="col-sm-12 col-md-6 col-xl-7 d-flex flex-column justify-content-center align-items-center">
                 <h4 class="text-secondary">{{ showText('LOGIN') }}</h4>
                 <el-form
+                    @submit.prevent="submitForm"
                     class="w-100 p-3 form_login"
                     ref="formRef"
                     :model="formValidation"
@@ -24,7 +25,9 @@
                     </router-link>
 
                     <el-form-item class="mt-3">
-                        <el-button type="primary" @click="submitForm" class="w-100">{{ showText('LOGIN') }}</el-button>
+                        <el-button type="primary" native-type="submit" class="w-100" :loading="isLoading">
+                            {{ isLoading ? showText('LOADING') : showText('LOGIN') }}
+                        </el-button>
                     </el-form-item>
 
                     <hr class="text-secondary">
@@ -51,6 +54,7 @@ import { onMounted, onUnmounted  } from 'vue';
 import { siteInfoStore } from '@/store/siteInfoStore';
 import AuthService from '@/services/AuthService';
 import { showAlert } from '@/helpers/showAlert';
+import { router } from '@/router';
 
 onMounted(() => {
     document.title = `${showText('LOGIN_PAGE')} | ${siteInfoStore.constants.webSiteName}`;
@@ -61,6 +65,7 @@ onUnmounted(() => {
 });
  
 const formRef = ref(null);
+let isLoading = ref(false);
 
 const formRules = {
     email: [
@@ -81,11 +86,17 @@ const submitForm = async () => {
     const isValid  = await validForm();
 
     if(isValid) {
+        isLoading.value = true;
         try {
             const response = await AuthService.login(formValidation);
             console.log(response);
+            isLoading.value = false;
+
+            AuthService.setUserLogged(response.data);
             showAlert('success', '', showText('LOGIN_SUCCESSFUL'));
+            router.push('/');
         } catch (error) {
+            isLoading.value = false;
             console.error('Error logging in', error);
         }
     }

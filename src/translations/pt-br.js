@@ -4,6 +4,7 @@ export const HELLO_WORLD = "Olá mundo";
 export const PATH_LOGIN = "entrar";
 export const PATH_RECOVER_PASSWORD = "recuperar-senha";
 export const PATH_NEW_ACCOUNT = "nova-conta";
+export const PATH_DASHBOARD = "dashboard";
 
 // Name of navigation
 export const LOGIN_PAGE = "Entrar";
@@ -36,5 +37,6 @@ export const FATAL_ERROR = "Oops, houve um erro tente novamente.";
 
 export const WEBSITE_LOGO = "Logo do site";
 export const LOGIN = "Entrar";
+export const LOADING = "Aguarde";
 export const NOT_HAVE_ACCOUNT = "Não possui conta?";
 export const CREATE_ACCOUNT = "Criar minha conta";
