@@ -62,6 +62,7 @@ import { router } from '@/router';
 
 onMounted(() => {
     document.title = `${showText('LOGIN_PAGE')} | ${siteInfoStore.constants.webSiteName}`;
+    checkIfLogged();
 });
 
 onUnmounted(() => {
@@ -131,6 +132,14 @@ const validForm = () => {
             }
         });
     });
+}
+
+const checkIfLogged = () => {
+    if(AuthService.getUserLogged()) {
+        router.push('/');
+        showAlert('success', '', showText('USER_ALREADY_LOGGED'));
+        return;
+    }
 }
 
 </script>

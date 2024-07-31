@@ -30,6 +30,7 @@ export const ALL_REQUIRED = "Fill in all required fields";
 
 // Success message
 export const LOGIN_SUCCESSFUL = "Login successful.";
+export const USER_ALREADY_LOGGED = "Você já esta logado.";
 
 // Error message
 export const TITLE_ERROR_MESSAGE = "Error";

@@ -30,6 +30,7 @@ export const ALL_REQUIRED = "Preencha todos os campos obrigatórios";
 
 // Success message
 export const LOGIN_SUCCESSFUL = "Login efetuado com sucesso";
+export const USER_ALREADY_LOGGED = "Você já está logado.";
 
 // Error message
 export const TITLE_ERROR_MESSAGE = "Erro"
