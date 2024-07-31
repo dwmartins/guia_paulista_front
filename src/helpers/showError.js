@@ -1,5 +1,5 @@
 import AuthService from "@/services/AuthService";
-import router from "@/router";
+import { router } from "@/router";
 import { showAlert } from "./showAlert";
 import { showText } from "@/translation";
 
