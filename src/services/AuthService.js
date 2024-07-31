@@ -2,6 +2,7 @@ import axios from '@/http';
 import { userStore } from '@/store/userStore';
 import { showAlert } from '@/helpers/showAlert';
 import { router } from '@/router';
+import { showError } from '@/helpers/showError';
 
 class AuthService {
     teste() {
@@ -73,8 +74,13 @@ class AuthService {
         });
     }
 
-    login(credentials) {
-        return axios.post('/auth/login', credentials);
+    async login(credentials) {
+        try {
+            return await axios.post('/auth/login', credentials);
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
     }
 
     logout() {

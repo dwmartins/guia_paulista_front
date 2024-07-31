@@ -2,6 +2,8 @@ export const HELLO_WORLD = "Hello world";
 
 // Pages
 export const PATH_LOGIN = "login";
+export const PATH_RECOVER_PASSWORD = "recover-password";
+export const PATH_NEW_ACCOUNT = "new-account";
 
 // Name of navigation
 export const LOGIN_PAGE = "Login";
@@ -15,4 +17,24 @@ export const BLOG_PAGE = "Blog";
 export const CONTACT_PAGE = "Contact";
 export const ADVERTISE_PAGE = "Advertise here";
 
+// Form Labels
+export const EMAIL_LABEL = "Email";
+export const PASSWORD_LABEL = "Password";
+
+// Form Validations
+export const EMAIL_INVALID = "Please input correct email address";
+export const EMAIL_REQUIRED = "Email is required";
+export const PASSWORD_REQUIRED = "Password is required";
+export const ALL_REQUIRED = "Fill in all required fields";
+
+// Success message
+export const LOGIN_SUCCESSFUL = "Login successful.";
+
+// Error message
+export const TITLE_ERROR_MESSAGE = "Error";
+export const FATAL_ERROR = "Oops, there was an error, please try again.";
+
 export const WEBSITE_LOGO = "Website logo";
+export const LOGIN = "Login";
+export const NOT_HAVE_ACCOUNT = "Don't have an account?";
+export const CREATE_ACCOUNT = "Create my account";

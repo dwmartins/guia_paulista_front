@@ -7,7 +7,7 @@ export default async function loadApp() {
     try {
         const response = await SiteInfoService.getSiteInfo();
         const data = response.data;
-        siteInfoStore.updateConstants(data.siteinfo);
+        siteInfoStore.updateConstants(data.siteInfo);
         AuthService.setUserStore();
 
         const [language] = data.settings.filter(item => item.name === "language");

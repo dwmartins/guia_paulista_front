@@ -1,5 +1,5 @@
 <template>
-    <section id="publicLayout" class="position-relative" >
+    <section id="publicLayout" class="position-relative m-0 p-0" >
         <AppHeader />
         <main>
             <router-view></router-view>
