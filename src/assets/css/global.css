@@ -134,3 +134,7 @@ a.text-primary:focus {
 a.text-primary:active {
     color: #2f7dcf !important;
 }
+
+.el-input .el-input__clear, .el-input .el-input__password {
+    font-size: 20px !important;
+}

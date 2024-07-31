@@ -5,7 +5,7 @@
                 <h4 class="text-secondary">{{ showText('LOGIN') }}</h4>
                 <el-form
                     @submit.prevent="submitForm"
-                    class="w-100 p-3 form_login"
+                    class="w-100 p-0 p-sm-3 form_login"
                     ref="formRef"
                     :model="formValidation"
                     label-width="auto"
@@ -20,8 +20,8 @@
                         <el-input v-model="formValidation.password" type="password" show-password />
                     </el-form-item>
 
-                    <div class="d-flex justify-content-between align-items-center">
-                        <el-checkbox v-model="rememberMe" :label="showText('REMEMBER_ME')" size="large" />
+                    <div class="d-flex flex-wrap justify-content-between align-items-center rememberMe">
+                        <el-checkbox v-model="rememberMe" class="text-secondary pe-1" :label="showText('REMEMBER_ME')" size="large" />
 
                         <router-link :to="showText('PATH_RECOVER_PASSWORD')">
                         <el-link type="primary">Esqueci minha senha</el-link>
@@ -36,7 +36,7 @@
 
                     <hr class="text-secondary">
 
-                    <p class="text-secondary">
+                    <p class="text-secondary new_account">
                         {{ showText('NOT_HAVE_ACCOUNT') }}
                         <router-link :to="showText('PATH_NEW_ACCOUNT')"><el-link type="primary">{{ showText('CREATE_ACCOUNT') }}</el-link></router-link>
                     </p>
@@ -146,5 +146,16 @@ const validForm = () => {
 
 .img_login {
     width: 100%;
+}
+
+@media screen and (max-width: 342px) {
+    .rememberMe {
+        justify-content: center !important;
+    }
+
+    .new_account, a {
+        text-align: center;
+        font-size: 0.8rem;
+    }
 }
 </style>
