@@ -34,9 +34,11 @@ export const LOGIN_SUCCESSFUL = "Login successful.";
 // Error message
 export const TITLE_ERROR_MESSAGE = "Error";
 export const FATAL_ERROR = "Oops, there was an error, please try again.";
+export const NOT_LOGGED = "You are not logged in. Please log in again to continue.";
 
 export const WEBSITE_LOGO = "Website logo";
 export const LOGIN = "Login";
 export const LOADING = "Wait";
 export const NOT_HAVE_ACCOUNT = "Don't have an account?";
 export const CREATE_ACCOUNT = "Create my account";
+export const REMEMBER_ME = "Remember me";

@@ -3,21 +3,24 @@ import { userStore } from '@/store/userStore';
 import { showAlert } from '@/helpers/showAlert';
 import { router } from '@/router';
 import { showError } from '@/helpers/showError';
+import { showText } from '@/translation';
 
 class AuthService {
-    teste() {
-        router.push("/")
-        console.log("teste")
-    }
     getUserLogged() {
-        const user = localStorage.getItem('userData');
+        let user = sessionStorage.getItem('userData');
+
+        if(!user) {
+            user = localStorage.getItem('userData');
+        }
+
         return user ? JSON.parse(user) : null;
     }
 
     validateLoggedUser() {
         const user = this.getUserLogged();
+
         if (!user) {
-            showAlert("error", "Erro", "Token não fornecido, realize o login novamente.")
+            showAlert("error", showText('TITLE_ERROR_MESSAGE'), showText('NOT_LOGGED'))
             this.logout();
             router.push('/login');
             return null;
@@ -28,22 +31,31 @@ class AuthService {
 
     getBearer() {
         const user = this.getUserLogged();
-        return `Bearer userId:${user.id} token:${user.token}`
+        return `Bearer token:${user.token}`
     }
 
-    setUserLogged(userData) {
+    setUserLogged(userData, rememberMe) {
+        localStorage.removeItem('userData');
+        sessionStorage.removeItem('userData');
+
         userStore.updateUserLogged(userData);
-        localStorage.setItem('userData', JSON.stringify(userData));
-    }
 
-    getPermissions() {
-        const userData = localStorage.getItem('userData');
-
-        if(userData) {
-            const user = JSON.parse(userData);
-            return user.permissions
+        if(rememberMe) {
+            localStorage.setItem('userData', JSON.stringify(userData));
+            return;
         }
+
+        sessionStorage.setItem('userData', JSON.stringify(userData));
     }
+
+    // getPermissions() {
+    //     const userData = localStorage.getItem('userData');
+
+    //     if(userData) {
+    //         const user = JSON.parse(userData);
+    //         return user.permissions
+    //     }
+    // }
 
     setUserStore() {
         const user = this.getUserLogged();
@@ -53,23 +65,34 @@ class AuthService {
     }
 
     updateUserLogged(userData) {
-        localStorage.removeItem('userData');
         userStore.updateUserLogged(userData);
-        this.setUserLogged(userData);
+
+        if(sessionStorage.getItem('userData')) {
+            sessionStorage.removeItem('userData');
+            sessionStorage.setItem('userData');
+            return;
+        } 
+
+        if(localStorage.getItem('userData')) {
+            localStorage.removeItem('userData');
+            localStorage.setItem('userData');
+            return;
+        } 
     }
 
     auth() {
         const user = this.getUserLogged();
 
         if(!user) {
-            const error = new Error('Token não fornecido, realize o login novamente.');
+            const error = new Error(showText('NOT_LOGGED'));
             error.statusCode = 401;
             return Promise.reject(error);
         }
 
         return axios.get('/auth/auth', {
             headers: {
-                'Authorization': `Bearer userId:${user.id} token:${user.token}`,
+                'Authorization': this.getBearer(),
+                'userId': user.id
             }
         });
     }
@@ -85,6 +108,7 @@ class AuthService {
 
     logout() {
         localStorage.removeItem('userData');
+        sessionStorage.removeItem('userData');
         userStore.clean();
     }
 }

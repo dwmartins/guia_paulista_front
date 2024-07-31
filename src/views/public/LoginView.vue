@@ -20,9 +20,13 @@
                         <el-input v-model="formValidation.password" type="password" show-password />
                     </el-form-item>
 
-                    <router-link :to="showText('PATH_RECOVER_PASSWORD')">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <el-checkbox v-model="rememberMe" :label="showText('REMEMBER_ME')" size="large" />
+
+                        <router-link :to="showText('PATH_RECOVER_PASSWORD')">
                         <el-link type="primary">Esqueci minha senha</el-link>
                     </router-link>
+                    </div>
 
                     <el-form-item class="mt-3">
                         <el-button type="primary" native-type="submit" class="w-100" :loading="isLoading">
@@ -66,6 +70,7 @@ onUnmounted(() => {
  
 const formRef = ref(null);
 let isLoading = ref(false);
+const rememberMe = ref(false);
 
 const formRules = {
     email: [
@@ -88,11 +93,11 @@ const submitForm = async () => {
     if(isValid) {
         isLoading.value = true;
         try {
-            const response = await AuthService.login(formValidation);
+            const response = await AuthService.login({ ...formValidation, rememberMe: rememberMe.value });
             console.log(response);
             isLoading.value = false;
 
-            AuthService.setUserLogged(response.data);
+            AuthService.setUserLogged(response.data, rememberMe.value);
             showAlert('success', '', showText('LOGIN_SUCCESSFUL'));
             router.push('/');
         } catch (error) {
