@@ -1,9 +1,9 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary mx-0">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mx-0 p-0">
         <div class="container">
             <router-link to="/" class="navbar-brand">
-                <div class="d-flex align-items-center ">
-                    <img class="logo-header" :src="logoImage" :alt="showText('WEBSITE_LOGO')">
+                <div class="d-flex align-items-center logo_image">
+                    <img :src="logoImage" :alt="showText('WEBSITE_LOGO')">
                 </div>
             </router-link>
 
@@ -156,6 +156,17 @@ nav {
     box-shadow: 0 0 1rem rgba(0,0,0,.15)!important;
 }
 
+.logo_image {
+    max-width: 240px;
+    max-height: 240px;
+}
+
+.logo_image img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
 .logged_small {
     display: none;
 }
@@ -167,6 +178,11 @@ nav {
 
     .logged_large {
         display: none;
+    }
+
+    .logo_image {
+        max-width: 180px;
+        max-height: 180px;
     }
 }
 </style>
