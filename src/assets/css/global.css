@@ -138,3 +138,11 @@ a.text-primary:active {
 .el-input .el-input__clear, .el-input .el-input__password {
     font-size: 20px !important;
 }
+
+.fs-7 {
+    font-size: 0.9rem;
+}
+
+.fs-8 {
+    font-size: 0.8rem;
+}

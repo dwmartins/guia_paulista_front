@@ -4,6 +4,7 @@ import PublicLayout from "@/layouts/PublicLayout.vue";
 import HomeView from "@/views/public/HomeView.vue";
 import LoginView from '@/views/public/LoginView.vue';
 import AdminLayout from '@/layouts/AdminLayout.vue';
+import RegisterView from '@/views/public/RegisterView.vue';
 
 let router = null;
 
@@ -20,6 +21,10 @@ export function initializeRoutes() {
                 {
                     path: showText('PATH_LOGIN'),
                     component: LoginView
+                },
+                {
+                    path: showText('PATH_NEW_ACCOUNT'),
+                    component: RegisterView
                 }
             ]
         },

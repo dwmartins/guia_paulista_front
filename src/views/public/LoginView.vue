@@ -44,7 +44,7 @@
             </div>
             
             <div class="col-md-6 col-xl-5 d-none d-md-flex justify-content-center align-items-center">
-                <img class="img_login" src="@/assets/svg/login.svg" alt="Imagem de login">
+                <img class="img_login" src="@/assets/svg/login.svg" :alt="showText('ALT_LOGIN_IMG')">
             </div>
         </div>
     </section>
