@@ -110,6 +110,8 @@ class AuthService {
         localStorage.removeItem('userData');
         sessionStorage.removeItem('userData');
         userStore.clean();
+        router.push('/');
+        showAlert('success', '', showText('LOGOUT_MESSAGE'));
     }
 }
 

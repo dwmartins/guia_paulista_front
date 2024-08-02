@@ -7,11 +7,16 @@
                 </div>
             </router-link>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+            <button class="btn border-0 navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <div id="menu-bar" @click="menuOnClick" :class="{ change: isMenuOpen }">
+                    <div id="bar1" class="bar"></div>
+                    <div id="bar2" class="bar"></div>
+                    <div id="bar3" class="bar"></div>
+                </div>
             </button>
+
             <div class="collapse navbar-collapse" id="navBar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
@@ -19,25 +24,23 @@
                     <div v-if="userStore.userLogged">
                         <li class="nav-item logged_small">
                             <i class="bi bi-person-fill me-1 "></i>
-                            <span>{{ userStore.user.name }}</span>
+                            <p class="m-0 text-secondary"><i class="fa-regular fa-user me-2"></i>{{ userStore.user.name }} {{ userStore.user.lastName }}</p>
                         </li>
 
                         <hr>
 
                         <li class="nav-item logged_small">
-                            <router-link class="nav-link" @click="closeNavbar()">
+                            <router-link :to="showText('PATH_PANEL')" class="nav-link" @click="closeNavbar()">
                                 {{ showText('PANEL_PAGE') }}
                             </router-link>
                         </li>
                         <li class="nav-item logged_small">
-                            <router-link class="nav-link" @click="closeNavbar()">
+                            <router-link :to="showText('PATH_PROFILE')" class="nav-link" @click="closeNavbar()">
                                 {{ showText('PROFILE_PAGE') }}
                             </router-link>
                         </li>
                         <li class="nav-item logged_small">
-                            <router-link class="nav-link cursor_pointer" @click="closeNavbar()">
-                                {{ showText('LOGOUT_PAGE') }}
-                            </router-link>
+                            <span class="nav-link cursor_pointer" @click="closeNavbar(), AuthService.logout()">{{ showText('LOGOUT_PAGE') }}</span>
                         </li>
                     </div>
                     <!-- Logged -->
@@ -54,11 +57,11 @@
                             </router-link>
                         </li>
 
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <router-link to="/" class="nav-link" @click="closeNavbar()">
                                 {{ showText('JOBS_PAGE') }}
                             </router-link>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item">
                             <router-link to="/" class="nav-link" @click="closeNavbar()">
@@ -78,7 +81,7 @@
                             </router-link>
                         </li>
 
-                    <hr>
+                    <hr v-if="!userStore.userLogged">
                     <!-- not logged in -->
                     <li v-if="!userStore.userLogged" class="nav-item logged_small">
                         <router-link :to="showText('PATH_LOGIN')" class="nav-link" @click="closeNavbar()">
@@ -89,24 +92,37 @@
 
                 </ul>
                 <div v-if="userStore.userLogged" class="logged_large">
-                    <router-link :to="showText('PATH_LOGIN')" class="nav-link" @click="closeNavbar()">
-                        <el-button type="primary">{{ showText('LOGIN_PAGE') }}</el-button>
-                    </router-link>
+                    <button class="btn btn-light border btn-sm me-2">
+                        <router-link :to="showText('PATH_PLANS')" class="nav-link">
+                            {{ showText('ADVERTISE_HERE') }}
+                        </router-link>
+                    </button>
 
-
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            {{ userStore.user.name }}
-                        </button>
-                        <ul class="dropdown-menu">
-
-                            <button v-if="userStore.user.role == 'mod'" class="dropdown-item mb-1"><i class="fa-solid fa-chart-line me-2"></i>Painel</button>
-
-                            <button class="dropdown-item mb-1"><i class="fa-regular fa-user me-2"></i>Perfil</button>
-                            <button class="dropdown-item cursor_pointer mb-1"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</button>
-                        </ul>
-                    </div>
+                    <el-dropdown trigger="click">
+                        <el-button type="primary">
+                            {{ userStore.user.name }}<i class="fa-solid fa-chevron-down ms-2"></i>
+                        </el-button>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item>
+                                    <i class="fa-solid fa-chart-line me-2"></i>
+                                    <router-link :to="showText('PATH_PANEL')" class="nav-link">
+                                        {{ showText('PANEL_PAGE') }}
+                                    </router-link>
+                                </el-dropdown-item>
+                                <el-dropdown-item>
+                                    <i class="fa-regular fa-user me-2"></i>
+                                    <router-link :to="showText('PATH_PROFILE')" class="nav-link">
+                                        {{ showText('PROFILE_PAGE') }}
+                                    </router-link>
+                                </el-dropdown-item>
+                                <el-dropdown-item @click="AuthService.logout()">
+                                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                    {{ showText('LOGOUT_PAGE') }}
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
                 </div>
                 <div v-if="!userStore.userLogged" class="flex-column logged_large">
                     <router-link to="/" class="btn btn-light border btn-sm me-2 fw-semibold text-dark opacity-75" @click="closeNavbar()">
@@ -122,36 +138,36 @@
     </nav>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
 import defaultLogo from '@/assets/img/default/defaultLogo.png';
 import { showText } from '@/translation';
 import { userStore } from '@/store/userStore';
 import { siteInfoStore } from '@/store/siteInfoStore';
+import AuthService from '@/services/AuthService';
 
-export default {
-    name: 'AppHeader',
-    data() {
-        return {
-            showText,
-            siteInfoStore,
-            userStore,
-            logoImage: siteInfoStore.constants.logoImage ? `${this.$API_URL}/uploads/systemImages/${siteInfoStore.constants.logoImage}` : defaultLogo
-        }
-    },
-    methods: {
-        closeNavbar() {
-            const navBar = document.getElementById('navBar');
+const logoImage = siteInfoStore.constants.logoImage ? `${this.$API_URL}/uploads/systemImages/${siteInfoStore.constants.logoImage}` : defaultLogo;
+const isMenuOpen = ref(false);
 
-            if(navBar.classList.contains('show')) {
-                navBar.classList.remove('show');
-            }
-        }
+const menuOnClick = () => {
+    isMenuOpen.value = !isMenuOpen.value;
+};
+
+const closeNavbar = () => {
+    menuOnClick()
+    const navBar = document.getElementById('navBar');
+
+    if(navBar.classList.contains('show')) {
+        navBar.classList.remove('show');
     }
 }
-
 </script>
 
 <style scoped>
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
 nav {
     box-shadow: 0 0 1rem rgba(0,0,0,.15)!important;
 }
@@ -184,5 +200,36 @@ nav {
         max-width: 180px;
         max-height: 180px;
     }
+}
+
+#menu-bar {
+    width: 25px;
+    height: 20px;
+    margin: 15px 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bar {
+    height: 2px;
+    width: 100%;
+    background-color: #505050;
+    display: block;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.change #bar1 {
+    transform: translateY(9px) rotate(-45deg);
+}
+
+.change #bar2 {
+    opacity: 0;
+}
+
+.change #bar3 {
+    transform: translateY(-9px) rotate(45deg);
 }
 </style>

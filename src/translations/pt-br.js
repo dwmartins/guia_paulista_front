@@ -5,6 +5,9 @@ export const PATH_LOGIN = "entrar";
 export const PATH_RECOVER_PASSWORD = "recuperar-senha";
 export const PATH_NEW_ACCOUNT = "nova-conta";
 export const PATH_DASHBOARD = "dashboard";
+export const PATH_PLANS = "planos";
+export const PATH_PANEL = "painel";
+export const PATH_PROFILE = "perfil";
 
 // Name of navigation
 export const LOGIN_PAGE = "Entrar";
@@ -12,7 +15,7 @@ export const HOME_PAGE = "Início";
 export const PANEL_PAGE = "Painel";
 export const PROFILE_PAGE = "Perfil";
 export const LOGOUT_PAGE = "Sair";
-export const ADVERTISERS_PAGE = "Anunciantes";
+export const ADVERTISERS_PAGE = "Anúncios";
 export const JOBS_PAGE = "Empregos";
 export const BLOG_PAGE = "Blog";
 export const CONTACT_PAGE = "Contato";
@@ -31,6 +34,7 @@ export const ALL_REQUIRED = "Preencha todos os campos obrigatórios";
 // Success message
 export const LOGIN_SUCCESSFUL = "Login efetuado com sucesso";
 export const USER_ALREADY_LOGGED = "Você já está logado.";
+export const LOGOUT_MESSAGE = "Você se desconectou com sucesso. Até a próxima!";
 
 // Error message
 export const TITLE_ERROR_MESSAGE = "Erro"
@@ -44,3 +48,4 @@ export const NOT_HAVE_ACCOUNT = "Não possui conta?";
 export const CREATE_ACCOUNT = "Criar minha conta";
 export const REMEMBER_ME = "Lembrar de mim";
 export const FORGOT_MY_PASSWORD = "Esqueci minha senha";
+export const ADVERTISE_HERE = "Anuncie aqui";
