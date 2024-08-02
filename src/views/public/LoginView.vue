@@ -51,6 +51,7 @@
 </template>
 
 <script setup>
+import { useRoute } from 'vue-router';
 import { showText } from '@/translation';
 import { reactive, ref } from 'vue';
 import { ElMessage } from 'element-plus';
@@ -62,6 +63,7 @@ import { router } from '@/router';
 
 onMounted(() => {
     document.title = `${showText('LOGIN_PAGE')} | ${siteInfoStore.constants.webSiteName}`;
+    isNewUser();
     checkIfLogged();
 });
 
@@ -69,6 +71,7 @@ onUnmounted(() => {
     document.title = siteInfoStore.constants.webSiteName;
 });
  
+const route = useRoute();
 const formRef = ref(null);
 let isLoading = ref(false);
 const rememberMe = ref(false);
@@ -95,7 +98,6 @@ const submitForm = async () => {
         isLoading.value = true;
         try {
             const response = await AuthService.login({ ...formValidation, rememberMe: rememberMe.value });
-            console.log(response);
             isLoading.value = false;
 
             AuthService.setUserLogged(response.data, rememberMe.value);
@@ -141,6 +143,14 @@ const checkIfLogged = () => {
         return;
     }
 }
+
+const isNewUser = () => {
+    const emailFromState = route.query?.userEmail;
+    
+    if (emailFromState) {
+        formValidation.email = emailFromState;
+    }
+};
 
 </script>
 

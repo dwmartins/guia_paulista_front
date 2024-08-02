@@ -12,6 +12,7 @@ export const PATH_PRIVACY = "privacidade";
 
 // Name of navigation
 export const LOGIN_PAGE = "Entrar";
+export const REGISTER_PAGE = "Criar conta";
 export const HOME_PAGE = "Início";
 export const PANEL_PAGE = "Painel";
 export const PROFILE_PAGE = "Perfil";

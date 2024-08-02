@@ -45,12 +45,12 @@ export function showError(error) {
     }
 
     if(error.response.status && error.response.status === 400) {
-        showAlert('error', 'Invalido', error.response.data.message);
+        showAlert('error', '', error.response.data.message);
         return;
     }
 
     if(error.response.status && error.response.status === 409) {
-        showAlert('error', 'Invalido', error.response.data.message);
+        showAlert('error', '', error.response.data.message);
         return;
     }
 

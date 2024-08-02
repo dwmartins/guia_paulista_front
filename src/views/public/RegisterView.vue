@@ -4,7 +4,7 @@
             <div class="col-sm-12 col-md-5 col-xl-5 d-flex flex-column justify-content-center align-items-center">
                 <h4 class="text-secondary">{{ showText('NEW_ACCOUNT') }}</h4>
 
-                <el-form ref="formRef" :model="formValidation" class="w-100 p-0 p-sm-3 form_register">
+                <el-form @submit.prevent="submitForm" ref="formRef" :model="formValidation" class="w-100 p-0 p-sm-3 form_register">
                     <el-form-item :label="showText('NAME_LABEL')" label-position="top" prop="name" :rules="formRules.name">
                         <el-input v-model="formValidation.name" type="text" name="name"/>
                     </el-form-item>
@@ -37,8 +37,8 @@
                     <hr class="text-secondary">
 
                     <p class="text-secondary new_account">
-                        {{ showText('NOT_HAVE_ACCOUNT') }}
-                        <router-link :to="showText('PATH_LOGIN')"><el-link type="primary">{{ showText('HAVE_ACCOUNT') }}</el-link></router-link>
+                        {{ showText('HAVE_ACCOUNT') }}
+                        <router-link :to="showText('PATH_LOGIN')"><el-link type="primary">{{ showText('LOGIN_PAGE') }}</el-link></router-link>
                     </p>
                 </el-form>
             </div>
@@ -52,6 +52,19 @@
 <script setup>
 import { reactive, ref } from 'vue';
 import { showText } from '@/translation';
+import { onMounted, onUnmounted  } from 'vue';
+import { siteInfoStore } from '@/store/siteInfoStore';
+import UserService from '@/services/UserService';
+import { showAlert } from '@/helpers/showAlert';
+import { router } from '@/router';
+
+onMounted(() => {
+    document.title = `${showText('REGISTER_PAGE')} | ${siteInfoStore.constants.webSiteName}`;
+});
+
+onUnmounted(() => {
+    document.title = siteInfoStore.constants.webSiteName;
+});
 
 const formRef = ref(null);
 let isLoading = ref(false);
@@ -77,6 +90,40 @@ const formRules = {
     password: [
         { required: true, message: showText('PASSWORD_REQUIRED') }
     ]
+}
+
+const submitForm = async () => {
+    const isValid  = await validForm();
+
+    if(isValid) {
+        isLoading.value = true;
+        try {
+            const response = await UserService.create(formValidation);
+            isLoading.value = false;
+            showAlert('success', '', response.data.message);
+            router.push({
+                path: `/${showText('PATH_LOGIN')}`,
+                query: {userEmail: formValidation.email}
+            });
+
+        } catch (error) {
+            isLoading.value = false;
+            console.error('Error logging in', error);
+        }
+    }
+}
+
+const validForm = () => {
+    return new Promise((resolve) => {
+        if (!formRef.value) {
+            resolve(false);
+            return;
+        }
+
+        formRef.value.validate((valid) => {
+            valid ? resolve(true) : resolve(false)
+        });
+    });
 }
 
 </script>
