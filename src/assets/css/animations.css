@@ -1,0 +1,13 @@
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.show {
+    opacity: 0;
+    animation: show 0.5s ease-in-out forwards;
+}

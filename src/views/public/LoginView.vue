@@ -1,5 +1,5 @@
 <template>
-    <section id="loginView" class="container d-flex align-items-center">
+    <section id="loginView" class="container d-flex align-items-center show">
         <div class="row w-100 m-0">
             <div class="col-sm-12 col-md-6 col-xl-7 d-flex flex-column justify-content-center align-items-center">
                 <h4 class="text-secondary">{{ showText('LOGIN') }}</h4>
@@ -13,7 +13,7 @@
                     hide-required-asterisk >
 
                     <el-form-item label-position="top" :label="showText('EMAIL_LABEL')" prop="email" :rules="formRules.email">
-                        <el-input v-model="formValidation.email" type="text" />
+                        <el-input v-model="formValidation.email" type="text" name="email"/>
                     </el-form-item>
 
                     <el-form-item label-position="top" :label="showText('PASSWORD_LABEL')" prop="password" :rules="formRules.password">
@@ -21,10 +21,10 @@
                     </el-form-item>
 
                     <div class="d-flex flex-wrap justify-content-between align-items-center rememberMe">
-                        <el-checkbox v-model="rememberMe" class="text-secondary pe-1" :label="showText('REMEMBER_ME')" size="large" />
+                        <el-checkbox v-model="rememberMe" class="text-secondary pe-1" :label="showText('REMEMBER_ME')" size="large" id="rememberMe" name="rememberMe" />
 
                         <router-link :to="showText('PATH_RECOVER_PASSWORD')">
-                        <el-link type="primary">Esqueci minha senha</el-link>
+                        <el-link type="primary">{{ showText('FORGOT_MY_PASSWORD') }}</el-link>
                     </router-link>
                     </div>
 

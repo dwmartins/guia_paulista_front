@@ -43,3 +43,4 @@ export const LOADING = "Aguarde";
 export const NOT_HAVE_ACCOUNT = "Não possui conta?";
 export const CREATE_ACCOUNT = "Criar minha conta";
 export const REMEMBER_ME = "Lembrar de mim";
+export const FORGOT_MY_PASSWORD = "Esqueci minha senha";

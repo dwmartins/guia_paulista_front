@@ -43,3 +43,4 @@ export const LOADING = "Wait";
 export const NOT_HAVE_ACCOUNT = "Don't have an account?";
 export const CREATE_ACCOUNT = "Create my account";
 export const REMEMBER_ME = "Remember me";
+export const FORGOT_MY_PASSWORD = "I forgot my password";
