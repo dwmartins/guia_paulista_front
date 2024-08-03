@@ -9,6 +9,7 @@ export const PATH_PLANS = "plans";
 export const PATH_PANEL = "panel";
 export const PATH_PROFILE = "perfil";
 export const PATH_PRIVACY = "privacy";
+export const PATH_ADVERTISES = "listings";
 
 // Name of navigation
 export const LOGIN_PAGE = "Login";
@@ -69,3 +70,11 @@ export const PRIVACY = "By signing up, you agree to our";
 export const SEARCH_HERE = "Start your search here";
 export const WHAT_LOOKING = "What are you looking for?";
 export const SEARCH = "Search";
+export const EASY_SEARCH = "Quick and easy search";
+export const SEE_MORE = "See more";
+export const CHOSE_CATEGORY = "Choose a category";
+export const CHOSE_CATEGORY_TEXT = "Personalize your discovery experience! Select a category and explore related listings, making the discovery experience easier and more efficient. Find what you’re looking for now!";
+export const FIND_LOCATIONS = "Find by locations";
+export const FIND_LOCATIONS_TEXT = "Explore listings in specific locations, browse relevant listings, and connect with what’s happening in your city. Find great options locally!";
+export const MOST_WANTED = "Most wanted";
+export const MOST_WANTED_TEXT = "Discover what’s trending now! Explore our selection of the most wanted and popular items. From products to services, these picks are our community’s favorites. Don’t miss out on finding something special and in-demand.";

@@ -16,6 +16,39 @@
                 </div>
             </div>
         </div>
+
+        <div class="my-4 container">
+            <h3 class="text-center custom_dark mb-4">{{ showText('EASY_SEARCH') }}</h3>
+            <div class="row">
+                <div class="p-2 col-12 col-sm-6 col-lg-4">
+                    <el-card shadow="hover" class="h-100">
+                        <h5 class="custom_dark">{{ showText('CHOSE_CATEGORY') }}</h5>
+                        <p class="text-secondary">{{ showText('CHOSE_CATEGORY_TEXT') }}</p>
+                        <router-link :to="showText('PATH_ADVERTISES')">
+                            <el-link type="primary">{{ showText('SEE_MORE') }}</el-link>
+                        </router-link>
+                    </el-card>
+                </div>
+                <div class="p-2 col-12 col-sm-6 col-lg-4">
+                    <el-card shadow="hover" class="h-100">
+                        <h5 class="custom_dark">{{ showText('FIND_LOCATIONS') }}</h5>
+                        <p class="text-secondary fs-6">{{ showText('FIND_LOCATIONS_TEXT') }}</p>
+                        <router-link :to="showText('PATH_ADVERTISES')">
+                            <el-link type="primary">{{ showText('SEE_MORE') }}</el-link>
+                        </router-link>
+                    </el-card>
+                </div>
+                <div class="p-2 col-12 col-sm-12 col-lg-4">
+                    <el-card shadow="hover" class="h-100">
+                        <h5 class="custom_dark">{{ showText('MOST_WANTED') }}</h5>
+                        <p class="text-secondary">{{ showText('MOST_WANTED_TEXT') }}</p>
+                        <router-link :to="showText('PATH_ADVERTISES')">
+                            <el-link type="primary">{{ showText('SEE_MORE') }}</el-link>
+                        </router-link>
+                    </el-card>
+                </div>
+            </div>
+        </div>
     </section>
 </template>
 

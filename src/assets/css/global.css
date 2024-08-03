@@ -6,6 +6,8 @@
     --bs-primary: #409EFF;
     --bs-primary-rgb: 64, 158, 255;
     --bs-primary-text: #fff;
+
+    --custom-dark: #303F4E;
 }
 
 html {
@@ -145,4 +147,8 @@ a.text-primary:active {
 
 .fs-8 {
     font-size: 0.8rem;
+}
+
+.custom_dark {
+    color: var(--custom-dark);
 }
