@@ -17,11 +17,14 @@
             </div>
         </div>
 
-        <div class="my-4 container">
+        <div class="my-5 container">
             <h3 class="text-center custom_dark mb-4">{{ showText('EASY_SEARCH') }}</h3>
             <div class="row">
-                <div class="p-2 col-12 col-sm-6 col-lg-4">
+                <div class="p-2 col-12 col-sm-6 col-lg-4 text-center">
                     <el-card shadow="hover" class="h-100">
+                        <div class="icons_search">
+                            <i class="fa-solid fa-icons"></i>
+                        </div>
                         <h5 class="custom_dark">{{ showText('CHOSE_CATEGORY') }}</h5>
                         <p class="text-secondary">{{ showText('CHOSE_CATEGORY_TEXT') }}</p>
                         <router-link :to="showText('PATH_ADVERTISES')">
@@ -29,8 +32,11 @@
                         </router-link>
                     </el-card>
                 </div>
-                <div class="p-2 col-12 col-sm-6 col-lg-4">
+                <div class="p-2 col-12 col-sm-6 col-lg-4 text-center">
                     <el-card shadow="hover" class="h-100">
+                        <div class="icons_search">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
                         <h5 class="custom_dark">{{ showText('FIND_LOCATIONS') }}</h5>
                         <p class="text-secondary fs-6">{{ showText('FIND_LOCATIONS_TEXT') }}</p>
                         <router-link :to="showText('PATH_ADVERTISES')">
@@ -38,8 +44,11 @@
                         </router-link>
                     </el-card>
                 </div>
-                <div class="p-2 col-12 col-sm-12 col-lg-4">
+                <div class="p-2 col-12 col-sm-12 col-lg-4 text-center">
                     <el-card shadow="hover" class="h-100">
+                        <div class="icons_search">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </div>
                         <h5 class="custom_dark">{{ showText('MOST_WANTED') }}</h5>
                         <p class="text-secondary">{{ showText('MOST_WANTED_TEXT') }}</p>
                         <router-link :to="showText('PATH_ADVERTISES')">
@@ -88,6 +97,18 @@ const coverImage = siteInfoStore.constants.coverImage ? `${this.$API_URL}/upload
 
 .cover-image h1 {
     font-size: clamp(40px, 8vw, 65px);
+}
+
+.icons_search {
+    margin-bottom: 14px;
+}
+
+.icons_search i {
+    color: var(--bs-primary);
+    font-size: 22px;
+    padding: 25px;
+    background-color: #cce5ff;
+    border-radius: 50%;
 }
 
 </style>
