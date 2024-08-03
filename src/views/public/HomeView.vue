@@ -11,7 +11,7 @@
                         <el-input size="large" :placeholder="showText('PLACEHOLDER_SEARCH_LOCATIONS')" />
                     </div>
                     <div class="col-12 col-sm-2 px-3 p-sm-0">
-                        <el-button class="w-100" type="primary" size="large">{{ showText('SEARCH') }}</el-button>
+                        <el-button class="w-100 fs-6" type="primary" size="large">{{ showText('SEARCH') }}</el-button>
                     </div>
                 </div>
             </div>
