@@ -10,6 +10,9 @@ export const PATH_PANEL = "panel";
 export const PATH_PROFILE = "perfil";
 export const PATH_PRIVACY = "privacy";
 export const PATH_ADVERTISES = "listings";
+export const PATH_EVENTS = "events";
+export const PATH_BLOG = "blog";
+export const PATH_CONTACT = "contact";
 
 // Name of navigation
 export const LOGIN_PAGE = "Login";
@@ -24,6 +27,7 @@ export const BLOG_PAGE = "Blog";
 export const CONTACT_PAGE = "Contact";
 export const ADVERTISE_PAGE = "Advertise here";
 export const PRIVACY_PAGE = "Privacy Policy";
+export const EVENTS_PAGE = "Events"
 
 // Form Labels
 export const EMAIL_LABEL = "Email";
@@ -78,3 +82,6 @@ export const FIND_LOCATIONS = "Find by locations";
 export const FIND_LOCATIONS_TEXT = "Explore listings in specific locations, browse relevant listings, and connect with what’s happening in your city. Find great options locally!";
 export const MOST_WANTED = "Most wanted";
 export const MOST_WANTED_TEXT = "Discover what’s trending now! Explore our selection of the most wanted and popular items. From products to services, these picks are our community’s favorites. Don’t miss out on finding something special and in-demand.";
+export const NAVIGATION = "Navigation";
+export const SOCIAL_MEDIA = "Redes sociais";
+export const DEVELOPED_BY = "Developed by";

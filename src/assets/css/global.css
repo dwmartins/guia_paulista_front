@@ -152,3 +152,15 @@ a.text-primary:active {
 .custom_dark {
     color: var(--custom-dark);
 }
+
+.bg-ice-white {
+    background-color: #f8f9fa;
+}
+
+.bg-gray-200 {
+    background-color: #e9ecef;
+}
+
+.bg-gray-800 {
+    background-color: #343a40;
+}

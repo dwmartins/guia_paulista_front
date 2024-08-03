@@ -4,24 +4,13 @@
         <main>
             <router-view></router-view>
         </main>
+        <appFooter />
     </section>
 </template>
 
-<script>
+<script setup>
 import AppHeader from '@/components/public/appHeader.vue';
-import { showText } from '@/translation';
-
-export default {
-    name: 'PublicLayout',
-    components: {
-        AppHeader
-    },
-    data() {
-        return {
-            showText
-        }
-    }
-}
+import appFooter from '@/components/public/appFooter.vue';
 </script>
 
 <style>

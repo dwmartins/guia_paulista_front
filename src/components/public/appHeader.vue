@@ -7,10 +7,10 @@
                 </div>
             </router-link>
 
-            <button class="btn border-0 navbar-toggler" type="button" data-bs-toggle="collapse"
+            <button @click="menuOnClick" class="btn border-0 navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <div id="menu-bar" @click="menuOnClick" :class="{ change: isMenuOpen }">
+                <div id="menu-bar" :class="{ change: isMenuOpen }">
                     <div id="bar1" class="bar"></div>
                     <div id="bar2" class="bar"></div>
                     <div id="bar3" class="bar"></div>

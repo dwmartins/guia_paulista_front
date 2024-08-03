@@ -12,6 +12,7 @@ export const siteInfoStore = reactive({
         workSchedule: "",
         instagram: "",
         facebook: "",
+        twitter: "",
         description: "",
         keywords: "",
         ico: "",
