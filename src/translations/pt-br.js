@@ -52,6 +52,9 @@ export const NOT_LOGGED = "Você não está logado. Por favor, faça o login nov
 export const ALT_LOGIN_IMG = "Imagem de login";
 export const ALT_REGISTER_IMG = "Imagem de registro";
 
+// placeholders
+export const PLACEHOLDER_SEARCH_LOCATIONS = "Lanchonetes, pizzarias, hotel...";
+
 export const WEBSITE_LOGO = "Logo do site";
 export const LOGIN = "Entrar";
 export const NEW_ACCOUNT = "Criar conta";
@@ -63,3 +66,6 @@ export const REMEMBER_ME = "Lembrar de mim";
 export const FORGOT_MY_PASSWORD = "Esqueci minha senha";
 export const ADVERTISE_HERE = "Anuncie aqui";
 export const PRIVACY = "Ao se inscrever, você concorda com nossa";
+export const SEARCH_HERE = "Inicie sua busca aqui";
+export const WHAT_LOOKING = "O que você está procurando?";
+export const SEARCH = "Buscar";

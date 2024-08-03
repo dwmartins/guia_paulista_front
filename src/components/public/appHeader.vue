@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary mx-0 p-0">
         <div class="container">
-            <router-link to="/" class="navbar-brand">
+            <router-link to="/" class="navbar-brand" @click="closeNavbar()">
                 <div class="d-flex align-items-center logo_image">
                     <img :src="logoImage" :alt="showText('WEBSITE_LOGO')">
                 </div>

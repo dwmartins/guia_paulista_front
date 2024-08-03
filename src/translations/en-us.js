@@ -52,6 +52,9 @@ export const NOT_LOGGED = "You are not logged in. Please log in again to continu
 export const ALT_LOGIN_IMG = "Login image";
 export const ALT_REGISTER_IMG = "Register image";
 
+// placeholders
+export const PLACEHOLDER_SEARCH_LOCATIONS = "Snack bars, pizzerias, hotel...";
+
 export const WEBSITE_LOGO = "Website logo";
 export const LOGIN = "Login";
 export const NEW_ACCOUNT = "Create an account";
@@ -63,3 +66,6 @@ export const REMEMBER_ME = "Remember me";
 export const FORGOT_MY_PASSWORD = "I forgot my password";
 export const ADVERTISE_HERE = "Advertise here";
 export const PRIVACY = "By signing up, you agree to our";
+export const SEARCH_HERE = "Start your search here";
+export const WHAT_LOOKING = "What are you looking for?";
+export const SEARCH = "Search";
