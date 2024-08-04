@@ -1,18 +1,19 @@
 export const HELLO_WORLD = "Hello world";
 
 // Pages
-export const PATH_LOGIN = "login";
-export const PATH_RECOVER_PASSWORD = "recover-password";
-export const PATH_NEW_ACCOUNT = "register";
-export const PATH_DASHBOARD = "dashboard";
-export const PATH_PLANS = "plans";
-export const PATH_PANEL = "panel";
-export const PATH_PROFILE = "perfil";
-export const PATH_PRIVACY = "privacy";
-export const PATH_ADVERTISES = "listings";
-export const PATH_EVENTS = "events";
-export const PATH_BLOG = "blog";
-export const PATH_CONTACT = "contact";
+export const PATH_LOGIN = "/login";
+export const PATH_RECOVER_PASSWORD = "/user/recover-password";
+export const PATH_NEW_ACCOUNT = "/register";
+export const PATH_DASHBOARD = "/dashboard";
+export const PATH_PLANS = "/plans";
+export const PATH_PANEL = "/panel";
+export const PATH_PROFILE = "/user/profile";
+export const PATH_EDIT_PROFILE = "/user/edit-profile";
+export const PATH_PRIVACY = "/privacy";
+export const PATH_ADVERTISES = "/listings";
+export const PATH_EVENTS = "/events"; 
+export const PATH_BLOG = "/blog";
+export const PATH_CONTACT = "/contact";
 
 // Name of navigation
 export const LOGIN_PAGE = "Login";
@@ -52,6 +53,10 @@ export const LOGOUT_MESSAGE = "You have successfully exited. See you next time!"
 export const TITLE_ERROR_MESSAGE = "Error";
 export const FATAL_ERROR = "Oops, there was an error, please try again.";
 export const NOT_LOGGED = "You are not logged in. Please log in again to continue.";
+export const IMG_5MB = "The image must be a maximum of 5MB.";
+export const IMG_FORMAT = "The image format must be (png, jpg or jpeg).";
+export const ICON_5MB = "The icon must be a maximum of 5MB.";
+export const ICON_FORMAT = "The ico format must be an ICO icon or JPG, JPEG or PNG.";
 
 // Alts
 export const ALT_LOGIN_IMG = "Login image";
@@ -103,3 +108,6 @@ export const WELCOME_TO_YOU_AREA = "Welcome to your user area! Here you can mana
 export const WELCOME_TO_YOU_AREA_INFO = "View and update your profile information. Make sure your details are correct for a personalized and secure experience on our website.";
 export const DONT_HAVE_ADS = "It looks like you don't have any ads on our site.";
 export const ADVERTISE_NOW = "Advertise now";
+export const EDIT_PROFILE = "Edit profile";
+export const SAVE = "Save";
+export const CANCEL = "Cancel";

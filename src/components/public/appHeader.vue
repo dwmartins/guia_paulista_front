@@ -52,7 +52,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <router-link to="/" class="nav-link" @click="closeNavbar()">
+                            <router-link :to="showText('PATH_ADVERTISES')" class="nav-link" @click="closeNavbar()">
                                 {{ showText('ADVERTISERS_PAGE') }}
                             </router-link>
                         </li>
@@ -64,19 +64,19 @@
                         </li> -->
 
                         <li class="nav-item">
-                            <router-link to="/" class="nav-link" @click="closeNavbar()">
+                            <router-link :to="showText('PATH_BLOG')" class="nav-link" @click="closeNavbar()">
                                 {{ showText('BLOG_PAGE') }}
                             </router-link>
                         </li>
 
                         <li class="nav-item">
-                            <router-link to="/" class="nav-link" @click="closeNavbar()">
+                            <router-link :to="showText('PATH_CONTACT')" class="nav-link" @click="closeNavbar()">
                                 {{ showText('CONTACT_PAGE') }}
                             </router-link>
                         </li>
                     <hr>
                         <li class="nav-item logged_small">
-                            <router-link to="/" class="nav-link" @click="closeNavbar()">
+                            <router-link :to="showText('PATH_PLANS')" class="nav-link" @click="closeNavbar()">
                                 {{ showText('ADVERTISE_PAGE') }}
                             </router-link>
                         </li>
@@ -125,7 +125,7 @@
                     </el-dropdown>
                 </div>
                 <div v-if="!userStore.userLogged" class="flex-column logged_large">
-                    <router-link to="/" class="btn btn-light border btn-sm me-2 fw-semibold text-dark opacity-75" @click="closeNavbar()">
+                    <router-link :to="showText('PATH_PLANS')" class="btn btn-light border btn-sm me-2 fw-semibold text-dark opacity-75" @click="closeNavbar()">
                         {{ showText('ADVERTISE_PAGE') }}
                     </router-link>
 

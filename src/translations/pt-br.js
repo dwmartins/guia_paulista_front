@@ -1,18 +1,19 @@
 export const HELLO_WORLD = "Olá mundo";
 
 // Pages
-export const PATH_LOGIN = "entrar";
-export const PATH_RECOVER_PASSWORD = "recuperar-senha";
-export const PATH_NEW_ACCOUNT = "registrar";
-export const PATH_DASHBOARD = "dashboard";
-export const PATH_PLANS = "planos";
-export const PATH_PANEL = "painel";
-export const PATH_PROFILE = "perfil";
-export const PATH_PRIVACY = "privacidade";
-export const PATH_ADVERTISES = "listagens";
-export const PATH_EVENTS = "eventos";
-export const PATH_BLOG = "blog";
-export const PATH_CONTACT = "contato";
+export const PATH_LOGIN = "/entrar";
+export const PATH_RECOVER_PASSWORD = "/usuario/recuperar-senha";
+export const PATH_NEW_ACCOUNT = "/registrar";
+export const PATH_DASHBOARD = "/dashboard";
+export const PATH_PLANS = "/planos";
+export const PATH_PANEL = "/painel";
+export const PATH_PROFILE = "/usuario/perfil";
+export const PATH_EDIT_PROFILE = "/usuario/editar-perfil";
+export const PATH_PRIVACY = "/privacidade";
+export const PATH_ADVERTISES = "/listagens";
+export const PATH_EVENTS = "/eventos";
+export const PATH_BLOG = "/blog";
+export const PATH_CONTACT = "/contato";
 
 // Name of navigation
 export const LOGIN_PAGE = "Entrar";
@@ -52,6 +53,10 @@ export const LOGOUT_MESSAGE = "Você se desconectou com sucesso. Até a próxima
 export const TITLE_ERROR_MESSAGE = "Erro"
 export const FATAL_ERROR = "Oops, houve um erro tente novamente.";
 export const NOT_LOGGED = "Você não está logado. Por favor, faça o login novamente para continuar.";
+export const IMG_5MB = "A imagem deve ter no máximo 5MB.";
+export const IMG_FORMAT = "O formato da imagem deve ser (png, jpg ou jpeg).";
+export const ICON_5MB = "O ico deve ter no máximo 5MB.";
+export const ICON_FORMAT = "O formato do ico deve ser um ícone ICO ou JPG, JPEG ou PNG.";
 
 // Alts
 export const ALT_LOGIN_IMG = "Imagem de login";
@@ -103,3 +108,6 @@ export const WELCOME_TO_YOU_AREA = "Bem-vindo à sua área do usuário! Aqui, vo
 export const WELCOME_TO_YOU_AREA_INFO = "Visualize e atualize suas informações de perfil. Certifique-se de que seus dados estejam corretos para uma experiência personalizada e segura em nosso site.";
 export const DONT_HAVE_ADS = "Parece que você não possui nenhum anúncio em nosso site.";
 export const ADVERTISE_NOW = "Anunciar agora";
+export const EDIT_PROFILE = "Editar perfil";
+export const SAVE = "Salvar";
+export const CANCEL = "Cancelar";

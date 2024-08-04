@@ -16,11 +16,11 @@ async function startApp() {
         const router = initializeRoutes();
         
         const app = createApp(App);
+
         app.use(router);
         app.use(ElementPlus);
         app.mount('#app');
 
-        app.config.globalProperties.$API_URL = process.env.VUE_APP_API_URL;
         MetaManager.setAllMeta();
     } catch (error) {
         console.error("Error during app startup:", error);
