@@ -65,12 +65,20 @@
                 </div>
             </div>
         </div>
-        <div class="text-center bg-gray-800">
-            <p class="text-light m-0 p-3">{{ showText('DEVELOPED_BY') }}:
-                <a href="https://br.linkedin.com/in/douglas-martins-a36a45185" target="_blank" rel="noopener noreferrer" class="text-white link-offset-2 link-underline link-underline-opacity-0 opacity-75">Douglas Wellington
-                    Martins
-                </a>
-            </p>
+        <div class="container-fluid gap-3 bg-gray-800 p-3">
+            <div class="container">
+                <div class="row">
+                    <p class="col-12 col-sm-6 text-light m-0 fs-7 text-center mb-2 mb-sm-0">{{ showText('DEVELOPED_BY') }}:
+                        <a href="https://br.linkedin.com/in/douglas-martins-a36a45185" target="_blank" rel="noopener noreferrer" class="text-white link-offset-2 link-underline link-underline-opacity-0 opacity-75">Douglas Wellington
+                            Martins
+                        </a>
+                    </p>
+                    <p class="col-12 col-sm-6 text-light m-0 fs-7 text-center">
+                        {{ showText('STORYSET_TEXT') }}
+                        <a href="https://storyset.com" target="_blank" rel="noopener noreferrer" class="text-white link-offset-2 link-underline link-underline-opacity-0 opacity-75">{{ showText('STORYSET') }}</a> 
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 </template>

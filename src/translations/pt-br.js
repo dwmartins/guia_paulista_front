@@ -85,3 +85,5 @@ export const MOST_WANTED_TEXT = "Descubra o que está em alta agora! Explore nos
 export const NAVIGATION = "Navegação";
 export const SOCIAL_MEDIA = "Redes sociais";
 export const DEVELOPED_BY = "Desenvolvido por";
+export const STORYSET_TEXT = "Ilustrações por";
+export const STORYSET = "Storyset";
