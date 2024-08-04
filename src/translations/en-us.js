@@ -87,3 +87,5 @@ export const SOCIAL_MEDIA = "Redes sociais";
 export const DEVELOPED_BY = "Developed by";
 export const STORYSET_TEXT = "Illustrations by";
 export const STORYSET = "Storyset";
+export const UNIQUE_DIRECTORY = "UNIQUE DIRECTORY SITE";
+export const FIND_THE_BEST_LOCAL = "Find the best local businesses near you";

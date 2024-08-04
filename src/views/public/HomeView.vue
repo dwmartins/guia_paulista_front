@@ -17,8 +17,9 @@
             </div>
         </div>
 
-        <div class="my-5 container">
-            <h3 class="text-center custom_dark mb-4">{{ showText('EASY_SEARCH') }}</h3>
+        <div class="my-5 py-3 container">
+            <p class="text-primary fw-bolder letter-spacing mb-0">{{ showText('UNIQUE_DIRECTORY') }}</p>
+            <h2 class="custom_dark mb-4 fw-semibold">{{ showText('FIND_THE_BEST_LOCAL') }}</h2>
             <div class="row">
                 <div class="p-2 col-12 col-sm-6 col-lg-4 text-center">
                     <el-card shadow="hover" class="h-100">

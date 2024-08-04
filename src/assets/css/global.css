@@ -164,3 +164,7 @@ a.text-primary:active {
 .bg-gray-800 {
     background-color: #343a40;
 }
+
+.letter-spacing {
+    letter-spacing: .1em;
+}
