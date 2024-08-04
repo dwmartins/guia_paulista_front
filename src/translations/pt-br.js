@@ -56,9 +56,16 @@ export const NOT_LOGGED = "Você não está logado. Por favor, faça o login nov
 // Alts
 export const ALT_LOGIN_IMG = "Imagem de login";
 export const ALT_REGISTER_IMG = "Imagem de registro";
+export const ALT_USER_IMG = "Imagem do usuário";
+export const NO_ADS = "Sem anúncios";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Lanchonetes, pizzarias, hotel...";
+
+// dates
+export const GOOD_MORNING = "Bom dia";
+export const GOOD_AFTERNOON = "Boa tarde";
+export const GOODNIGHT = "Boa noite";
 
 export const WEBSITE_LOGO = "Logo do site";
 export const LOGIN = "Entrar";
@@ -92,3 +99,7 @@ export const FIND_THE_BEST_LOCAL = "Encontre as melhores empresas locais próxim
 export const START_DIRECTORY = "Comece a usar o Directory hoje mesmo";
 export const START_DIRECTORY_TEXT = "O Directory é a melhor forma de encontrar e descobrir ótimas empresas locais. Crie sua conta hoje!";
 export const CREATE_MY_ACCOUNT = "Criar minha conta";
+export const WELCOME_TO_YOU_AREA = "Bem-vindo à sua área do usuário! Aqui, você pode gerenciar seus anúncios e visualizar informações pessoais. Tenha controle total sobre o conteúdo que você compartilha e mantenha seus dados atualizados.";
+export const WELCOME_TO_YOU_AREA_INFO = "Visualize e atualize suas informações de perfil. Certifique-se de que seus dados estejam corretos para uma experiência personalizada e segura em nosso site.";
+export const DONT_HAVE_ADS = "Parece que você não possui nenhum anúncio em nosso site.";
+export const ADVERTISE_NOW = "Anunciar agora";

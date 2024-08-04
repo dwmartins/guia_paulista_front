@@ -5,6 +5,7 @@ import HomeView from "@/views/public/HomeView.vue";
 import LoginView from '@/views/public/LoginView.vue';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import RegisterView from '@/views/public/RegisterView.vue';
+import ProfileView from '@/views/public/ProfileView.vue';
 
 let router = null;
 
@@ -25,6 +26,10 @@ export function initializeRoutes() {
                 {
                     path: showText('PATH_NEW_ACCOUNT'),
                     component: RegisterView
+                },
+                {
+                    path: showText('PATH_PROFILE'),
+                    component: ProfileView
                 }
             ]
         },

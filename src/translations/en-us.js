@@ -56,9 +56,16 @@ export const NOT_LOGGED = "You are not logged in. Please log in again to continu
 // Alts
 export const ALT_LOGIN_IMG = "Login image";
 export const ALT_REGISTER_IMG = "Register image";
+export const ALT_USER_IMG = "User Image";
+export const NO_ADS = "Sem anúncios";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Snack bars, pizzerias, hotel...";
+
+// dates
+export const GOOD_MORNING = "Good morning";
+export const GOOD_AFTERNOON = "Good afternoon";
+export const GOODNIGHT = "goodnight";
 
 export const WEBSITE_LOGO = "Website logo";
 export const LOGIN = "Login";
@@ -92,3 +99,7 @@ export const FIND_THE_BEST_LOCAL = "Find the best local businesses near you";
 export const START_DIRECTORY = "Start using Directory today";
 export const START_DIRECTORY_TEXT = "Directory is the best way to find and discover great local businesses. Create your account today!";
 export const CREATE_MY_ACCOUNT = "Create my account";
+export const WELCOME_TO_YOU_AREA = "Welcome to your user area! Here you can manage your ads and view personal information. Have full control over the content you share and keep your data up to date.";
+export const WELCOME_TO_YOU_AREA_INFO = "View and update your profile information. Make sure your details are correct for a personalized and secure experience on our website.";
+export const DONT_HAVE_ADS = "It looks like you don't have any ads on our site.";
+export const ADVERTISE_NOW = "Advertise now";
