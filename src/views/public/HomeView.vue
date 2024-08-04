@@ -17,6 +17,8 @@
             </div>
         </div>
 
+        <appStartToday />
+
         <div class="my-5 py-3 container">
             <p class="text-primary fw-bolder letter-spacing mb-0">{{ showText('UNIQUE_DIRECTORY') }}</p>
             <h2 class="custom_dark mb-4 fw-semibold">{{ showText('FIND_THE_BEST_LOCAL') }}</h2>
@@ -66,6 +68,7 @@
 import defaultCoverImage from '@/assets/img/default/defaultCoverImage.jpg';
 import { siteInfoStore } from '@/store/siteInfoStore';
 import { showText } from '@/translation';
+import appStartToday from '@/components/public/appStartToday.vue';
 
 const coverImage = siteInfoStore.constants.coverImage ? `${this.$API_URL}/uploads/systemImages/${siteInfoStore.constants.coverImage}` : defaultCoverImage
 

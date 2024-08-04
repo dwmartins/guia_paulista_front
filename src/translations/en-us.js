@@ -89,3 +89,6 @@ export const STORYSET_TEXT = "Illustrations by";
 export const STORYSET = "Storyset";
 export const UNIQUE_DIRECTORY = "UNIQUE DIRECTORY SITE";
 export const FIND_THE_BEST_LOCAL = "Find the best local businesses near you";
+export const START_DIRECTORY = "Start using Directory today";
+export const START_DIRECTORY_TEXT = "Directory is the best way to find and discover great local businesses. Create your account today!";
+export const CREATE_MY_ACCOUNT = "Create my account";

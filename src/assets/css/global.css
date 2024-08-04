@@ -158,7 +158,7 @@ a.text-primary:active {
 }
 
 .bg-gray-200 {
-    background-color: #e9ecef;
+    background-color: #f8f9fa;
 }
 
 .bg-gray-800 {
@@ -167,4 +167,10 @@ a.text-primary:active {
 
 .letter-spacing {
     letter-spacing: .1em;
+}
+
+.item_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
