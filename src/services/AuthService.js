@@ -31,7 +31,7 @@ class AuthService {
 
     getBearer() {
         const user = this.getUserLogged();
-        return `Bearer token:${user.token}`
+        return `Bearer ${user.token}`
     }
 
     setUserLogged(userData, rememberMe) {
@@ -80,21 +80,27 @@ class AuthService {
         } 
     }
 
-    auth() {
+    async auth() {
         const user = this.getUserLogged();
 
         if(!user) {
+            showAlert('error', '', showText('NOT_LOGGED'));
             const error = new Error(showText('NOT_LOGGED'));
             error.statusCode = 401;
             return Promise.reject(error);
         }
 
-        return axios.get('/auth/auth', {
-            headers: {
-                'Authorization': this.getBearer(),
-                'userId': user.id
-            }
-        });
+        try {
+            return await axios.get('/auth/auth', {
+                headers: {
+                    'Authorization': this.getBearer(),
+                    'userId': user.id
+                }
+            });
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
     }
 
     async login(credentials) {

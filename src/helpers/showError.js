@@ -1,6 +1,7 @@
 import AuthService from "@/services/AuthService";
 import { router } from "@/router";
 import { showAlert } from "./showAlert";
+import { showText } from "@/translation";
 
 export function showError(error) {
     console.error('ERROR', error);
@@ -69,5 +70,5 @@ export function showError(error) {
         return;
     }
 
-    showAlert('error', '', 'Oops, houve um erro tente novamente.');
+    showAlert('error', '', showText('FATAL_ERROR'));
 }

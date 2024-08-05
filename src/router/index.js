@@ -6,6 +6,7 @@ import LoginView from '@/views/public/LoginView.vue';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import RegisterView from '@/views/public/RegisterView.vue';
 import ProfileView from '@/views/public/ProfileView.vue';
+import AuthService from '@/services/AuthService';
 
 let router = null;
 
@@ -29,7 +30,8 @@ export function initializeRoutes() {
                 },
                 {
                     path: showText('PATH_PROFILE'),
-                    component: ProfileView
+                    component: ProfileView,
+                    meta: { requiresAuth: true }
                 }
             ]
         },
@@ -63,7 +65,23 @@ export function initializeRoutes() {
             } else {
               return { top: 0 };
             }
-          }
+        }
+    });
+
+    router.beforeEach((to, from, next) => {
+        const { requiresAuth } = to.meta;
+    
+        if(requiresAuth) {
+            AuthService.auth()
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    next({ path: showText('PATH_LOGIN') });
+                })
+        } else {
+            next();
+        }
     });
 
     return router;
