@@ -5,12 +5,14 @@
             <router-view></router-view>
         </main>
         <appFooter />
+        <AppLoadingPage />
     </section>
 </template>
 
 <script setup>
 import AppHeader from '@/components/public/appHeader.vue';
 import appFooter from '@/components/public/appFooter.vue';
+import AppLoadingPage from '@/components/shared/AppLoadingPage.vue';
 </script>
 
 <style>

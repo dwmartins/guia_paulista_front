@@ -7,6 +7,7 @@ import AdminLayout from '@/layouts/AdminLayout.vue';
 import RegisterView from '@/views/public/RegisterView.vue';
 import ProfileView from '@/views/public/ProfileView.vue';
 import AuthService from '@/services/AuthService';
+import { loadingPageStore } from '@/store/loadingPageStore';
 
 let router = null;
 
@@ -72,11 +73,14 @@ export function initializeRoutes() {
         const { requiresAuth } = to.meta;
     
         if(requiresAuth) {
+            loadingPageStore.show();
             AuthService.auth()
                 .then(() => {
+                    loadingPageStore.hide();
                     next();
                 })
                 .catch(() => {
+                    loadingPageStore.hide();
                     next({ path: showText('PATH_LOGIN') });
                 })
         } else {
