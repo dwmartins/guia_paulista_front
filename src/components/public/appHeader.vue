@@ -104,15 +104,15 @@
                         </el-button>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item>
-                                    <i class="fa-solid fa-chart-line me-2"></i>
-                                    <router-link :to="showText('PATH_PANEL')" class="nav-link">
+                                <el-dropdown-item class="px-0">
+                                    <router-link :to="showText('PATH_PANEL')" class="nav-link px-3 w-100">
+                                        <i class="fa-solid fa-chart-line me-2"></i>
                                         {{ showText('PANEL_PAGE') }}
                                     </router-link>
                                 </el-dropdown-item>
-                                <el-dropdown-item>
-                                    <i class="fa-regular fa-user me-2"></i>
-                                    <router-link :to="showText('PATH_PROFILE')" class="nav-link">
+                                <el-dropdown-item class="px-0">
+                                    <router-link :to="showText('PATH_PROFILE')" class="nav-link px-3 w-100">
+                                        <i class="fa-regular fa-user me-2"></i>
                                         {{ showText('PROFILE_PAGE') }}
                                     </router-link>
                                 </el-dropdown-item>
