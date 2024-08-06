@@ -154,11 +154,11 @@ const menuOnClick = () => {
 };
 
 const closeNavbar = () => {
-    menuOnClick()
     const navBar = document.getElementById('navBar');
-
+    
     if(navBar.classList.contains('show')) {
         navBar.classList.remove('show');
+        menuOnClick();
     }
 }
 </script>
