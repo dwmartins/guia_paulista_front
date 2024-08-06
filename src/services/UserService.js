@@ -1,5 +1,5 @@
 import axios from '@/http';
-// import AuthService from './AuthService';
+import AuthService from './AuthService';
 import { showError } from '@/helpers/showError';
 
 class UserService {
@@ -22,6 +22,26 @@ class UserService {
     async create(userData) {
         try {
             return await axios.post('/user', userData);
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
+    }
+
+    async setPhoto(photo) {
+        try {
+            const user = AuthService.checkAuth();
+            if(!user) return false;
+
+            const formData = new FormData();
+            formData.append('photo', photo);
+
+            return await axios.post('/user/update-image', formData, {
+                headers: {
+                    'Authorization': AuthService.getBearer(),
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
         } catch (error) {
             showError(error);
             throw error;

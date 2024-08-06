@@ -13,13 +13,15 @@
                         </div>
 
                         <div v-if="previewImg" class="d-flex justify-content-center py-3 show">
-                            <el-button type="primary" plain>{{ showText('SAVE') }}</el-button>
-                            <el-button type="danger" plain @click="cancelEditPhoto()">{{ showText('CANCEL') }}</el-button>
+                            <el-button type="primary" plain @click="submitImage()" :loading="isLoading.updateImg">
+                                {{ isLoading.updateImg ? showText('LOADING') : showText('SAVE') }}
+                            </el-button>
+                            <el-button v-if="!isLoading.updateImg" type="danger" plain @click="cancelEditPhoto()">{{ showText('CANCEL') }}</el-button>
                         </div>
 
                         <div class="d-flex flex-column align-items-center">
                             <p class="custom_dark fw-semibold mt-2">{{ user.name }} {{ user.lastName }}</p>
-                            <p class="text-secondary fs-8">{{ user.email }}</p>
+                            <p class="text-secondary fs-8 text-break">{{ user.email }}</p>
                             <router-link :to="showText('PATH_EDIT_PROFILE')">
                                 <button class="btn btn-sm btn-primary">{{ showText('EDIT_PROFILE') }}<i class="fa-solid fa-user-pen ms-2"></i></button>
                             </router-link>
@@ -55,6 +57,9 @@ import { showText } from '@/translation';
 import { userStore } from '@/store/userStore';
 import defaultImg from '@/assets/img/default/user.jpg'
 import FileValidator from '@/validators/FileValidator';
+import UserService from '@/services/UserService';
+import { showAlert } from '@/helpers/showAlert';
+import AuthService from '@/services/AuthService';
 
 const imgExtensions = "image/jpeg, image/jpg, image/png";
 
@@ -62,6 +67,10 @@ const API_URL = process.env.VUE_APP_API_URL;
 let userImg = ref(userStore.user.photo ? `${API_URL}/uploads/users/${userStore.user.photo}` : defaultImg)
 const user = userStore.user;
 let previewImg = ref("");
+let imgToUpdate = "";
+let isLoading = ref({
+    updateImg: false
+});
 
 const setGreeting = () => {
     const now = new Date();
@@ -86,6 +95,7 @@ const triggerFileInput = () => {
 const handleFileChange = (event) => {
     const fileInput = event.target;
     const file = fileInput.files?.[0];
+    imgToUpdate = file;
     
     if (file) {
         if(FileValidator.img(file)) {
@@ -106,6 +116,22 @@ const cancelEditPhoto = () => {
     const fileInput = document.getElementById('img_user');
     fileInput.value = "";
     previewImg.value = "";
+}
+
+const submitImage = async () => {
+    try {
+        isLoading.value.updateImg = true;
+        const response = await UserService.setPhoto(imgToUpdate);
+
+        AuthService.updateUserLogged(response.data.userData);
+        showAlert('success', '', response.data.message);
+
+        previewImg.value = "";
+        isLoading.value.updateImg = false;
+    } catch (error) {
+        isLoading.value.updateImg = false;
+        console.error(error);
+    }
 }
 </script>
 

@@ -16,11 +16,11 @@ class AuthService {
         return user ? JSON.parse(user) : null;
     }
 
-    validateLoggedUser() {
+    checkAuth() {
         const user = this.getUserLogged();
 
         if (!user) {
-            showAlert("error", showText('TITLE_ERROR_MESSAGE'), showText('NOT_LOGGED'))
+            showAlert("error", '', showText('NOT_LOGGED'))
             this.logout();
             router.push('/login');
             return null;
@@ -66,16 +66,18 @@ class AuthService {
 
     updateUserLogged(userData) {
         userStore.updateUserLogged(userData);
+        let user = this.getUserLogged();
+        user = {...user, ...userData};
 
         if(sessionStorage.getItem('userData')) {
             sessionStorage.removeItem('userData');
-            sessionStorage.setItem('userData');
+            sessionStorage.setItem('userData', JSON.stringify(user));
             return;
         } 
 
         if(localStorage.getItem('userData')) {
             localStorage.removeItem('userData');
-            localStorage.setItem('userData');
+            localStorage.setItem('userData', JSON.stringify(user));
             return;
         } 
     }
@@ -93,8 +95,7 @@ class AuthService {
         try {
             return await axios.get('/auth/auth', {
                 headers: {
-                    'Authorization': this.getBearer(),
-                    'userId': user.id
+                    'Authorization': this.getBearer()
                 }
             });
         } catch (error) {
