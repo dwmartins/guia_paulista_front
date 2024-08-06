@@ -8,6 +8,7 @@ import RegisterView from '@/views/public/RegisterView.vue';
 import ProfileView from '@/views/public/ProfileView.vue';
 import AuthService from '@/services/AuthService';
 import { loadingPageStore } from '@/store/loadingPageStore';
+import ProfileInfoView from '@/views/public/ProfileInfoView.vue';
 
 let router = null;
 
@@ -32,6 +33,11 @@ export function initializeRoutes() {
                 {
                     path: showText('PATH_PROFILE'),
                     component: ProfileView,
+                    meta: { requiresAuth: true }
+                },
+                {
+                    path: showText('PATH_PROFILE_INFO'),
+                    component: ProfileInfoView,
                     meta: { requiresAuth: true }
                 }
             ]
@@ -81,7 +87,7 @@ export function initializeRoutes() {
                 })
                 .catch(() => {
                     loadingPageStore.hide();
-                    next({ path: showText('PATH_LOGIN') });
+                    next({ path: '/' });
                 })
         } else {
             next();

@@ -21,8 +21,9 @@
 
                         <div class="d-flex flex-column align-items-center">
                             <p class="custom_dark fw-semibold mt-2">{{ user.name }} {{ user.lastName }}</p>
+                            <p class="text-secondary fs-8 text-break mb-0">{{ user.city }}, {{ user.state }}</p>
                             <p class="text-secondary fs-8 text-break">{{ user.email }}</p>
-                            <router-link :to="showText('PATH_EDIT_PROFILE')">
+                            <router-link :to="showText('PATH_PROFILE_INFO')">
                                 <button class="btn btn-sm btn-primary">{{ showText('EDIT_PROFILE') }}<i class="fa-solid fa-user-pen ms-2"></i></button>
                             </router-link>
                         </div>
