@@ -40,7 +40,7 @@
                             </router-link>
                         </li>
                         <li class="nav-item logged_small">
-                            <span class="nav-link cursor_pointer" @click="closeNavbar(), AuthService.logout()">{{ showText('LOGOUT_PAGE') }}</span>
+                            <span class="nav-link cursor_pointer" @click="closeNavbar(), AuthService.logout(true)">{{ showText('LOGOUT_PAGE') }}</span>
                         </li>
                     </div>
                     <!-- Logged -->
@@ -116,7 +116,7 @@
                                         {{ showText('PROFILE_PAGE') }}
                                     </router-link>
                                 </el-dropdown-item>
-                                <el-dropdown-item @click="AuthService.logout()">
+                                <el-dropdown-item @click="AuthService.logout(true)">
                                     <i class="fa-solid fa-right-from-bracket me-2"></i>
                                     {{ showText('LOGOUT_PAGE') }}
                                 </el-dropdown-item>

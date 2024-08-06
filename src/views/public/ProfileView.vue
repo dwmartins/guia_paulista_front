@@ -126,6 +126,7 @@ const submitImage = async () => {
         AuthService.updateUserLogged(response.data.userData);
         showAlert('success', '', response.data.message);
 
+        userImg = previewImg.value;
         previewImg.value = "";
         isLoading.value.updateImg = false;
     } catch (error) {

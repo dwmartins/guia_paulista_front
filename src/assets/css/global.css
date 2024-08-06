@@ -174,3 +174,7 @@ a.text-primary:active {
     justify-content: center;
     align-items: center;
 }
+
+.cursor_pointer {
+    cursor: pointer;
+}

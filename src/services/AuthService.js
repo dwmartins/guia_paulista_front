@@ -113,12 +113,16 @@ class AuthService {
         }
     }
 
-    logout() {
+    logout(showMessage = false) {
         localStorage.removeItem('userData');
         sessionStorage.removeItem('userData');
         userStore.clean();
+
         router.push('/');
-        showAlert('success', '', showText('LOGOUT_MESSAGE'));
+
+        if(showMessage) {
+            showAlert('success', '', showText('LOGOUT_MESSAGE'));
+        }
     }
 }
 
