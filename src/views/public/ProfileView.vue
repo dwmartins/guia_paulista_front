@@ -22,7 +22,7 @@
                         <div class="d-flex flex-column align-items-center">
                             <p class="custom_dark fw-semibold mt-2 mb-0">{{ user.name }} {{ user.lastName }}</p>
                             <p class="text-secondary fs-8 text-break">{{ user.email }}</p>
-                            <p class="custom_dark fw-semibold fs-8 text-break mb-0">Membro desde:</p>
+                            <p class="custom_dark fw-semibold fs-8 text-break mb-0">{{ showText('MEMBER_SINCE') }}:</p>
                             <p class="text-secondary fs-8 text-break">{{ getDateAsString(user.createdAt) }}</p>
                             <p v-if="user.city && user.state" class="text-secondary fs-8 text-break">{{ user.city }}, {{ user.state }}</p>
 

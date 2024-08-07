@@ -120,3 +120,4 @@ export const MANAGE_PERSONAL_HERE = "Gerencie suas informações pessoais e conf
 export const BASIC_INFORMATION = "Informações básicas";
 export const ADDRESS = "Endereço";
 export const UPDATE = "Atualizar";
+export const MEMBER_SINCE = "Membro desde";

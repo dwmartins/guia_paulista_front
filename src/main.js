@@ -8,8 +8,29 @@ import 'element-plus/dist/index.css';
 import '@/assets/css/global.css';
 import '@/assets/css/animations.css';
 import ElementPlus from 'element-plus'
-import ptBr from 'element-plus/es/locale/lang/pt-br';
 import MetaManager from '@/helpers/MetaManager';
+import { settingsStore } from '@/store/SettingsStore';
+import en from 'element-plus/es/locale/lang/en';
+import ptBr from 'element-plus/es/locale/lang/pt-br';
+
+function getElementPlusLocale() {
+    const lang = settingsStore.getSetting('language') || 'pt-br';
+    let locale;
+
+    switch (lang) {
+        case 'pt-br':
+            locale = ptBr;
+            break;
+        case 'en-us':
+            locale = en;
+            break;
+        default:
+            locale = ptBr;
+            break;
+    }
+    
+    return locale;
+}
 
 async function startApp() {
     try {
@@ -19,7 +40,7 @@ async function startApp() {
         const app = createApp(App);
 
         app.use(router);
-        app.use(ElementPlus, { locale: ptBr });
+        app.use(ElementPlus, { locale: getElementPlusLocale() });
         app.mount('#app');
 
         MetaManager.setAllMeta();
