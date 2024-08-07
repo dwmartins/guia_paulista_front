@@ -30,7 +30,7 @@
                         </p>
                     </div>
                     <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-                        <div v-show="!isCollapsed.basic_info" id="info_basic_form" class="container-fluid px-0 mt-2">
+                        <div v-show="!isCollapsed.basic_info" @submit.prevent="submitFormBasicInfo" id="info_basic_form" class="container-fluid px-0 mt-2">
                             <el-form ref="formRefBasicInfo" :model="formBasicInfo" class="row py-3">
                                 <el-form-item class="col-12 col-lg-4" :label="showText('NAME_LABEL')" label-position="top" prop="name" :rules="formRules.name">
                                     <el-input v-model="formBasicInfo.name" type="text" name="name"/>
@@ -89,6 +89,9 @@ import { computed, ref, reactive } from 'vue';
 import { showText } from '@/translation';
 import { userStore } from '@/store/userStore';
 import { simpleDate } from '@/helpers/dateUtils';
+import UserService from '@/services/UserService';
+import { showAlert } from '@/helpers/showAlert';
+import AuthService from '@/services/AuthService';
 
 const user = computed(() => userStore.user);
 const formRefBasicInfo = ref(null);
@@ -126,25 +129,59 @@ const formRules = {
     ]
 }
 
-function toggleCollapse() {
+const submitFormBasicInfo = async () => {
+    const isValid = await validForm(formRefBasicInfo);
+
+    if(isValid) {
+        isLoading.value.basic_info = true;
+
+        try {
+            const response = UserService.update(formBasicInfo);
+            isLoading.value.basic_info = false;
+
+            AuthService.updateUserLogged(response.data.userData);
+
+            showAlert('success', '', response.data.message);
+        } catch (error) {
+            isLoading.value.basic_info = false;
+            console.error('error updating user', error);
+        }
+    } else {
+        showAlert('error' , '', showText('ALL_REQUIRED'))
+    }
+}
+
+const validForm = (form) => {
+    return new Promise((resolve) => {
+        form.value.validate((valid) => {
+                    if(valid) {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                })
+    })
+}
+
+const toggleCollapse = () => {
     isCollapsed.value.basic_info = !isCollapsed.value.basic_info;
 }
 
 
-function beforeEnter(el) {
+const beforeEnter = (el) => {
     el.style.maxHeight = '0';
     el.style.opacity = '0';
     el.style.overflow = 'hidden';
 }
 
-function enter(el) {
+const enter = (el) => {
     el.offsetHeight;
     el.style.transition = 'max-height 0.2s ease, opacity 0.2s ease';
     el.style.maxHeight = el.scrollHeight + 'px';
     el.style.opacity = '1';
 }
 
-function leave(el) {
+const leave = (el) =>  {
     el.style.transition = 'max-height 0.2s ease, opacity 0.2s ease';
     el.style.maxHeight = '0';
     el.style.opacity = '0';

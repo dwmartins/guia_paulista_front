@@ -51,6 +51,7 @@ export const ALL_REQUIRED = "Preencha todos os campos obrigatórios";
 export const LOGIN_SUCCESSFUL = "Login efetuado com sucesso";
 export const USER_ALREADY_LOGGED = "Você já está logado.";
 export const LOGOUT_MESSAGE = "Você se desconectou com sucesso. Até a próxima!";
+export const USER_UPDATE = "Usuário atualizado com sucesso.";
 
 // Error message
 export const TITLE_ERROR_MESSAGE = "Erro"

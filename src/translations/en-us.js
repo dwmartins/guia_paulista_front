@@ -51,6 +51,7 @@ export const ALL_REQUIRED = "Fill in all required fields";
 export const LOGIN_SUCCESSFUL = "Login successful.";
 export const USER_ALREADY_LOGGED = "You are already logged in.";
 export const LOGOUT_MESSAGE = "You have successfully exited. See you next time!";
+export const USER_UPDATE = "User updated successfully.";
 
 // Error message
 export const TITLE_ERROR_MESSAGE = "Error";

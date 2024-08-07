@@ -28,6 +28,22 @@ class UserService {
         }
     }
 
+    async update(userData) {
+        const user = AuthService.checkAuth();
+        if(!user) return false;
+
+        try {
+            return await axios.put(`/user/`, userData,{
+                headers: {
+                    'Authorization': AuthService.getBearer()
+                }
+            }) 
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
+    }
+
     async setPhoto(photo) {
         try {
             const user = AuthService.checkAuth();
@@ -74,22 +90,6 @@ class UserService {
     //                 'Authorization': AuthService.getBearer()
     //             }
     //         })
-    //     } catch (error) {
-    //         showError(error);
-    //         throw error;
-    //     }
-    // }
-
-    // async updateUser(userData) {
-    //     const user = AuthService.validateLoggedUser();
-    //     if(!user) return false;
-
-    //     try {
-    //         return await axios.put(`/user/`, userData,{
-    //             headers: {
-    //                 'Authorization': AuthService.getBearer()
-    //             }
-    //         }) 
     //     } catch (error) {
     //         showError(error);
     //         throw error;
