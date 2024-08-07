@@ -35,6 +35,9 @@ export const EMAIL_LABEL = "E-mail";
 export const PASSWORD_LABEL = "Senha";
 export const NAME_LABEL = "Nome";
 export const LAST_NAME_LABEL = "Sobrenome";
+export const PHONE_LABEL = "Telefone";
+export const DESCRIPTION_LABEL = "Descrição";
+export const DATE_OF_BIRTH_LABEL = "Data de nascimento";
 
 // Form Validations
 export const EMAIL_INVALID = "Por favor, insira o endereço de e-mail correto";
@@ -63,6 +66,7 @@ export const ALT_LOGIN_IMG = "Imagem de login";
 export const ALT_REGISTER_IMG = "Imagem de registro";
 export const ALT_USER_IMG = "Imagem do usuário";
 export const NO_ADS = "Sem anúncios";
+export const ALT_ACCOUNT = "Imagem da conta do usuário";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Lanchonetes, pizzarias, hotel...";
@@ -113,3 +117,6 @@ export const SAVE = "Salvar";
 export const CANCEL = "Cancelar";
 export const PERSONAL_INFO = "Informações pessoais";
 export const MANAGE_PERSONAL_HERE = "Gerencie suas informações pessoais e configurações aqui.";
+export const BASIC_INFORMATION = "Informações básicas";
+export const ADDRESS = "Endereço";
+export const UPDATE = "Atualizar";

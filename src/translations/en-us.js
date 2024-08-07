@@ -35,6 +35,9 @@ export const EMAIL_LABEL = "Email";
 export const PASSWORD_LABEL = "Password";
 export const NAME_LABEL = "First Name";
 export const LAST_NAME_LABEL = "Last Name";
+export const PHONE_LABEL = "Phone";
+export const DESCRIPTION_LABEL = "Description";
+export const DATE_OF_BIRTH_LABEL = "Date of birth";
 
 // Form Validations
 export const EMAIL_INVALID = "Please input correct email address";
@@ -63,6 +66,7 @@ export const ALT_LOGIN_IMG = "Login image";
 export const ALT_REGISTER_IMG = "Register image";
 export const ALT_USER_IMG = "User Image";
 export const NO_ADS = "Sem anúncios";
+export const ALT_ACCOUNT = "User account image";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Snack bars, pizzerias, hotel...";
@@ -113,3 +117,6 @@ export const SAVE = "Save";
 export const CANCEL = "Cancel";
 export const PERSONAL_INFO = "Personal information";
 export const MANAGE_PERSONAL_HERE = "Manage your Personal info and settings here.";
+export const BASIC_INFORMATION = "Basic information";
+export const ADDRESS = "Address";
+export const UPDATE = "Update";

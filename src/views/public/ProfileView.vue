@@ -20,9 +20,12 @@
                         </div>
 
                         <div class="d-flex flex-column align-items-center">
-                            <p class="custom_dark fw-semibold mt-2">{{ user.name }} {{ user.lastName }}</p>
-                            <p class="text-secondary fs-8 text-break mb-0">{{ user.city }}, {{ user.state }}</p>
+                            <p class="custom_dark fw-semibold mt-2 mb-0">{{ user.name }} {{ user.lastName }}</p>
                             <p class="text-secondary fs-8 text-break">{{ user.email }}</p>
+                            <p class="custom_dark fw-semibold fs-8 text-break mb-0">Membro desde:</p>
+                            <p class="text-secondary fs-8 text-break">{{ getDateAsString(user.createdAt) }}</p>
+                            <p v-if="user.city && user.state" class="text-secondary fs-8 text-break">{{ user.city }}, {{ user.state }}</p>
+
                             <router-link :to="showText('PATH_PROFILE_INFO')">
                                 <button class="btn btn-sm btn-primary">{{ showText('EDIT_PROFILE') }}<i class="fa-solid fa-user-pen ms-2"></i></button>
                             </router-link>
@@ -53,7 +56,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { showText } from '@/translation';
 import { userStore } from '@/store/userStore';
 import defaultImg from '@/assets/img/default/user.jpg'
@@ -61,12 +64,13 @@ import FileValidator from '@/validators/FileValidator';
 import UserService from '@/services/UserService';
 import { showAlert } from '@/helpers/showAlert';
 import AuthService from '@/services/AuthService';
+import { getDateAsString } from '@/helpers/dateUtils';
 
 const imgExtensions = "image/jpeg, image/jpg, image/png";
 
 const API_URL = process.env.VUE_APP_API_URL;
 let userImg = ref(userStore.user.photo ? `${API_URL}/uploads/users/${userStore.user.photo}` : defaultImg)
-const user = userStore.user;
+const user = computed(() => userStore.user);
 let previewImg = ref("");
 let imgToUpdate = "";
 let isLoading = ref({

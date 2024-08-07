@@ -8,6 +8,7 @@ import 'element-plus/dist/index.css';
 import '@/assets/css/global.css';
 import '@/assets/css/animations.css';
 import ElementPlus from 'element-plus'
+import ptBr from 'element-plus/es/locale/lang/pt-br';
 import MetaManager from '@/helpers/MetaManager';
 
 async function startApp() {
@@ -18,7 +19,7 @@ async function startApp() {
         const app = createApp(App);
 
         app.use(router);
-        app.use(ElementPlus);
+        app.use(ElementPlus, { locale: ptBr });
         app.mount('#app');
 
         MetaManager.setAllMeta();
