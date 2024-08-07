@@ -102,7 +102,7 @@ const submitForm = async () => {
             isLoading.value = false;
             showAlert('success', '', response.data.message);
             router.push({
-                path: `/${showText('PATH_LOGIN')}`,
+                path: showText('PATH_LOGIN'),
                 query: {userEmail: formValidation.email}
             });
 
