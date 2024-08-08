@@ -136,7 +136,7 @@ const submitFormBasicInfo = async () => {
         isLoading.value.basic_info = true;
 
         try {
-            const response = UserService.update(formBasicInfo);
+            const response = await UserService.update(formBasicInfo);
             isLoading.value.basic_info = false;
 
             AuthService.updateUserLogged(response.data.userData);
