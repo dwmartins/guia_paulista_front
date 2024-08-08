@@ -148,6 +148,7 @@ const submitImage = async () => {
 
 .user_img img{
     width: 160px;
+    height: 160px;
     border-radius: 50%;
     border: 8px solid #ffff;
 }
