@@ -41,7 +41,7 @@
                                 </el-form-item>
 
                                 <el-form-item class="col-12 col-lg-4" :label="showText('DATE_OF_BIRTH_LABEL')" label-position="top" prop="dateOfBirth">
-                                    <el-date-picker v-model="formBasicInfo.dateOfBirth" type="date" class="w-100" />
+                                    <el-date-picker v-model="formBasicInfo.dateOfBirth" type="date" class="w-100" :format="settingsStore.getSetting('dateFormat').replace(/-/g, '/')" />
                                 </el-form-item>
 
                                 <el-form-item class="col-12 col-lg-6" :label="showText('EMAIL_LABEL')" label-position="top" prop="email" :rules="formRules.email">
@@ -92,6 +92,7 @@ import { simpleDate } from '@/helpers/dateHelper';
 import UserService from '@/services/UserService';
 import { showAlert } from '@/helpers/showAlert';
 import AuthService from '@/services/AuthService';
+import { settingsStore } from '@/store/SettingsStore';
 
 const user = computed(() => userStore.user);
 const formRefBasicInfo = ref(null);
