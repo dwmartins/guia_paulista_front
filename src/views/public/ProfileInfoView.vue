@@ -88,7 +88,7 @@
 import { computed, ref, reactive } from 'vue';
 import { showText } from '@/translation';
 import { userStore } from '@/store/userStore';
-import { simpleDate } from '@/helpers/dateUtils';
+import { simpleDate } from '@/helpers/dateHelper';
 import UserService from '@/services/UserService';
 import { showAlert } from '@/helpers/showAlert';
 import AuthService from '@/services/AuthService';

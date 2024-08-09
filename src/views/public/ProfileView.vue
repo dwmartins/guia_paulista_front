@@ -8,8 +8,12 @@
                         <div class="user_img">
                             <img :src="previewImg ? previewImg : userImg" :alt="showText('ALT_USER_IMG')">
                             
-                            <button class="btn btn-primary edit_photo" type="button" @click="triggerFileInput()"><i class="fa-solid fa-pencil"></i></button>
+                            <button v-if="!isLoading.uploadImg" class="btn btn-primary edit_photo" type="button" @click="triggerFileInput()"><i class="fa-solid fa-pencil"></i></button>
                             <input type="file" id="img_user" class="d-none" :accept="imgExtensions" @change="handleFileChange($event)">
+
+                            <div v-if="isLoading.uploadImg" class="loading-overlay">
+                                <div class="spinner-border text-primary" role="status"></div>
+                            </div>
                         </div>
 
                         <div v-if="previewImg" class="d-flex justify-content-center py-3 show">
@@ -64,7 +68,7 @@ import FileValidator from '@/validators/FileValidator';
 import UserService from '@/services/UserService';
 import { showAlert } from '@/helpers/showAlert';
 import AuthService from '@/services/AuthService';
-import { getDateAsString } from '@/helpers/dateUtils';
+import { getDateAsString } from '@/helpers/dateHelper';
 
 const imgExtensions = "image/jpeg, image/jpg, image/png";
 
@@ -74,7 +78,8 @@ const user = computed(() => userStore.user);
 let previewImg = ref("");
 let imgToUpdate = "";
 let isLoading = ref({
-    updateImg: false
+    updateImg: false,
+    uploadImg: false
 });
 
 const setGreeting = () => {
@@ -100,21 +105,25 @@ const triggerFileInput = () => {
 const handleFileChange = (event) => {
     const fileInput = event.target;
     const file = fileInput.files?.[0];
-    imgToUpdate = file;
-    
-    if (file) {
-        if(FileValidator.img(file)) {
-            const reader = new FileReader();
 
-            reader.onload = () => {
-                previewImg.value = reader.result.toString();
-            }
+    if (!file) return;
 
-            reader.readAsDataURL(file);
-        } else {
-            fileInput.value = "";
-        }
+    if (!FileValidator.img(file)) {
+        fileInput.value = "";
+        return;
     }
+
+    imgToUpdate = file;
+
+    isLoading.value.uploadImg = true;
+    const reader = new FileReader();
+
+    reader.onload = () => {
+        previewImg.value = reader.result.toString();
+        isLoading.value.uploadImg = false;
+    };
+
+    reader.readAsDataURL(file);
 }
 
 const cancelEditPhoto = () => {
@@ -174,5 +183,21 @@ const submitImage = async () => {
     .img_no_ads {
         width: 90%;
     } 
+}
+
+.loading-overlay {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 8px solid #ffff;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000077;
 }
 </style>
