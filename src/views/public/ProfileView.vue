@@ -69,6 +69,8 @@ import UserService from '@/services/UserService';
 import { showAlert } from '@/helpers/showAlert';
 import AuthService from '@/services/AuthService';
 import { getDateAsString } from '@/helpers/dateHelper';
+import { settingsStore } from '@/store/SettingsStore';
+import { compressImage } from '@/helpers/imageHelper';
 
 const imgExtensions = "image/jpeg, image/jpg, image/png";
 
@@ -102,28 +104,40 @@ const triggerFileInput = () => {
     }
 };
 
-const handleFileChange = (event) => {
-    const fileInput = event.target;
-    const file = fileInput.files?.[0];
+const handleFileChange = async (event) => {
+    try {
+        const fileInput = event.target;
+        const file = fileInput.files?.[0];
 
-    if (!file) return;
+        if (!file) return;
 
-    if (!FileValidator.img(file)) {
-        fileInput.value = "";
-        return;
-    }
+        if (!FileValidator.img(file)) {
+            fileInput.value = "";
+            return;
+        }
 
-    imgToUpdate = file;
+        isLoading.value.uploadImg = true;
+        
+        if(settingsStore.getSetting("compressImage") == "on") {
+            imgToUpdate = await compressImage(file);
+        } else {
+            imgToUpdate = file;
+        }
 
-    isLoading.value.uploadImg = true;
-    const reader = new FileReader();
+        const reader = new FileReader();
 
-    reader.onload = () => {
-        previewImg.value = reader.result.toString();
+        reader.onload = () => {
+            previewImg.value = reader.result.toString();
+            isLoading.value.uploadImg = false;
+        };
+
+        reader.readAsDataURL(file);
+        
+    } catch (error) {
         isLoading.value.uploadImg = false;
-    };
-
-    reader.readAsDataURL(file);
+        showAlert('error', '', showText('FATAL_ERROR'));
+        console.error("Error loading image", error);
+    }
 }
 
 const cancelEditPhoto = () => {
