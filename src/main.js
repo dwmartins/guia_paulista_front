@@ -15,11 +15,7 @@ import ptBr from 'element-plus/es/locale/lang/pt-br';
 import AppLoadingPage from '@/components/shared/AppLoadingPage.vue';
 import { loadingPageStore } from './store/loadingPageStore';
 
-const LoadingPage = createApp({
-    template: '<AppLoadingPage />',
-    components: { AppLoadingPage }
-});
-
+const LoadingPage = createApp(AppLoadingPage);
 LoadingPage.mount('#loading');
 loadingPageStore.show();
 

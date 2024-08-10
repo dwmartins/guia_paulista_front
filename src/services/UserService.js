@@ -44,6 +44,38 @@ class UserService {
         }
     }
 
+    async updateAddress(userData) {
+        const user = AuthService.checkAuth();
+        if(!user) return false;
+
+        try {
+            return await axios.put(`/user/address`, userData,{
+                headers: {
+                    'Authorization': AuthService.getBearer()
+                }
+            }) 
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
+    }
+
+    async updateSettings(settings) {
+        const user = AuthService.checkAuth();
+        if(!user) return false;
+
+        try {
+            return await axios.put(`/user/settings`, settings,{
+                headers: {
+                    'Authorization': AuthService.getBearer()
+                }
+            }) 
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
+    }
+
     async setPhoto(photo) {
         try {
             const user = AuthService.checkAuth();

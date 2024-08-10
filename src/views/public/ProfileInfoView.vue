@@ -59,7 +59,7 @@
                                         show-word-limit
                                         type="textarea"
                                         name="description"
-                                        rows="5"
+                                        :rows="5"
                                     />
                                 </el-form-item>
 
@@ -94,21 +94,21 @@
 
                     <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                         <div v-show="!isCollapsed.address" id="address_form" class="container-fluid px-0 mt-2">
-                            <el-form @submit.prevent="submitFormAddress" :model="form" class="row py-3">
+                            <el-form @submit.prevent="submitFormAddress" :model="formAddress" class="row py-3">
                                 <el-form-item class="col-12 col-sm-6" :label="showText('ADDRESS_LABEL')" label-position="top" prop="address">
-                                    <el-input v-model="form.address" type="text" name="address"/>
+                                    <el-input v-model="formAddress.address" type="text" name="address"/>
                                 </el-form-item>
 
                                 <el-form-item class="col-12 col-sm-3" :label="showText('CITY_LABEL')" label-position="top" prop="city">
-                                    <el-input v-model="form.city" type="text" name="city"/>
+                                    <el-input v-model="formAddress.city" type="text" name="city"/>
                                 </el-form-item>
 
                                 <el-form-item class="col-12 col-sm-3" :label="showText('ZIP_CODE_LABEL')" label-position="top" prop="zipCode">
-                                    <el-input v-model="form.zipCode" type="number" name="zipCode"/>
+                                    <el-input v-model="formAddress.zipCode" type="number" name="zipCode"/>
                                 </el-form-item>
 
                                 <el-form-item class="col-12 col-sm-4" :label="showText('STATE_LABEL')" label-position="top" prop="state">
-                                    <el-input v-model="form.state" type="text" name="state"/>
+                                    <el-input v-model="formAddress.state" type="text" name="state"/>
                                 </el-form-item>
 
                                 <el-form-item class="mt-3">
@@ -132,13 +132,13 @@
 
                     <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                         <div v-show="!isCollapsed.settings" id="settings_form" class="container-fluid px-0 mt-2">
-                            <el-form @submit.prevent="submitFormSettings" :model="form" class="row py-3">
-                                <el-checkbox class="text-secondary" v-model="form.acceptsEmails" :label="showText('AGREE_RECEIVE_MAIL')" size="large" />
-                                <el-checkbox class="text-secondary" v-model="form.publishContactInfo" :label="showText('CONTACT_PUBLIC')" size="large" />
+                            <el-form @submit.prevent="submitFormSettings" :model="formSettings" class="row py-3">
+                                <el-checkbox class="text-secondary" v-model="formSettings.acceptsEmails" :label="showText('AGREE_RECEIVE_MAIL')" size="large" />
+                                <el-checkbox class="text-secondary" v-model="formSettings.publishContactInfo" :label="showText('CONTACT_PUBLIC')" size="large" />
 
                                 <div class="w-100 d-flex justify-content-end mt-3">
-                                    <el-button type="primary" plain native-type="submit" class="btn_save" :loading="isLoading.address">
-                                        {{ isLoading.address ? showText('LOADING') : showText('SAVE') }}
+                                    <el-button type="primary" plain native-type="submit" class="btn_save" :loading="isLoading.settings">
+                                        {{ isLoading.settings ? showText('LOADING') : showText('SAVE') }}
                                     </el-button>
                                 </div>
                             </el-form>
@@ -193,6 +193,7 @@ const formRefBasicInfo = ref(null);
 let isLoading = ref({
     basic_info: false,
     address: false,
+    settings: false,
     delete_account: false
 })
 
@@ -208,14 +209,20 @@ const form = reactive({
     email: user.value.email,
     phone: user.value.phone,
     description: user.value.description,
-    dateOfBirth: user.value.dateOfBirth,
+    dateOfBirth: user.value.dateOfBirth
+});
+
+const formAddress = reactive({
     address: user.value.address,
     city: user.value.city,
     zipCode: user.value.zipCode,
     state: user.value.state,
+});
+
+const formSettings = reactive({
     acceptsEmails: user.value.acceptsEmails === "Y" ? true : false,
     publishContactInfo: user.value.publishContactInfo === "Y" ? true : false,
-});
+})
 
 const confirmAccountDeletion = ref(false);
 
@@ -241,10 +248,15 @@ const submitFormBasicInfo = async () => {
     if(isValid) {
         try {
             isLoading.value.basic_info = true;
-            await updateUser();
+            const response = await UserService.update(form);
+
+            AuthService.updateUserLogged(response.data.userData);
+
+            showAlert('success', '', response.data.message);
             isLoading.value.basic_info = false;
         } catch (error) {
             isLoading.value.basic_info = false;
+            console.error('error updating user', error);
         }
     } else {
         showAlert('error' , '', showText('ALL_REQUIRED'))
@@ -254,26 +266,32 @@ const submitFormBasicInfo = async () => {
 const submitFormAddress = async () => {
     try {
         isLoading.value.address = true;
-        await updateUser();
+        const response = await UserService.updateAddress(formAddress);
+        AuthService.updateUserLogged(response.data.userData);
+
+        showAlert('success', '', response.data.message);
         isLoading.value.address = false;
     } catch (error) {
+        console.error('error updating user address', error);
         isLoading.value.address = false;
     }
 }
 
 const submitFormSettings = async () => {
-
-}
-
-const updateUser = async () => {
+    isLoading.value.settings = true;
     try {
-        const response = await UserService.update(form);
+        let settings = {...formSettings};
+        settings.acceptsEmails = settings.acceptsEmails ? "Y" : "N";
+        settings.publishContactInfo = settings.publishContactInfo ? "Y" : "N";
 
+        const response = await UserService.updateSettings(settings);
         AuthService.updateUserLogged(response.data.userData);
-
         showAlert('success', '', response.data.message);
+
+        isLoading.value.settings = false;
     } catch (error) {
-        console.error('error updating user', error);
+        console.error('error updating user settings', error);
+        isLoading.value.settings = false;
     }
 }
 
