@@ -38,6 +38,10 @@ export const LAST_NAME_LABEL = "Sobrenome";
 export const PHONE_LABEL = "Telefone";
 export const DESCRIPTION_LABEL = "Descrição";
 export const DATE_OF_BIRTH_LABEL = "Data de nascimento";
+export const ADDRESS_LABEL = "Endereço";
+export const CITY_LABEL = "Cidade";
+export const ZIP_CODE_LABEL = "CEP";
+export const STATE_LABEL = "Estado";
 
 // Form Validations
 export const EMAIL_INVALID = "Por favor, insira o endereço de e-mail correto";
