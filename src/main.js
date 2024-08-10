@@ -12,6 +12,16 @@ import MetaManager from '@/helpers/MetaManager';
 import { settingsStore } from '@/store/SettingsStore';
 import en from 'element-plus/es/locale/lang/en';
 import ptBr from 'element-plus/es/locale/lang/pt-br';
+import AppLoadingPage from '@/components/shared/AppLoadingPage.vue';
+import { loadingPageStore } from './store/loadingPageStore';
+
+const LoadingPage = createApp({
+    template: '<AppLoadingPage />',
+    components: { AppLoadingPage }
+});
+
+LoadingPage.mount('#loading');
+loadingPageStore.show();
 
 function getElementPlusLocale() {
     const lang = settingsStore.getSetting('language') || 'pt-br';
@@ -44,7 +54,13 @@ async function startApp() {
         app.mount('#app');
 
         MetaManager.setAllMeta();
+
+        loadingPageStore.hide();
+        LoadingPage.unmount('#loading');
+
     } catch (error) {
+        loadingPageStore.hide();
+        LoadingPage.unmount('#loading');
         console.error("Error during app startup:", error);
     } 
 }

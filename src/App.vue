@@ -1,15 +1,11 @@
 <template>
     <router-view></router-view>
+    <AppLoadingPage />
 </template>
 
-<script>
+<script setup>
+import AppLoadingPage from '@/components/shared/AppLoadingPage.vue';
 
-export default {
-    name: 'App',
-    components: {
-        
-    }
-}
 </script>
 
 <style>
