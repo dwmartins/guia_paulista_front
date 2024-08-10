@@ -7,7 +7,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-lg-7 col-xxl-6">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <p class="fs-4 custom_dark fw-semibold mb-0">{{ showText('BASIC_INFORMATION') }}</p>
+                        <p class="fs-4 custom_dark mb-0">{{ showText('BASIC_INFORMATION') }}</p>
                         <el-button @click="toggleCollapse('basic_info')" type="primary" class="fs-7 fw-semibold letter-spacing text-uppercase" link>{{ showText('UPDATE') }}</el-button>
                     </div>
 
@@ -59,6 +59,7 @@
                                         show-word-limit
                                         type="textarea"
                                         name="description"
+                                        rows="5"
                                     />
                                 </el-form-item>
 
@@ -77,7 +78,7 @@
                     <hr class="text-secondary">
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <p class="fs-4 custom_dark fw-semibold mb-0">{{ showText('ADDRESS') }}</p>
+                        <p class="fs-4 custom_dark mb-0">{{ showText('ADDRESS') }}</p>
                         <el-button @click="toggleCollapse('address')" type="primary" class="fs-7 fw-semibold letter-spacing text-uppercase" link>{{ showText('UPDATE') }}</el-button>
                     </div>
 
@@ -121,8 +122,54 @@
                             </el-form>
                         </div>
                     </transition>
+
+                    <hr class="text-secondary">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-5 custom_dark mb-0">{{ showText('SETTINGS') }}</p>
+                        <el-button @click="toggleCollapse('settings')" type="primary" class="fs-7 fw-semibold letter-spacing text-uppercase" link>{{ showText('UPDATE') }}</el-button>
+                    </div>
+
+                    <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+                        <div v-show="!isCollapsed.settings" id="settings_form" class="container-fluid px-0 mt-2">
+                            <el-form @submit.prevent="submitFormSettings" :model="form" class="row py-3">
+                                <el-checkbox class="text-secondary" v-model="form.acceptsEmails" :label="showText('AGREE_RECEIVE_MAIL')" size="large" />
+                                <el-checkbox class="text-secondary" v-model="form.publishContactInfo" :label="showText('CONTACT_PUBLIC')" size="large" />
+
+                                <div class="w-100 d-flex justify-content-end mt-3">
+                                    <el-button type="primary" plain native-type="submit" class="btn_save" :loading="isLoading.address">
+                                        {{ isLoading.address ? showText('LOADING') : showText('SAVE') }}
+                                    </el-button>
+                                </div>
+                            </el-form>
+                        </div>
+                    </transition>
+
+                    <hr class="text-secondary">
+
+                    <div class="mt-5">
+                        <p class="fs-5 custom_dark mb-3">{{ showText('DELETE_ACCOUNT') }}</p>
+
+                        <div class="alert-danger alert border-0 d-flex flex-nowrap gap-2">
+                            <div>
+                                <i class="fa-solid fa-triangle-exclamation text-danger fs-1"></i>
+                            </div>
+                            <div>
+                                <p class="text-danger fw-semibold mb-0 fs-7">{{ showText('DELETE_ACCOUNT_TEXT') }}</p>
+                                <p class="text-danger mb-0 fs-7">{{ showText('ACTION_CANNOT_UNDONE') }}</p>
+                            </div>
+                        </div>
+
+                        <el-checkbox class="text-secondary" v-model="confirmAccountDeletion" :label="showText('CONFIRM_DELETE_ACCOUNT')" size="large" />
+
+                        <div class="w-100 d-flex justify-content-end mt-3">
+                            <el-button type="danger" native-type="submit" class="btn_save" :loading="isLoading.delete_account">
+                                {{ isLoading.delete_account ? showText('LOADING') : showText('DELETE') }}
+                            </el-button>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-5 col-xxl-6 p-3 pt-0 d-none d-lg-flex justify-content-center">
+                <div class="col-12 col-lg-5 col-xxl-6 p-3 pt-0 d-none d-lg-flex justify-content-center align-items-baseline">
                     <img class="w-100" src="@/assets/svg/account.svg" :alt="showText('ALT_ACCOUNT')">
                 </div>
             </div>
@@ -145,12 +192,14 @@ const formRefBasicInfo = ref(null);
 
 let isLoading = ref({
     basic_info: false,
-    address: false
+    address: false,
+    delete_account: false
 })
 
 const isCollapsed = ref({
     basic_info: true,
-    address: true
+    address: true,
+    settings: true
 });
 
 const form = reactive({
@@ -163,8 +212,12 @@ const form = reactive({
     address: user.value.address,
     city: user.value.city,
     zipCode: user.value.zipCode,
-    state: user.value.state
+    state: user.value.state,
+    acceptsEmails: user.value.acceptsEmails === "Y" ? true : false,
+    publishContactInfo: user.value.publishContactInfo === "Y" ? true : false,
 });
+
+const confirmAccountDeletion = ref(false);
 
 const formRules = {
     name: [
@@ -206,6 +259,10 @@ const submitFormAddress = async () => {
     } catch (error) {
         isLoading.value.address = false;
     }
+}
+
+const submitFormSettings = async () => {
+
 }
 
 const updateUser = async () => {

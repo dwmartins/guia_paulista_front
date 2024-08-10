@@ -50,6 +50,8 @@ export const PASSWORD_REQUIRED = "Password is required";
 export const NAME_REQUIRED = "First name is required";
 export const LAST_NAME_REQUIRED = "Last name is required";
 export const ALL_REQUIRED = "Fill in all required fields";
+export const AGREE_RECEIVE_MAIL = "I agree to receive informational and promotional emails.";
+export const CONTACT_PUBLIC = "Make my contact details public";
 
 // Success message
 export const LOGIN_SUCCESSFUL = "Login successful.";
@@ -120,9 +122,15 @@ export const ADVERTISE_NOW = "Advertise now";
 export const EDIT_PROFILE = "Edit profile";
 export const SAVE = "Save";
 export const CANCEL = "Cancel";
+export const DELETE = "Delete";
 export const PERSONAL_INFO = "Personal information";
 export const MANAGE_PERSONAL_HERE = "Manage your Personal info and settings here.";
 export const BASIC_INFORMATION = "Basic information";
 export const ADDRESS = "Address";
 export const UPDATE = "Update";
 export const MEMBER_SINCE = "Member since";
+export const SETTINGS = "Settings";
+export const DELETE_ACCOUNT = "Delete account";
+export const DELETE_ACCOUNT_TEXT = "If you delete your account, you will lose all your data";
+export const ACTION_CANNOT_UNDONE = "This action cannot be undone.";
+export const CONFIRM_DELETE_ACCOUNT = "Confirmo que gostaria de excluir minha conta";

@@ -20,6 +20,8 @@ export const userStore = reactive({
         zipCode: "",
         state: "",
         photo: "",
+        acceptsEmails: "",
+        publishContactInfo: "",
         createdAt: "",
         updatedAt: "",
         permissions: {

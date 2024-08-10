@@ -50,6 +50,8 @@ export const PASSWORD_REQUIRED = "Senha é obrigatória";
 export const NAME_REQUIRED = "Nome é obrigatório";
 export const LAST_NAME_REQUIRED = "Sobrenome é obrigatório";
 export const ALL_REQUIRED = "Preencha todos os campos obrigatórios";
+export const AGREE_RECEIVE_MAIL = "Concordo em receber e-mails informativos e promocionais.";
+export const CONTACT_PUBLIC = "Tornar meus dados de contato públicos";
 
 // Success message
 export const LOGIN_SUCCESSFUL = "Login efetuado com sucesso";
@@ -120,9 +122,15 @@ export const ADVERTISE_NOW = "Anunciar agora";
 export const EDIT_PROFILE = "Editar perfil";
 export const SAVE = "Salvar";
 export const CANCEL = "Cancelar";
+export const DELETE = "Excluir";
 export const PERSONAL_INFO = "Informações pessoais";
 export const MANAGE_PERSONAL_HERE = "Gerencie suas informações pessoais e configurações aqui.";
 export const BASIC_INFORMATION = "Informações básicas";
 export const ADDRESS = "Endereço";
 export const UPDATE = "Atualizar";
 export const MEMBER_SINCE = "Membro desde";
+export const SETTINGS = "Configurações";
+export const DELETE_ACCOUNT = "Excluir conta";
+export const DELETE_ACCOUNT_TEXT = "Se você excluir sua conta, você perderá todos os seus dados";
+export const ACTION_CANNOT_UNDONE = "Esta ação não pode ser desfeita";
+export const CONFIRM_DELETE_ACCOUNT = "Confirmo que gostaria de excluir minha conta";
