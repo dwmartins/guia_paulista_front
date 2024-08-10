@@ -55,7 +55,7 @@
                                 <el-form-item class="col-12" :label="showText('DESCRIPTION_LABEL')" label-position="top" prop="description">
                                     <el-input
                                         v-model="form.description"
-                                        maxlength="200"
+                                        maxlength="600"
                                         show-word-limit
                                         type="textarea"
                                         name="description"
@@ -163,7 +163,7 @@
                         <el-checkbox class="text-secondary" v-model="confirmAccountDeletion" :label="showText('CONFIRM_DELETE_ACCOUNT')" size="large" />
 
                         <div class="w-100 d-flex justify-content-end mt-3">
-                            <el-button type="danger" native-type="submit" class="btn_save" :loading="isLoading.delete_account">
+                            <el-button @click="deleteAccount" type="danger" native-type="submit" class="btn_save" :loading="isLoading.delete_account">
                                 {{ isLoading.delete_account ? showText('LOADING') : showText('DELETE') }}
                             </el-button>
                         </div>
@@ -292,6 +292,27 @@ const submitFormSettings = async () => {
     } catch (error) {
         console.error('error updating user settings', error);
         isLoading.value.settings = false;
+    }
+}
+
+const deleteAccount = async () => {
+    if(!confirmAccountDeletion.value) {
+        showAlert('warning', '', showText('ALERT_DELETE_ACCOUNT'));
+        return;
+    }
+
+    isLoading.value.delete_account = true;
+
+    try {
+        const response = await UserService.delete(user.value.id);
+
+        showAlert('success', '', response.data.message);
+
+        AuthService.logout();
+        isLoading.value.delete_account = false;
+    } catch (error) {
+        console.error('error deleting user account', error);
+        isLoading.value.delete_account = false;
     }
 }
 

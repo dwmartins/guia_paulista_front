@@ -96,21 +96,21 @@ class UserService {
         }
     }
 
-    // async deleteUser(userId) {
-    //     const user = AuthService.validateLoggedUser();
-    //     if(!user) return false;
+    async delete(userId) {
+        const user = AuthService.checkAuth();
+        if(!user) return false;
 
-    //     try {
-    //         return await axios.delete(`/user/${userId}`, {
-    //             headers: {
-    //                 'Authorization': AuthService.getBearer()
-    //             }
-    //         });
-    //     } catch (error) {
-    //         showError(error);
-    //         throw error;
-    //     }
-    // }
+        try {
+            return await axios.delete(`/user/${userId}`, {
+                headers: {
+                    'Authorization': AuthService.getBearer()
+                }
+            });
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
+    }
 
     // async deleteMultiples(ids) {
     //     const user = AuthService.validateLoggedUser();

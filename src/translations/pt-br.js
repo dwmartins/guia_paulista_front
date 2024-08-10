@@ -67,6 +67,7 @@ export const IMG_5MB = "A imagem deve ter no máximo 5MB.";
 export const IMG_FORMAT = "O formato da imagem deve ser (png, jpg ou jpeg).";
 export const ICON_5MB = "O ico deve ter no máximo 5MB.";
 export const ICON_FORMAT = "O formato do ico deve ser um ícone ICO ou JPG, JPEG ou PNG.";
+export const ALERT_DELETE_ACCOUNT = "Você precisa confirmar se realmente deseja excluir sua conta";
 
 // Alts
 export const ALT_LOGIN_IMG = "Imagem de login";
