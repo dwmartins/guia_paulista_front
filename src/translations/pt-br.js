@@ -37,6 +37,7 @@ export const NAME_LABEL = "Nome";
 export const LAST_NAME_LABEL = "Sobrenome";
 export const PHONE_LABEL = "Telefone";
 export const DESCRIPTION_LABEL = "Descrição";
+export const MESSAGE_LABEL = "Mensagem";
 export const DATE_OF_BIRTH_LABEL = "Data de nascimento";
 export const ADDRESS_LABEL = "Endereço";
 export const CITY_LABEL = "Cidade";
@@ -45,6 +46,7 @@ export const STATE_LABEL = "Estado";
 export const CURRENT_PASSWORD_LABEL = "Senha atual";
 export const NEW_PASSWORD_LABEL = "Nova Senha";
 export const CONFIRM_PASSWORD_LABEL = "Confirme sua senha";
+export const COMPANY_LABEL = "Empresa";
 
 // Form Validations
 export const EMAIL_INVALID = "Por favor, insira o endereço de e-mail correto";
@@ -54,6 +56,7 @@ export const CURRENT_PASSWORD_REQUIRED = "Senha atual é obrigatória";
 export const NEW_PASSWORD_REQUIRED = "Nova senha é obrigatória";
 export const NAME_REQUIRED = "Nome é obrigatório";
 export const LAST_NAME_REQUIRED = "Sobrenome é obrigatório";
+export const MESSAGE_REQUIRED = "Mensagem é obrigatória";
 export const ALL_REQUIRED = "Preencha todos os campos obrigatórios";
 export const AGREE_RECEIVE_MAIL = "Concordo em receber e-mails informativos e promocionais.";
 export const CONTACT_PUBLIC = "Tornar meus dados de contato públicos";
@@ -81,6 +84,7 @@ export const ALT_REGISTER_IMG = "Imagem de registro";
 export const ALT_USER_IMG = "Imagem do usuário";
 export const NO_ADS = "Sem anúncios";
 export const ALT_ACCOUNT = "Imagem da conta do usuário";
+export const ALT_CONTACT = "Imagem de contato";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Lanchonetes, pizzarias, hotel...";
@@ -130,6 +134,8 @@ export const EDIT_PROFILE = "Editar perfil";
 export const SAVE = "Salvar";
 export const CANCEL = "Cancelar";
 export const DELETE = "Excluir";
+export const SEND_MESSAGE = "Enviar mensagem";
+export const SENDING = "Enviando";
 export const PERSONAL_INFO = "Informações pessoais";
 export const MANAGE_PERSONAL_HERE = "Gerencie suas informações pessoais e configurações aqui.";
 export const BASIC_INFORMATION = "Informações básicas";

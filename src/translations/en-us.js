@@ -37,6 +37,7 @@ export const NAME_LABEL = "First Name";
 export const LAST_NAME_LABEL = "Last Name";
 export const PHONE_LABEL = "Phone";
 export const DESCRIPTION_LABEL = "Description";
+export const MESSAGE_LABEL = "Message";
 export const DATE_OF_BIRTH_LABEL = "Date of birth";
 export const ADDRESS_LABEL = "Address";
 export const CITY_LABEL = "City";
@@ -45,6 +46,7 @@ export const STATE_LABEL = "State";
 export const CURRENT_PASSWORD_LABEL = "Current Password";
 export const NEW_PASSWORD_LABEL = "New Password";
 export const CONFIRM_PASSWORD_LABEL = "Confirm your password";
+export const COMPANY_LABEL = "Company";
 
 // Form Validations
 export const EMAIL_INVALID = "Please input correct email address";
@@ -53,6 +55,7 @@ export const PASSWORD_REQUIRED = "Password is required";
 export const CURRENT_PASSWORD_REQUIRED = "Current password is required";
 export const NEW_PASSWORD_REQUIRED = "New password is required";
 export const NAME_REQUIRED = "First name is required";
+export const MESSAGE_REQUIRED = "Message is required";
 export const LAST_NAME_REQUIRED = "Last name is required";
 export const ALL_REQUIRED = "Fill in all required fields";
 export const AGREE_RECEIVE_MAIL = "I agree to receive informational and promotional emails.";
@@ -81,6 +84,7 @@ export const ALT_REGISTER_IMG = "Register image";
 export const ALT_USER_IMG = "User Image";
 export const NO_ADS = "Sem anúncios";
 export const ALT_ACCOUNT = "User account image";
+export const ALT_CONTACT = "Contact Image";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Snack bars, pizzerias, hotel...";
@@ -130,6 +134,8 @@ export const EDIT_PROFILE = "Edit profile";
 export const SAVE = "Save";
 export const CANCEL = "Cancel";
 export const DELETE = "Delete";
+export const SEND_MESSAGE = "Send Message";
+export const SENDING = "Sending";
 export const PERSONAL_INFO = "Personal information";
 export const MANAGE_PERSONAL_HERE = "Manage your Personal info and settings here.";
 export const BASIC_INFORMATION = "Basic information";

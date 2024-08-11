@@ -9,6 +9,7 @@ import ProfileView from '@/views/public/ProfileView.vue';
 import AuthService from '@/services/AuthService';
 import { loadingPageStore } from '@/store/loadingPageStore';
 import ProfileInfoView from '@/views/public/ProfileInfoView.vue';
+import ContactView from '@/views/public/ContactView.vue';
 
 let router = null;
 
@@ -39,6 +40,10 @@ export function initializeRoutes() {
                     path: showText('PATH_PROFILE_INFO'),
                     component: ProfileInfoView,
                     meta: { requiresAuth: true }
+                },
+                {
+                    path: showText('PATH_CONTACT'),
+                    component: ContactView
                 }
             ]
         },
