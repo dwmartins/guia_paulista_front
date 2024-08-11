@@ -35,7 +35,7 @@
 
                         <el-form-item class="mt-3">
                             <div class="w-100 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-sm btn-outline-primary btn_send letter-spacing text-uppercase" :disabled="isLoading">
+                                <button type="submit" class="btn btn-sm btn-outline-primary btn_send letter-spacing text-uppercase d-flex justify-content-center" :disabled="isLoading">
                                     <template v-if="isLoading">
                                         <AppSpinner :message="showText('SENDING')" color="text-primary" />
                                     </template>
@@ -96,7 +96,7 @@ const sendMessage = async () => {
     if(isValid) {
         isLoading.value = true;
         try {
-            const response = EmailService.sendMessageContact(formContact);
+            const response = await EmailService.sendMessageContact(formContact);
             showAlert('success' , '', response.data.message);
 
             formRefContact.value.resetFields();
