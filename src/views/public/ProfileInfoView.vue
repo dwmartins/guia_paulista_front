@@ -83,12 +83,15 @@
                     </div>
 
                     <div class="address">
-                        <p class="text-secondary fs-7 mb-0">
+                        <p v-if="user.address" class="text-secondary fs-7 mb-0">
                             <i class="fa-solid fa-location-dot me-2"></i>
                             {{ user.address }}
                         </p>
                         <p class="text-secondary fs-7 mb-0">
-                            {{ user.city }}, {{ user.state }}, {{ user.zipCode }}
+                            <i v-if="!user.address" class="fa-solid fa-location-dot me-2"></i>
+                            <template v-if="user.city">{{ user.city }}</template>
+                            <template v-if="user.state">, {{ user.state }}</template>
+                            <template v-if="user.zipCode">, {{ user.zipCode }}</template>
                         </p>
                     </div>
 
