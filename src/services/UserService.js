@@ -76,6 +76,22 @@ class UserService {
         }
     }
 
+    async updatePassword(data) {
+        const user = AuthService.checkAuth();
+        if(!user) return false;
+
+        try {
+            return await axios.put(`/user/password`, data,{
+                headers: {
+                    'Authorization': AuthService.getBearer()
+                }
+            }) 
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
+    }
+
     async setPhoto(photo) {
         try {
             const user = AuthService.checkAuth();

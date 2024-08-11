@@ -42,16 +42,22 @@ export const ADDRESS_LABEL = "Address";
 export const CITY_LABEL = "City";
 export const ZIP_CODE_LABEL = "Zip code";
 export const STATE_LABEL = "State";
+export const CURRENT_PASSWORD_LABEL = "Current Password";
+export const NEW_PASSWORD_LABEL = "New Password";
+export const CONFIRM_PASSWORD_LABEL = "Confirm your password";
 
 // Form Validations
 export const EMAIL_INVALID = "Please input correct email address";
 export const EMAIL_REQUIRED = "Email is required";
 export const PASSWORD_REQUIRED = "Password is required";
+export const CURRENT_PASSWORD_REQUIRED = "Current password is required";
+export const NEW_PASSWORD_REQUIRED = "New password is required";
 export const NAME_REQUIRED = "First name is required";
 export const LAST_NAME_REQUIRED = "Last name is required";
 export const ALL_REQUIRED = "Fill in all required fields";
 export const AGREE_RECEIVE_MAIL = "I agree to receive informational and promotional emails.";
 export const CONTACT_PUBLIC = "Make my contact details public";
+export const PASSWORD_NOT_MATCH = "Passwords do not match";
 
 // Success message
 export const LOGIN_SUCCESSFUL = "Login successful.";

@@ -42,16 +42,22 @@ export const ADDRESS_LABEL = "Endereço";
 export const CITY_LABEL = "Cidade";
 export const ZIP_CODE_LABEL = "CEP";
 export const STATE_LABEL = "Estado";
+export const CURRENT_PASSWORD_LABEL = "Senha atual";
+export const NEW_PASSWORD_LABEL = "Nova Senha";
+export const CONFIRM_PASSWORD_LABEL = "Confirme sua senha";
 
 // Form Validations
 export const EMAIL_INVALID = "Por favor, insira o endereço de e-mail correto";
 export const EMAIL_REQUIRED = "Email é obrigatório";
 export const PASSWORD_REQUIRED = "Senha é obrigatória";
+export const CURRENT_PASSWORD_REQUIRED = "Senha atual é obrigatória";
+export const NEW_PASSWORD_REQUIRED = "Nova senha é obrigatória";
 export const NAME_REQUIRED = "Nome é obrigatório";
 export const LAST_NAME_REQUIRED = "Sobrenome é obrigatório";
 export const ALL_REQUIRED = "Preencha todos os campos obrigatórios";
 export const AGREE_RECEIVE_MAIL = "Concordo em receber e-mails informativos e promocionais.";
 export const CONTACT_PUBLIC = "Tornar meus dados de contato públicos";
+export const PASSWORD_NOT_MATCH = "As senhas não coincidem";
 
 // Success message
 export const LOGIN_SUCCESSFUL = "Login efetuado com sucesso";

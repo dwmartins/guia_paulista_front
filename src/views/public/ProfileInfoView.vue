@@ -126,6 +126,37 @@
                     <hr class="text-secondary">
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-5 custom_dark mb-0">{{ showText('PASSWORD_LABEL') }}</p>
+                        <el-button @click="toggleCollapse('password')" type="primary" class="fs-7 fw-semibold letter-spacing text-uppercase" link>{{ showText('UPDATE') }}</el-button>
+                    </div>
+
+                    <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+                        <div v-show="!isCollapsed.password" id="password_form" class="container-fluid px-0 mt-2">
+                            <el-form ref="formRefPassword" @submit.prevent="submitPassword" :model="formPassword" class="row py-3">
+                                <el-form-item class="col-12" label-position="top" :label="showText('CURRENT_PASSWORD_LABEL')" prop="currentPassword" :rules="formRules.currentPassword">
+                                    <el-input v-model="formPassword.currentPassword" type="password" show-password />
+                                </el-form-item>
+
+                                <el-form-item class="col-12 col-sm-6" label-position="top" :label="showText('NEW_PASSWORD_LABEL')" prop="newPassword" :rules="formRules.newPassword">
+                                    <el-input v-model="formPassword.newPassword" type="password" show-password />
+                                </el-form-item>
+
+                                <el-form-item class="col-12 col-sm-6" label-position="top" :label="showText('CONFIRM_PASSWORD_LABEL')" prop="confirmPassword" :rules="formRules.password">
+                                    <el-input v-model="formPassword.confirmPassword" type="password" show-password />
+                                </el-form-item>
+
+                                <div class="w-100 d-flex justify-content-end mt-3">
+                                    <el-button type="primary" plain native-type="submit" class="btn_save" :loading="isLoading.password">
+                                        {{ isLoading.password ? showText('LOADING') : showText('SAVE') }}
+                                    </el-button>
+                                </div>
+                            </el-form>
+                        </div>
+                    </transition>
+
+                    <hr class="text-secondary">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
                         <p class="fs-5 custom_dark mb-0">{{ showText('SETTINGS') }}</p>
                         <el-button @click="toggleCollapse('settings')" type="primary" class="fs-7 fw-semibold letter-spacing text-uppercase" link>{{ showText('UPDATE') }}</el-button>
                     </div>
@@ -133,8 +164,8 @@
                     <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                         <div v-show="!isCollapsed.settings" id="settings_form" class="container-fluid px-0 mt-2">
                             <el-form @submit.prevent="submitFormSettings" :model="formSettings" class="row py-3">
-                                <el-checkbox class="text-secondary" v-model="formSettings.acceptsEmails" :label="showText('AGREE_RECEIVE_MAIL')" size="large" />
-                                <el-checkbox class="text-secondary" v-model="formSettings.publishContactInfo" :label="showText('CONTACT_PUBLIC')" size="large" />
+                                <el-checkbox class="text-secondary" v-model="formSettings.acceptsEmails" :label="showText('AGREE_RECEIVE_MAIL')" name="acceptsEmails" size="large" />
+                                <el-checkbox class="text-secondary" v-model="formSettings.publishContactInfo" :label="showText('CONTACT_PUBLIC')" name="publishContactInfo" size="large" />
 
                                 <div class="w-100 d-flex justify-content-end mt-3">
                                     <el-button type="primary" plain native-type="submit" class="btn_save" :loading="isLoading.settings">
@@ -160,7 +191,7 @@
                             </div>
                         </div>
 
-                        <el-checkbox class="text-secondary" v-model="confirmAccountDeletion" :label="showText('CONFIRM_DELETE_ACCOUNT')" size="large" />
+                        <el-checkbox class="text-secondary" v-model="confirmAccountDeletion" :label="showText('CONFIRM_DELETE_ACCOUNT')" name="confirmAccountDeletion" size="large" />
 
                         <div class="w-100 d-flex justify-content-end mt-3">
                             <el-button @click="deleteAccount" type="danger" native-type="submit" class="btn_save" :loading="isLoading.delete_account">
@@ -189,17 +220,20 @@ import { settingsStore } from '@/store/SettingsStore';
 
 const user = computed(() => userStore.user);
 const formRefBasicInfo = ref(null);
+const formRefPassword = ref(null);
 
 let isLoading = ref({
     basic_info: false,
     address: false,
     settings: false,
+    password: false,
     delete_account: false
 })
 
 const isCollapsed = ref({
     basic_info: true,
     address: true,
+    password: true,
     settings: true
 });
 
@@ -222,6 +256,12 @@ const formAddress = reactive({
 const formSettings = reactive({
     acceptsEmails: user.value.acceptsEmails === "Y" ? true : false,
     publishContactInfo: user.value.publishContactInfo === "Y" ? true : false,
+});
+
+const formPassword = reactive({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: ""
 })
 
 const confirmAccountDeletion = ref(false);
@@ -239,6 +279,12 @@ const formRules = {
     ],
     password: [
         { required: true, message: showText('PASSWORD_REQUIRED') }
+    ],
+    currentPassword: [
+        { required: true, message: showText('CURRENT_PASSWORD_REQUIRED')}
+    ],
+    newPassword: [
+        { required: true, message: showText('NEW_PASSWORD_REQUIRED')}
     ]
 }
 
@@ -292,6 +338,34 @@ const submitFormSettings = async () => {
     } catch (error) {
         console.error('error updating user settings', error);
         isLoading.value.settings = false;
+    }
+}
+
+const submitPassword = async () => {
+    const isValid = await validForm(formRefPassword);
+
+    if(isValid) {
+        if(formPassword.newPassword != formPassword.confirmPassword) {
+            showAlert('error', '', showText('PASSWORD_NOT_MATCH'));
+            return;
+        }
+
+        isLoading.value.password = true;
+
+        try {
+            const response = await UserService.updatePassword(formPassword);
+
+            showAlert('success', '', response.data.message);
+            isLoading.value.password = false;
+
+            formRefPassword.value.resetFields();
+            
+        } catch (error) {
+            console.error('error updating user password', error);
+            isLoading.value.password = false;
+        }
+    } else {
+        showAlert('error' , '', showText('ALL_REQUIRED'))
     }
 }
 
