@@ -35,14 +35,15 @@
 
                         <el-form-item class="mt-3">
                             <div class="w-100 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-sm btn-outline-primary btn_send letter-spacing text-uppercase d-flex justify-content-center" :disabled="isLoading">
-                                    <template v-if="isLoading">
-                                        <AppSpinner :message="showText('SENDING')" color="text-primary" />
-                                    </template>
-                                    <template v-else>
-                                        {{ showText('SEND_MESSAGE') }}
-                                    </template>
-                                </button>
+                                <btnLoadingOutline 
+                                    :loading="isLoading" 
+                                    :text="showText('SEND_MESSAGE')" 
+                                    :textLoading="showText('SENDING')"
+                                    width="sm"
+                                    type="submit"
+                                    class="btn_send"
+                                    icon="fa-regular fa-paper-plane"
+                                />
                             </div>
                         </el-form-item>
                     </el-form>
@@ -59,8 +60,8 @@
 import { showText } from '@/translation';
 import { showAlert } from '@/helpers/showAlert';
 import { ref, reactive } from 'vue';
-import AppSpinner from '@/components/shared/AppSpinner.vue';
 import EmailService from '@/services/EmailService';
+import btnLoadingOutline from '@/components/shared/buttons/btnLoadingOutline.vue';
 
 let isLoading = ref(false);
 
