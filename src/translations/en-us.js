@@ -30,6 +30,7 @@ export const CONTACT_PAGE = "Contact";
 export const ADVERTISE_PAGE = "Advertise here";
 export const PRIVACY_PAGE = "Privacy Policy";
 export const EVENTS_PAGE = "Events"
+export const MAINTENANCE_PAGE = "Maintenance";
 
 // Form Labels
 export const EMAIL_LABEL = "Email";

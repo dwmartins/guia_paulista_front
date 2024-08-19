@@ -14,7 +14,6 @@ import en from 'element-plus/es/locale/lang/en';
 import ptBr from 'element-plus/es/locale/lang/pt-br';
 import AppLoadingPage from '@/components/shared/AppLoadingPage.vue';
 import { loadingPageStore } from './store/loadingPageStore';
-import { showText } from './translation';
 
 const LoadingPage = createApp(AppLoadingPage);
 LoadingPage.mount('#loading');
@@ -54,11 +53,6 @@ async function startApp() {
 
         loadingPageStore.hide();
         LoadingPage.unmount('#loading');
-        console.log(settingsStore.getSetting('maintenance'));
-
-        if(settingsStore.getSetting('maintenance') == "on") {
-            router.push(showText('PATH_MAINTENANCE'));
-        }
 
     } catch (error) {
         loadingPageStore.hide();

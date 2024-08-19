@@ -10,6 +10,7 @@ import AuthService from '@/services/AuthService';
 import { loadingPageStore } from '@/store/loadingPageStore';
 import ProfileInfoView from '@/views/public/ProfileInfoView.vue';
 import ContactView from '@/views/public/ContactView.vue';
+import { settingsStore } from '@/store/SettingsStore';
 
 let router = null;
 
@@ -44,10 +45,6 @@ export function initializeRoutes() {
                 {
                     path: showText('PATH_CONTACT'),
                     component: ContactView
-                },
-                {
-                    path: showText('PATH_MAINTENANCE'),
-                    component: () => import('@/views/public/MaintenanceView.vue'),
                 }
             ]
         },
@@ -57,10 +54,14 @@ export function initializeRoutes() {
             meta: { requiresAuthAdmin: true },
             children: [
                 {
-                    path: showText('PATH_DASHBOARD'),
-                    component: () => import('@/views/admin/DashboardView.vue'),
+                    path: '',
+                    component: () => import('@/views/admin/DashboardView.vue')
                 }
             ]
+        },
+        {
+            path: showText('PATH_MAINTENANCE'),
+            component: () => import('@/views/public/MaintenanceView.vue'),
         },
         {
             path: '/:pathMatch(.*)*',
@@ -68,7 +69,7 @@ export function initializeRoutes() {
         },
         {
             path: '/app/:pathMatch(.*)*',
-            redirect:`app/${showText('PATH_DASHBOARD')}`
+            redirect: `/app${showText('PATH_DASHBOARD')}`
         }
     ];
 
@@ -86,6 +87,14 @@ export function initializeRoutes() {
 
     router.beforeEach((to, from, next) => {
         const { requiresAuth } = to.meta;
+
+        if (to.path.startsWith('/app')) {
+            return next();
+        }
+        
+        if (settingsStore.getSetting('maintenance') === "on" && to.path !== showText('PATH_MAINTENANCE')) {
+            return next({ path: showText('PATH_MAINTENANCE') });
+        }
     
         if(requiresAuth) {
             loadingPageStore.show();
