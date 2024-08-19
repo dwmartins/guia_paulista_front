@@ -44,6 +44,10 @@ export function initializeRoutes() {
                 {
                     path: showText('PATH_CONTACT'),
                     component: ContactView
+                },
+                {
+                    path: showText('PATH_MAINTENANCE'),
+                    component: () => import('@/views/public/MaintenanceView.vue'),
                 }
             ]
         },

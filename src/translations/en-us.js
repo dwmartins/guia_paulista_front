@@ -14,6 +14,7 @@ export const PATH_ADVERTISES = "/listings";
 export const PATH_EVENTS = "/events"; 
 export const PATH_BLOG = "/blog";
 export const PATH_CONTACT = "/contact";
+export const PATH_MAINTENANCE = "/maintenance";
 
 // Name of navigation
 export const LOGIN_PAGE = "Login";
@@ -85,6 +86,7 @@ export const ALT_USER_IMG = "User Image";
 export const NO_ADS = "Sem anúncios";
 export const ALT_ACCOUNT = "User account image";
 export const ALT_CONTACT = "Contact Image";
+export const ALT_MAINTENANCE = "Maintenance image";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Snack bars, pizzerias, hotel...";
@@ -147,3 +149,4 @@ export const DELETE_ACCOUNT = "Delete account";
 export const DELETE_ACCOUNT_TEXT = "If you delete your account, you will lose all your data";
 export const ACTION_CANNOT_UNDONE = "This action cannot be undone.";
 export const CONFIRM_DELETE_ACCOUNT = "Confirmo que gostaria de excluir minha conta";
+export const MAINTENANCE_TEXT = "We are undergoing maintenance, we will be back soon.";

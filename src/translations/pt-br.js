@@ -14,6 +14,7 @@ export const PATH_ADVERTISES = "/listagens";
 export const PATH_EVENTS = "/eventos";
 export const PATH_BLOG = "/blog";
 export const PATH_CONTACT = "/contato";
+export const PATH_MAINTENANCE = "/manutencao";
 
 // Name of navigation
 export const LOGIN_PAGE = "Entrar";
@@ -85,6 +86,7 @@ export const ALT_USER_IMG = "Imagem do usuário";
 export const NO_ADS = "Sem anúncios";
 export const ALT_ACCOUNT = "Imagem da conta do usuário";
 export const ALT_CONTACT = "Imagem de contato";
+export const ALT_MAINTENANCE = "Imagem de manutenção";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Lanchonetes, pizzarias, hotel...";
@@ -147,3 +149,4 @@ export const DELETE_ACCOUNT = "Excluir conta";
 export const DELETE_ACCOUNT_TEXT = "Se você excluir sua conta, você perderá todos os seus dados";
 export const ACTION_CANNOT_UNDONE = "Esta ação não pode ser desfeita";
 export const CONFIRM_DELETE_ACCOUNT = "Confirmo que gostaria de excluir minha conta";
+export const MAINTENANCE_TEXT = "Estamos em manutenção, voltaremos em breve.";
