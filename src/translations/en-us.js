@@ -16,6 +16,9 @@ export const PATH_BLOG = "/blog";
 export const PATH_CONTACT = "/contact";
 export const PATH_MAINTENANCE = "/maintenance";
 
+// restricted pages 
+export const PATH_ADM_LOGIN = "/panel/login";
+
 // Name of navigation
 export const LOGIN_PAGE = "Login";
 export const REGISTER_PAGE = "Criar conta";
@@ -79,6 +82,7 @@ export const IMG_FORMAT = "The image format must be (png, jpg or jpeg).";
 export const ICON_5MB = "The icon must be a maximum of 5MB.";
 export const ICON_FORMAT = "The ico format must be an ICO icon or JPG, JPEG or PNG.";
 export const ALERT_DELETE_ACCOUNT = "You need to confirm that you really want to delete your account";
+export const NOT_HAVE_PERMISSION_ACCESS_AREA = "You do not have permission to access this area.";
 
 // Alts
 export const ALT_LOGIN_IMG = "Login image";

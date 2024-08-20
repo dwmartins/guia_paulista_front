@@ -60,6 +60,10 @@ export function initializeRoutes() {
             ]
         },
         {
+            path: showText('PATH_ADM_LOGIN'),
+            component: () => import('@/views/admin/LoginView.vue')
+        },
+        {
             path: showText('PATH_MAINTENANCE'),
             component: () => import('@/views/public/MaintenanceView.vue'),
         },
