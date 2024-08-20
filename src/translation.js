@@ -4,6 +4,7 @@ async function loadTranslations(lang) {
     try {
         const module = await import(`./translations/${lang}.js`);
         translations = module;
+        document.documentElement.lang = lang;
     } catch (error) {
         console.error(`Failed to load translations for language: ${lang}`, error);
     }
