@@ -1,7 +1,7 @@
 <template>
-    <button :class="['btn', `btn-outline-${color}`, `btn-${width}`, 'd-flex', 'justify-content-center']" :type="type" :disabled="loading">
+    <button :class="['btn', `btn-primary`, `btn-${width}`, 'd-flex', 'justify-content-center']" :type="type" :disabled="loading">
         <template v-if="loading">
-            <AppSpinner :message="textLoading" :color="[`text-${color}`]" />
+            <AppSpinner :message="textLoading" color="text-white" />
         </template>
         <template v-else>
             <div class="d-flex align-items-center">
@@ -13,9 +13,9 @@
 </template>
 
 <script setup>
-import defineProps from 'vue';
-import { showText } from '@/translation';
+import { defineProps } from 'vue';
 import AppSpinner from '@/components/shared/AppSpinner.vue';
+import { showText } from '@/translation';
 
 defineProps({
     text: {
@@ -27,11 +27,6 @@ defineProps({
         type: String,
         required: false,
         default: showText('LOADING')
-    },
-    color: {
-        type: String,
-        require: false,
-        default: "primary"
     },
     width: {
         type: String,

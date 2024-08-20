@@ -13,11 +13,11 @@
                     hide-required-asterisk >
 
                     <el-form-item label-position="top" :label="showText('EMAIL_LABEL')" prop="email" :rules="formRules.email">
-                        <el-input v-model="formValidation.email" type="text" name="email"/>
+                        <el-input v-model="formValidation.email" type="text" name="email" size="large"/>
                     </el-form-item>
 
                     <el-form-item label-position="top" :label="showText('PASSWORD_LABEL')" prop="password" :rules="formRules.password">
-                        <el-input v-model="formValidation.password" type="password" show-password />
+                        <el-input v-model="formValidation.password" type="password" size="large" show-password />
                     </el-form-item>
 
                     <div class="d-flex flex-wrap justify-content-between align-items-center rememberMe">
@@ -29,9 +29,13 @@
                     </div>
 
                     <el-form-item class="mt-3">
-                        <el-button type="primary" native-type="submit" class="w-100" :loading="isLoading">
-                            {{ isLoading ? showText('LOADING') : showText('LOGIN') }}
-                        </el-button>
+                        <btnPrimary 
+                            :loading="isLoading"
+                            :text="showText('LOGIN')"
+                            type="submit"
+                            icon="fa-solid fa-arrow-right-to-bracket"
+                            class="w-100"
+                        />
                     </el-form-item>
 
                     <hr class="text-secondary">
@@ -60,6 +64,7 @@ import { siteInfoStore } from '@/store/siteInfoStore';
 import AuthService from '@/services/AuthService';
 import { showAlert } from '@/helpers/showAlert';
 import { router } from '@/router';
+import btnPrimary from '@/components/shared/buttons/btnPrimary.vue';
 
 onMounted(() => {
     document.title = `${showText('LOGIN_PAGE')} | ${siteInfoStore.constants.webSiteName}`;

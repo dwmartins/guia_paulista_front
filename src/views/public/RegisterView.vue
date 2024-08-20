@@ -6,19 +6,19 @@
 
                 <el-form @submit.prevent="submitForm" ref="formRef" :model="formValidation" class="w-100 p-0 p-sm-3 form_register">
                     <el-form-item :label="showText('NAME_LABEL')" label-position="top" prop="name" :rules="formRules.name">
-                        <el-input v-model="formValidation.name" type="text" name="name"/>
+                        <el-input v-model="formValidation.name" type="text" name="name" size="large"/>
                     </el-form-item>
 
                     <el-form-item :label="showText('LAST_NAME_LABEL')" label-position="top" prop="lastName" :rules="formRules.lastName">
-                        <el-input v-model="formValidation.lastName" type="text" name="lastName"/>
+                        <el-input v-model="formValidation.lastName" type="text" name="lastName" size="large"/>
                     </el-form-item>
 
                     <el-form-item :label="showText('EMAIL_LABEL')" label-position="top" prop="email" :rules="formRules.email">
-                        <el-input v-model="formValidation.email" type="text" name="email"/>
+                        <el-input v-model="formValidation.email" type="text" name="email" size="large"/>
                     </el-form-item>
 
                     <el-form-item :label="showText('PASSWORD_LABEL')" label-position="top" prop="password" :rules="formRules.password">
-                        <el-input v-model="formValidation.password" type="password" show-password/>
+                        <el-input v-model="formValidation.password" type="password" size="large" show-password/>
                     </el-form-item>
 
                     <div class="fs-8 text-secondary text-center">
@@ -29,9 +29,12 @@
                     </div>
 
                     <el-form-item class="mt-3">
-                        <el-button type="primary" native-type="submit" class="w-100" :loading="isLoading">
-                            {{ isLoading ? showText('LOADING') : showText('NEW_ACCOUNT') }}
-                        </el-button>
+                        <btnPrimary 
+                            :loading="isLoading"
+                            :text="showText('NEW_ACCOUNT')"
+                            type="submit"
+                            class="w-100"
+                        />
                     </el-form-item>
 
                     <hr class="text-secondary">
@@ -57,6 +60,7 @@ import { siteInfoStore } from '@/store/siteInfoStore';
 import UserService from '@/services/UserService';
 import { showAlert } from '@/helpers/showAlert';
 import { router } from '@/router';
+import btnPrimary from '@/components/shared/buttons/btnPrimary.vue';
 
 onMounted(() => {
     document.title = `${showText('REGISTER_PAGE')} | ${siteInfoStore.constants.webSiteName}`;

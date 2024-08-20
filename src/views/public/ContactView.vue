@@ -7,15 +7,15 @@
                 <div class="container-fluid">
                     <el-form ref="formRefContact" @submit.prevent="sendMessage" :model="formContact" class="row py-3">
                         <el-form-item class="col-12 col-lg-6" :label="showText('NAME_LABEL')" label-position="top" prop="name" :rules="formRules.name">
-                            <el-input v-model="formContact.name" type="text" name="name"/>
+                            <el-input v-model="formContact.name" type="text" name="name" size="large"/>
                         </el-form-item>
 
                         <el-form-item class="col-12 col-lg-6" :label="showText('LAST_NAME_LABEL')" label-position="top" prop="lastName" :rules="formRules.lastName">
-                            <el-input v-model="formContact.lastName" type="text" name="lastName"/>
+                            <el-input v-model="formContact.lastName" type="text" name="lastName" size="large"/>
                         </el-form-item>
 
                         <el-form-item class="col-12 col-lg-6" :label="showText('EMAIL_LABEL')" label-position="top" prop="email" :rules="formRules.email">
-                            <el-input v-model="formContact.email" type="text" name="email"/>
+                            <el-input v-model="formContact.email" type="text" name="email" size="large"/>
                         </el-form-item>
 
                         <el-form-item class="col-12 col-lg-6" :label="showText('COMPANY_LABEL')" label-position="top" prop="company">
@@ -35,11 +35,10 @@
 
                         <el-form-item class="mt-3">
                             <div class="w-100 d-flex justify-content-end">
-                                <btnLoadingOutline 
+                                <btnPrimaryOutline 
                                     :loading="isLoading" 
                                     :text="showText('SEND_MESSAGE')" 
                                     :textLoading="showText('SENDING')"
-                                    width="sm"
                                     type="submit"
                                     class="btn_send"
                                     icon="fa-regular fa-paper-plane"
@@ -61,7 +60,7 @@ import { showText } from '@/translation';
 import { showAlert } from '@/helpers/showAlert';
 import { ref, reactive } from 'vue';
 import EmailService from '@/services/EmailService';
-import btnLoadingOutline from '@/components/shared/buttons/btnLoadingOutline.vue';
+import btnPrimaryOutline from '@/components/shared/buttons/btnPrimaryOutline.vue';
 
 let isLoading = ref(false);
 
