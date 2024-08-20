@@ -13,7 +13,7 @@
                     hide-required-asterisk >
 
                     <el-form-item label-position="top" :label="showText('EMAIL_LABEL')" prop="email" :rules="formRules.email">
-                        <el-input v-model="formValidation.email" type="text" name="email" size="large"/>
+                        <el-input v-model="formValidation.email" type="text" name="email" size="large" autocomplete/>
                     </el-form-item>
 
                     <el-form-item label-position="top" :label="showText('PASSWORD_LABEL')" prop="password" :rules="formRules.password">

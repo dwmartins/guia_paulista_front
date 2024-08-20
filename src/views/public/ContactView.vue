@@ -19,7 +19,7 @@
                         </el-form-item>
 
                         <el-form-item class="col-12 col-lg-6" :label="showText('COMPANY_LABEL')" label-position="top" prop="company">
-                            <el-input v-model="formContact.company" type="text" name="company"/>
+                            <el-input v-model="formContact.company" type="text" name="company" size="large"/>
                         </el-form-item>
 
                         <el-form-item class="col-12" :label="showText('MESSAGE_LABEL')" label-position="top" prop="message" :rules="formRules.message">
