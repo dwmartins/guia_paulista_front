@@ -91,11 +91,17 @@ export function initializeRoutes() {
 
     router.beforeEach((to, from, next) => {
         const { requiresAuth } = to.meta;
+        console.log(to.path);
 
         if (to.path.startsWith('/app')) {
             return next();
         }
+
+        if(to.path === showText('PATH_ADM_LOGIN')) {
+            return next();
+        }
         
+        // If it is in maintenance mode, it only blocks public routes
         if (settingsStore.getSetting('maintenance') === "on" && to.path !== showText('PATH_MAINTENANCE')) {
             return next({ path: showText('PATH_MAINTENANCE') });
         }
