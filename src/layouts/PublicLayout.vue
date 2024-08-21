@@ -28,7 +28,6 @@ const getSiteInfo = async () => {
         const response = await SiteInfoService.getSiteInfo();
         siteInfoStore.updateConstants(response.data.siteInfo);
         settingsStore.setSettings(response.data.settings);
-        console.log(response.data.settings);
         
         if(settingsStore.getSetting('maintenance') === 'on') {
             router.push(showText('PATH_MAINTENANCE'));
