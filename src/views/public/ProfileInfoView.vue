@@ -88,7 +88,6 @@
                             {{ user.address }}
                         </p>
                         <p class="text-secondary fs-7 mb-0">
-                            <i v-if="!user.address" class="fa-solid fa-location-dot me-2"></i>
                             <template v-if="user.city">{{ user.city }}</template>
                             <template v-if="user.state">, {{ user.state }}</template>
                             <template v-if="user.zipCode">, {{ user.zipCode }}</template>
