@@ -11,6 +11,7 @@ import { loadingPageStore } from '@/store/loadingPageStore';
 import ProfileInfoView from '@/views/public/ProfileInfoView.vue';
 import ContactView from '@/views/public/ContactView.vue';
 import { settingsStore } from '@/store/SettingsStore';
+import { showAlert } from '@/helpers/showAlert';
 
 let router = null;
 
@@ -90,33 +91,52 @@ export function initializeRoutes() {
     });
 
     router.beforeEach((to, from, next) => {
-        const { requiresAuth } = to.meta;
-        console.log(to.path);
-
-        if (to.path.startsWith('/app')) {
-            return next();
-        }
-
-        if(to.path === showText('PATH_ADM_LOGIN')) {
-            return next();
-        }
+        const { requiresAuth, requiresAuthAdmin } = to.meta;
+        const isEnteringApp = to.path.startsWith('/app') && !from.path.startsWith('/app');
+        const maintenanceMode = settingsStore.getSetting('maintenance') === "on";
         
-        // If it is in maintenance mode, it only blocks public routes
-        if (settingsStore.getSetting('maintenance') === "on" && to.path !== showText('PATH_MAINTENANCE')) {
-            return next({ path: showText('PATH_MAINTENANCE') });
-        }
-    
-        if(requiresAuth) {
+        const handleAuth = () => {
             loadingPageStore.show();
-            AuthService.auth()
-                .then(() => {
-                    loadingPageStore.hide();
-                    next();
-                })
-                .catch(() => {
-                    loadingPageStore.hide();
-                    next({ path: '/' });
-                })
+            return AuthService.auth()
+                .finally(() => loadingPageStore.hide());
+        };
+    
+        const redirectToMaintenance = () => {
+            next({ path: showText('PATH_MAINTENANCE') });
+        };
+    
+        const redirectToHome = () => {
+            next({ path: '/' });
+        };
+    
+        const checkMaintenanceMode = () => {
+            if (maintenanceMode && to.path !== showText('PATH_MAINTENANCE') && !to.path.startsWith('/app')) {
+                return redirectToMaintenance();
+            }
+        };
+    
+        const checkUserRole = (role) => {
+            const allowedRoles = ["support", "admin", "mod", "test"];
+            if (allowedRoles.includes(role)) {
+                next();
+            } else {
+                showAlert('error', '', showText('NOT_HAVE_PERMISSION_ACCESS_AREA'));
+                redirectToHome();
+            }
+        };
+    
+        // Check maintenance mode
+        checkMaintenanceMode();
+    
+        // Check authentication
+        if (requiresAuth) {
+            handleAuth()
+                .then(() => next())
+                .catch(redirectToHome);
+        } else if (requiresAuthAdmin && isEnteringApp) {
+            handleAuth()
+                .then(response => checkUserRole(response.data.role))
+                .catch(redirectToHome);
         } else {
             next();
         }
