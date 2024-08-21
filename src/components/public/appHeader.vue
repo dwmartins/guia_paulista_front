@@ -29,8 +29,8 @@
 
                         <hr>
 
-                        <li class="nav-item logged_small">
-                            <router-link :to="showText('PATH_PANEL')" class="nav-link" @click="closeNavbar()">
+                        <li v-if="allowedRolesToApp.includes(user.role)" class="nav-item logged_small">
+                            <router-link :to="showText('PATH_ADM_DASHBOARD')" class="nav-link" @click="closeNavbar()">
                                 {{ showText('PANEL_PAGE') }}
                             </router-link>
                         </li>
@@ -104,8 +104,8 @@
                         </el-button>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item class="px-0">
-                                    <router-link :to="showText('PATH_PANEL')" class="nav-link px-3 w-100">
+                                <el-dropdown-item v-if="allowedRolesToApp.includes(user.role)" class="px-0">
+                                    <router-link :to="showText('PATH_ADM_DASHBOARD')" class="nav-link px-3 w-100">
                                         <i class="fa-solid fa-chart-line me-2"></i>
                                         {{ showText('PANEL_PAGE') }}
                                     </router-link>
@@ -139,12 +139,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import defaultLogo from '@/assets/img/default/defaultLogo.png';
 import { showText } from '@/translation';
 import { userStore } from '@/store/userStore';
 import { siteInfoStore } from '@/store/siteInfoStore';
 import AuthService from '@/services/AuthService';
+
+const allowedRolesToApp = ["support", "admin", "mod", "test"];
+const user = computed(() => userStore.user);
 
 const logoImage = siteInfoStore.constants.logoImage ? `${this.$API_URL}/uploads/systemImages/${siteInfoStore.constants.logoImage}` : defaultLogo;
 const isMenuOpen = ref(false);

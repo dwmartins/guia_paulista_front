@@ -18,6 +18,7 @@ export const PATH_MAINTENANCE = "/manutencao";
 
 // restricted pages 
 export const PATH_ADM_LOGIN = "/painel/entrar";
+export const PATH_ADM_DASHBOARD = "/app";
 
 // Name of navigation
 export const LOGIN_PAGE = "Entrar";
