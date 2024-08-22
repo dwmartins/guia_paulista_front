@@ -34,6 +34,7 @@ export const ADVERTISE_PAGE = "Advertise here";
 export const PRIVACY_PAGE = "Privacy Policy";
 export const EVENTS_PAGE = "Events"
 export const MAINTENANCE_PAGE = "Maintenance";
+export const DASHBOARD_PAGE = "Dashboard";
 
 // Form Labels
 export const EMAIL_LABEL = "Email";
