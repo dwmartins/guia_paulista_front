@@ -169,11 +169,12 @@ const submitImage = async () => {
     position: relative;
 }
 
-.user_img img{
+.user_img img {
     width: 160px;
     height: 160px;
     border-radius: 50%;
     border: 8px solid #ffff;
+    object-fit: cover;
 }
 
 .edit_photo {
