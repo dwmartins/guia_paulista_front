@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary mx-0 p-0">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mx-0 p-0" :class="{'maintenanceMode': settingsStore.maintenance == 'on'}">
         <div class="container">
             <router-link to="/" class="navbar-brand" @click="closeNavbar()">
                 <div class="d-flex align-items-center logo_image">
@@ -145,6 +145,7 @@ import { showText } from '@/translation';
 import { userStore } from '@/store/userStore';
 import { siteInfoStore } from '@/store/siteInfoStore';
 import AuthService from '@/services/AuthService';
+import { settingsStore } from '@/store/SettingsStore';
 
 const allowedRolesToApp = ["support", "admin", "mod", "test"];
 const user = computed(() => userStore.user);
@@ -234,5 +235,9 @@ nav {
 
 .change #bar3 {
     transform: translateY(-9px) rotate(45deg);
+}
+
+.maintenanceMode {
+    margin-top: 40px;
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
     <section id="publicLayout" class="position-relative m-0 p-0" >
-        <div v-if="settingsStore.maintenance == 'on'" id="adminBar" class="container-fluid bg-dark">
+        <div v-if="settingsStore.maintenance == 'on'" id="adminBar" class="container-fluid bg-dark position-fixed top-0 z-3">
             <div class="container d-flex justify-content-center align-items-center gap-2 py-1">
-                <p class="m-0 text-white-50">Site em manutenção</p>
+                <p class="m-0 text-white-50 fs-7">Site em manutenção</p>
                 <button class="btn btn-sm btn-outline-primary">Publicar</button>
             </div>
         </div>
 
-        <AppHeader />
+        <AppHeader/>
         <main>
             <router-view></router-view>
         </main>
@@ -53,6 +53,6 @@ const getSiteInfo = async () => {
 
 </script>
 
-<style>
+<style scoped>
 
 </style>
