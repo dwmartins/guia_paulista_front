@@ -19,7 +19,14 @@ export const PATH_MAINTENANCE = "/manutencao";
 export const PATH_ADM_LOGIN = "/painel/entrar";
 export const PATH_ADM_DASHBOARD = "/app";
 export const PATH_DASHBOARD = "/dashboard";
-export const PATH_AMD_SETTINGS = "/configuracoes/configuracoes-gerais";
+export const PATH_ADM_SETTINGS = "/configuracoes/configuracoes-gerais";
+export const PATH_ADM_ADVERTISEMENTS = "/conteudos/anuncios";
+export const PATH_ADM_EVENTS = "/conteudos/eventos";
+export const PATH_ADM_BLOG = "/conteudos/blog";
+export const PATH_ADM_BASIC_INFORMATION = "/configuracoes/informacoes-basicas";
+export const PATH_ADM_LANGUAGE = "/configuracoes/linguagem";
+export const PATH_ADM_MAIL = "/configuracoes/email";
+export const PATH_ADM_USERS = "/usuarios";
 
 // Name of navigation
 export const LOGIN_PAGE = "Entrar";
@@ -37,6 +44,13 @@ export const PRIVACY_PAGE = "Política de privacidade";
 export const EVENTS_PAGE = "Eventos"
 export const MAINTENANCE_PAGE = "Manutenção";
 export const DASHBOARD_PAGE = "Dashboard";
+export const CONTENTS_PAGE = "Conteúdos";
+export const ADVERTISEMENTS_PAGE = "Anúncios";
+export const BASIC_INFORMATION_PAGE = "informações básicas";
+export const GENERAL_SETTINGS_PAGE = "Configurações gerais";
+export const LANGUAGE_PAGE = "Linguagem";
+export const EMAIL_PAGE = "E-mail";
+export const USERS_PAGE = "Usuários";
 
 // Form Labels
 export const EMAIL_LABEL = "E-mail";
@@ -158,3 +172,5 @@ export const DELETE_ACCOUNT_TEXT = "Se você excluir sua conta, você perderá t
 export const ACTION_CANNOT_UNDONE = "Esta ação não pode ser desfeita";
 export const CONFIRM_DELETE_ACCOUNT = "Confirmo que gostaria de excluir minha conta";
 export const MAINTENANCE_TEXT = "Estamos em manutenção, voltaremos em breve.";
+export const MAINTENANCE_ALERT = "Site em manutenção";
+export const PUBLISH = "Publicar";

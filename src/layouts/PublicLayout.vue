@@ -2,8 +2,8 @@
     <section id="publicLayout" class="position-relative m-0 p-0" >
         <div v-if="settingsStore.maintenance == 'on'" id="adminBar" class="container-fluid bg-dark position-fixed top-0 z-3">
             <div class="container d-flex justify-content-center align-items-center gap-2 py-1">
-                <p class="m-0 text-white-50 fs-7">Site em manutenção</p>
-                <button class="btn btn-sm btn-outline-primary">Publicar</button>
+                <p class="m-0 text-white-50 fs-7">{{ showText('MAINTENANCE_ALERT') }}</p>
+                <button class="btn btn-sm btn-outline-primary">{{ showText('PUBLISH') }}</button>
             </div>
         </div>
 

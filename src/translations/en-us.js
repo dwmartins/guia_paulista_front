@@ -19,7 +19,14 @@ export const PATH_MAINTENANCE = "/maintenance";
 export const PATH_ADM_LOGIN = "/panel/login";
 export const PATH_ADM_DASHBOARD = "/app";
 export const PATH_DASHBOARD = "/dashboard";
-export const PATH_AMD_SETTINGS = "/settings/general-settings";
+export const PATH_ADM_SETTINGS = "/settings/general-settings";
+export const PATH_ADM_ADVERTISEMENTS = "/contents/announcements";
+export const PATH_ADM_EVENTS = "/contents/events";
+export const PATH_ADM_BLOG = "/contents/blog";
+export const PATH_ADM_BASIC_INFORMATION = "/settings/basic-information";
+export const PATH_ADM_LANGUAGE = "/settings/language";
+export const PATH_ADM_MAIL = "/settings/email";
+export const PATH_ADM_USERS = "/users";
 
 // Name of navigation
 export const LOGIN_PAGE = "Login";
@@ -37,6 +44,13 @@ export const PRIVACY_PAGE = "Privacy Policy";
 export const EVENTS_PAGE = "Events"
 export const MAINTENANCE_PAGE = "Maintenance";
 export const DASHBOARD_PAGE = "Dashboard";
+export const CONTENTS_PAGE = "Contents";
+export const ADVERTISEMENTS_PAGE = "Advertisements";
+export const BASIC_INFORMATION_PAGE = "basic information";
+export const GENERAL_SETTINGS_PAGE = "General Settings";
+export const LANGUAGE_PAGE = "Language";
+export const EMAIL_PAGE = "Email";
+export const USERS_PAGE = "Users";
 
 // Form Labels
 export const EMAIL_LABEL = "Email";
@@ -158,3 +172,5 @@ export const DELETE_ACCOUNT_TEXT = "If you delete your account, you will lose al
 export const ACTION_CANNOT_UNDONE = "This action cannot be undone.";
 export const CONFIRM_DELETE_ACCOUNT = "Confirmo que gostaria de excluir minha conta";
 export const MAINTENANCE_TEXT = "We are undergoing maintenance, we will be back soon.";
+export const MAINTENANCE_ALERT = "Site under maintenance";
+export const PUBLISH = "Publish";
