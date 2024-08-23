@@ -57,6 +57,14 @@ export function initializeRoutes() {
                 {
                     path: '',
                     component: () => import('@/views/admin/DashboardView.vue')
+                },
+                {
+                    path: showText('PATH_DASHBOARD'),
+                    component: () => import('@/views/admin/DashboardView.vue')
+                },
+                {
+                    path: 'usuarios',
+                    component: () => import('@/views/admin/UsersView.vue')
                 }
             ]
         },
@@ -74,7 +82,7 @@ export function initializeRoutes() {
         },
         {
             path: '/app/:pathMatch(.*)*',
-            redirect: `/app${showText('PATH_DASHBOARD')}`
+            redirect: `/app`
         }
     ];
 
@@ -94,49 +102,78 @@ export function initializeRoutes() {
         const { requiresAuth, requiresAuthAdmin } = to.meta;
         const isEnteringApp = to.path.startsWith('/app') && !from.path.startsWith('/app');
         const maintenanceMode = settingsStore.getSetting('maintenance') === "on";
+        const allowedRoles = ["support", "admin", "mod", "test"];
         
+        // Function that handles authentication and displays the loading screen
         const handleAuth = () => {
             loadingPageStore.show();
             return AuthService.auth()
                 .finally(() => loadingPageStore.hide());
         };
     
+        // Redirects to the maintenance page
         const redirectToMaintenance = () => {
-            next({ path: showText('PATH_MAINTENANCE') });
+            return next({ path: showText('PATH_MAINTENANCE') });
         };
     
+        // Redirects to the home page
         const redirectToHome = () => {
-            next({ path: '/' });
+            return next({ path: '/' });
         };
     
+        // Redirects to the admin login page
+        const redirectToLoginAdmin = () => {
+            return next({ path: showText('PATH_ADM_LOGIN') });
+        };
+    
+        // Checks if maintenance mode is enabled
+        // Returns false if the user should be redirected to the maintenance page, interrupting navigation
         const checkMaintenanceMode = () => {
-            if (maintenanceMode && to.path !== showText('PATH_MAINTENANCE') && !to.path.startsWith('/app')) {
-                return redirectToMaintenance();
+            const userLogged = AuthService.getUserLogged();
+    
+            // If the user is logged in and is a superuser, it does not enter maintenance mode
+            if(userLogged && allowedRoles.includes(userLogged.role)) {
+                return true;
             }
+            
+            // If maintenance mode is enabled and the user is not on allowed routes, redirect
+            if (maintenanceMode && to.path !== showText('PATH_MAINTENANCE') && !to.path.startsWith('/app') && to.path !== showText('PATH_ADM_LOGIN')) {
+                redirectToMaintenance();
+                return false;
+            }
+    
+            return true;
         };
     
+        // Checks if the user has the appropriate permission to access the route
+        // Returns false and redirects to the home page if the user does not have permission
         const checkUserRole = (role) => {
-            const allowedRoles = ["support", "admin", "mod", "test"];
             if (allowedRoles.includes(role)) {
-                next();
+                return true;
             } else {
                 showAlert('error', '', showText('NOT_HAVE_PERMISSION_ACCESS_AREA'));
                 redirectToHome();
+                return false;
             }
         };
     
-        // Check maintenance mode
-        checkMaintenanceMode();
+        // Check maintenance mode before anything else
+        if (!checkMaintenanceMode()) return;
     
-        // Check authentication
+        // Check if the route requires authentication
         if (requiresAuth) {
             handleAuth()
                 .then(() => next())
                 .catch(redirectToHome);
         } else if (requiresAuthAdmin && isEnteringApp) {
+            // Checks if the user is trying to enter the admin area and is authenticated
             handleAuth()
-                .then(response => checkUserRole(response.data.role))
-                .catch(redirectToHome);
+                .then(response => {
+                    if (checkUserRole(response.data.role)) {
+                        next();
+                    }
+                })
+                .catch(redirectToLoginAdmin);
         } else {
             next();
         }

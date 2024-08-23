@@ -1,5 +1,12 @@
 <template>
     <section id="publicLayout" class="position-relative m-0 p-0" >
+        <div v-if="settingsStore.maintenance == 'on'" id="adminBar" class="container-fluid bg-dark">
+            <div class="container d-flex justify-content-center align-items-center gap-2 py-1">
+                <p class="m-0 text-white-50">Site em manutenção</p>
+                <button class="btn btn-sm btn-outline-primary">Publicar</button>
+            </div>
+        </div>
+
         <AppHeader />
         <main>
             <router-view></router-view>
@@ -17,6 +24,9 @@ import { siteInfoStore } from "@/store/siteInfoStore";
 import { onMounted } from 'vue';
 import { router } from '@/router';
 import { showText } from '@/translation';
+import AuthService from '@/services/AuthService';
+
+const allowedRoles = ["support", "admin", "mod", "test"];
 
 onMounted( async () => {
     await getSiteInfo();
@@ -30,7 +40,11 @@ const getSiteInfo = async () => {
         settingsStore.setSettings(response.data.settings);
         
         if(settingsStore.getSetting('maintenance') === 'on') {
-            router.push(showText('PATH_MAINTENANCE'));
+            const userLogged = AuthService.getUserLogged();
+
+            if(userLogged && !allowedRoles.includes(userLogged.role)) {
+                router.push(showText('PATH_MAINTENANCE'));
+            }
         }
 
     }, 120000); 

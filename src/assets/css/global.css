@@ -178,3 +178,7 @@ a.text-primary:active {
 .cursor_pointer {
     cursor: pointer;
 }
+
+.outline_none {
+    text-decoration: none;
+}

@@ -4,7 +4,6 @@ export const HELLO_WORLD = "Hello world";
 export const PATH_LOGIN = "/login";
 export const PATH_RECOVER_PASSWORD = "/user/recover-password";
 export const PATH_NEW_ACCOUNT = "/register";
-export const PATH_DASHBOARD = "/dashboard";
 export const PATH_PLANS = "/plans";
 export const PATH_PANEL = "/panel";
 export const PATH_PROFILE = "/user/profile";
@@ -18,6 +17,9 @@ export const PATH_MAINTENANCE = "/maintenance";
 
 // restricted pages 
 export const PATH_ADM_LOGIN = "/panel/login";
+export const PATH_ADM_DASHBOARD = "/app";
+export const PATH_DASHBOARD = "/dashboard";
+export const PATH_AMD_SETTINGS = "/settings/general-settings";
 
 // Name of navigation
 export const LOGIN_PAGE = "Login";
