@@ -78,7 +78,7 @@ onUnmounted(() => {
  
 const route = useRoute();
 const formRef = ref(null);
-let isLoading = ref(true);
+let isLoading = ref(false);
 const rememberMe = ref(false);
 
 const formRules = {
