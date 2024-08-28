@@ -21,12 +21,12 @@ defineProps({
     text: {
         type: String,
         required: false,
-        default: showText('SAVE')
+        default: () => showText('SAVE')
     },
     textLoading: {
         type: String,
         required: false,
-        default: showText('LOADING')
+        default: () => showText('LOADING')
     },
     color: {
         type: String,

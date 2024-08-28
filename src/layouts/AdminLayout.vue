@@ -61,6 +61,11 @@
                 <button class="btn border-0 mx-2" @click="openMenu">
                     <i class="fa-solid fa-bars fs-5"></i>
                 </button>
+                <router-link to="/">
+                    <button class="btn btn-sm btn-outline-primary">
+                        Site
+                    </button>
+                </router-link>
             </header>
             <main class="px-3">
                 <router-view></router-view>
