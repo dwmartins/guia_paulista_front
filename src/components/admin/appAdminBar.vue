@@ -1,7 +1,7 @@
 <template>
     <section id="adminBar" class="container-fluid position-sticky top-0 bg-dark z-3">
         <div class="container py-2 d-flex align-items-center justify-content-between">
-            <router-link :to="PATH_ADM_DASHBOARD" class="text-white-50 outline_none hover_primary">
+            <router-link :to="showText('PATH_ADM_DASHBOARD')" class="text-white-50 outline_none hover_primary">
                 <i class="fa-solid fa-house me-2"></i>
                 <span class="d-none d-sm-inline-block">Dashboard</span>
             </router-link>

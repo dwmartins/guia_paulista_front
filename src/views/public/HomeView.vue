@@ -8,10 +8,10 @@
                         <h3 class="text-light text-center">{{ showText('WHAT_LOOKING') }}</h3>
                     </div>
                     <div class="col-12 col-sm-5 mb-2 p-0 px-3 p-sm-0">
-                        <el-input size="large" :placeholder="showText('PLACEHOLDER_SEARCH_LOCATIONS')" />
+                        <input type="text" name="search" id="search" class="form-control custom_focus rounded-1 custom_placeholder" :placeholder="showText('PLACEHOLDER_SEARCH_LOCATIONS')">
                     </div>
                     <div class="col-12 col-sm-2 px-3 p-sm-0">
-                        <el-button class="w-100 fs-6" type="primary" size="large">{{ showText('SEARCH') }}</el-button>
+                        <button type="button" class="btn btn-primary w-100">{{ showText('SEARCH') }}</button>
                     </div>
                 </div>
             </div>
