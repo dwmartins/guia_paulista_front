@@ -5,10 +5,10 @@ import HomeView from "@/views/public/HomeView.vue";
 import LoginView from '@/views/public/LoginView.vue';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import RegisterView from '@/views/public/RegisterView.vue';
-import ProfileView from '@/views/public/ProfileView.vue';
+import PanelView from '@/views/public/user/PanelView.vue';
 import AuthService from '@/services/AuthService';
 import { loadingPageStore } from '@/store/loadingPageStore';
-import ProfileInfoView from '@/views/public/ProfileInfoView.vue';
+import ProfileView from '@/views/public/user/ProfileView.vue';
 import ContactView from '@/views/public/ContactView.vue';
 import { settingsStore } from '@/store/SettingsStore';
 import { showAlert } from '@/helpers/showAlert';
@@ -34,13 +34,13 @@ export function initializeRoutes() {
                     component: RegisterView
                 },
                 {
-                    path: showText('PATH_PROFILE'),
-                    component: ProfileView,
+                    path: showText('PATH_USER_PANEL'),
+                    component: PanelView,
                     meta: { requiresAuth: true }
                 },
                 {
-                    path: showText('PATH_PROFILE_INFO'),
-                    component: ProfileInfoView,
+                    path: showText('PATH_PROFILE'),
+                    component: ProfileView,
                     meta: { requiresAuth: true }
                 },
                 {

@@ -30,7 +30,7 @@
                             <p class="text-secondary fs-8 text-break">{{ getDateAsString(user.createdAt) }}</p>
                             <p v-if="user.city && user.state" class="text-secondary fs-8 text-break">{{ user.city }}, {{ user.state }}</p>
 
-                            <router-link :to="showText('PATH_PROFILE_INFO')">
+                            <router-link :to="showText('PATH_PROFILE')">
                                 <button class="btn btn-sm btn-primary">{{ showText('EDIT_PROFILE') }}<i class="fa-solid fa-user-pen ms-2"></i></button>
                             </router-link>
                         </div>

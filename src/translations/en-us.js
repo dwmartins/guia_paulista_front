@@ -7,7 +7,6 @@ export const PATH_NEW_ACCOUNT = "/register";
 export const PATH_PLANS = "/plans";
 export const PATH_PANEL = "/panel";
 export const PATH_PROFILE = "/user/profile";
-export const PATH_PROFILE_INFO = "/user/account";
 export const PATH_PRIVACY = "/privacy";
 export const PATH_ADVERTISES = "/listings";
 export const PATH_EVENTS = "/events"; 

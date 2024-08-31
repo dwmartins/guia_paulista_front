@@ -8,8 +8,7 @@
             </router-link>
 
             <button @click="menuOnClick" class="btn border-0 navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false"
-                aria-label="Toggle navigation">
+                data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
                 <div id="menu-bar" :class="{ change: isMenuOpen }">
                     <div id="bar1" class="bar"></div>
                     <div id="bar2" class="bar"></div>
@@ -24,13 +23,14 @@
                     <div v-if="userStore.userLogged">
                         <li class="nav-item logged_small">
                             <i class="bi bi-person-fill me-1 "></i>
-                            <p class="m-0 text-secondary"><i class="fa-regular fa-user me-2"></i>{{ userStore.user.name }} {{ userStore.user.lastName }}</p>
+                            <p class="m-0 text-secondary"><i class="fa-regular fa-user me-2"></i>{{ userStore.user.name
+                                }} {{ userStore.user.lastName }}</p>
                         </li>
 
                         <hr>
 
                         <li v-if="allowedRolesToApp.includes(user.role)" class="nav-item logged_small">
-                            <router-link :to="showText('PATH_ADM_DASHBOARD')" class="nav-link" @click="closeNavbar()">
+                            <router-link :to="showText('PATH_USER_PANEL')" class="nav-link" @click="closeNavbar()">
                                 {{ showText('PANEL_PAGE') }}
                             </router-link>
                         </li>
@@ -40,46 +40,47 @@
                             </router-link>
                         </li>
                         <li class="nav-item logged_small">
-                            <span class="nav-link cursor_pointer" @click="closeNavbar(), AuthService.logout(true)">{{ showText('LOGOUT_PAGE') }}</span>
+                            <span class="nav-link cursor_pointer" @click="closeNavbar(), AuthService.logout(true)">{{
+                                showText('LOGOUT_PAGE') }}</span>
                         </li>
                     </div>
                     <!-- Logged -->
                     <hr>
-                        <li class="nav-item">
-                            <router-link to="/" class="nav-link" @click="closeNavbar()">
-                                {{ showText('HOME_PAGE') }}
-                            </router-link>
-                        </li>
+                    <li class="nav-item">
+                        <router-link to="/" class="nav-link" @click="closeNavbar()">
+                            {{ showText('HOME_PAGE') }}
+                        </router-link>
+                    </li>
 
-                        <li class="nav-item">
-                            <router-link :to="showText('PATH_ADVERTISES')" class="nav-link" @click="closeNavbar()">
-                                {{ showText('ADVERTISERS_PAGE') }}
-                            </router-link>
-                        </li>
+                    <li class="nav-item">
+                        <router-link :to="showText('PATH_ADVERTISES')" class="nav-link" @click="closeNavbar()">
+                            {{ showText('ADVERTISERS_PAGE') }}
+                        </router-link>
+                    </li>
 
-                        <!-- <li class="nav-item">
+                    <!-- <li class="nav-item">
                             <router-link to="/" class="nav-link" @click="closeNavbar()">
                                 {{ showText('JOBS_PAGE') }}
                             </router-link>
                         </li> -->
 
-                        <li class="nav-item">
-                            <router-link :to="showText('PATH_BLOG')" class="nav-link" @click="closeNavbar()">
-                                {{ showText('BLOG_PAGE') }}
-                            </router-link>
-                        </li>
+                    <li class="nav-item">
+                        <router-link :to="showText('PATH_BLOG')" class="nav-link" @click="closeNavbar()">
+                            {{ showText('BLOG_PAGE') }}
+                        </router-link>
+                    </li>
 
-                        <li class="nav-item">
-                            <router-link :to="showText('PATH_CONTACT')" class="nav-link" @click="closeNavbar()">
-                                {{ showText('CONTACT_PAGE') }}
-                            </router-link>
-                        </li>
+                    <li class="nav-item">
+                        <router-link :to="showText('PATH_CONTACT')" class="nav-link" @click="closeNavbar()">
+                            {{ showText('CONTACT_PAGE') }}
+                        </router-link>
+                    </li>
                     <hr>
-                        <li class="nav-item logged_small">
-                            <router-link :to="showText('PATH_PLANS')" class="nav-link" @click="closeNavbar()">
-                                {{ showText('ADVERTISE_PAGE') }}
-                            </router-link>
-                        </li>
+                    <li class="nav-item logged_small">
+                        <router-link :to="showText('PATH_PLANS')" class="nav-link" @click="closeNavbar()">
+                            {{ showText('ADVERTISE_PAGE') }}
+                        </router-link>
+                    </li>
 
                     <hr v-if="!userStore.userLogged">
                     <!-- not logged in -->
@@ -98,14 +99,16 @@
                         </router-link>
                     </button>
 
-                    <el-dropdown trigger="click">
-                        <el-button type="primary">
-                            {{ userStore.user.name }}<i class="fa-solid fa-chevron-down ms-2"></i>
-                        </el-button>
+                    <el-dropdown>
+                        <span class="el-dropdown-link">
+                            <el-button type="primary">
+                                {{ userStore.user.name }}<i class="fa-solid fa-chevron-down ms-2"></i>
+                            </el-button>
+                        </span>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item v-if="allowedRolesToApp.includes(user.role)" class="px-0">
-                                    <router-link :to="showText('PATH_ADM_DASHBOARD')" class="nav-link px-3 w-100">
+                                <el-dropdown-item class="px-0">
+                                    <router-link :to="showText('PATH_USER_PANEL')" class="nav-link px-3 w-100">
                                         <i class="fa-solid fa-chart-line me-2"></i>
                                         {{ showText('PANEL_PAGE') }}
                                     </router-link>
@@ -116,20 +119,24 @@
                                         {{ showText('PROFILE_PAGE') }}
                                     </router-link>
                                 </el-dropdown-item>
-                                <el-dropdown-item @click="AuthService.logout(true)">
+                                <el-dropdown-item divided @click="logout">
                                     <i class="fa-solid fa-right-from-bracket me-2"></i>
                                     {{ showText('LOGOUT_PAGE') }}
                                 </el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
+
                 </div>
                 <div v-if="!userStore.userLogged" class="flex-column logged_large">
-                    <router-link :to="showText('PATH_PLANS')" class="btn btn-light border btn-sm me-2 fw-semibold text-dark opacity-75" @click="closeNavbar()">
+                    <router-link :to="showText('PATH_PLANS')"
+                        class="btn btn-light border btn-sm me-2 fw-semibold text-dark opacity-75"
+                        @click="closeNavbar()">
                         {{ showText('ADVERTISE_PAGE') }}
                     </router-link>
 
-                    <router-link :to="showText('PATH_LOGIN')" class="btn btn-primary btn-sm fw-bold rounded-1" @click="closeNavbar()">
+                    <router-link :to="showText('PATH_LOGIN')" class="btn btn-primary btn-sm fw-bold rounded-1"
+                        @click="closeNavbar()">
                         {{ showText('LOGIN_PAGE') }}
                     </router-link>
                 </div>
@@ -158,8 +165,8 @@ const menuOnClick = () => {
 
 const closeNavbar = () => {
     const navBar = document.getElementById('navBar');
-    
-    if(navBar.classList.contains('show')) {
+
+    if (navBar.classList.contains('show')) {
         navBar.classList.remove('show');
         menuOnClick();
     }
@@ -172,7 +179,7 @@ const closeNavbar = () => {
 }
 
 nav {
-    box-shadow: 0 0 1rem rgba(0,0,0,.15)!important;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .15) !important;
 }
 
 .logo_image {
@@ -180,7 +187,7 @@ nav {
     max-height: 240px;
 }
 
-.logo_image img{
+.logo_image img {
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;

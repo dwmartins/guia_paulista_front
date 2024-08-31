@@ -7,13 +7,13 @@ export const PATH_NEW_ACCOUNT = "/registrar";
 export const PATH_PLANS = "/planos";
 export const PATH_PANEL = "/painel";
 export const PATH_PROFILE = "/usuario/perfil";
-export const PATH_PROFILE_INFO = "/usuario/conta";
 export const PATH_PRIVACY = "/privacidade";
 export const PATH_ADVERTISES = "/listagens";
 export const PATH_EVENTS = "/eventos";
 export const PATH_BLOG = "/blog";
 export const PATH_CONTACT = "/contato";
 export const PATH_MAINTENANCE = "/manutencao";
+export const PATH_USER_PANEL = "/usuario/painel";
 
 // restricted pages 
 export const PATH_ADM_LOGIN = "/painel/entrar";
