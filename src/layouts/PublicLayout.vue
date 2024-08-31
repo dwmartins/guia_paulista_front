@@ -1,12 +1,6 @@
 <template>
     <section id="publicLayout" class="position-relative m-0 p-0" >
-        <div v-if="settingsStore.maintenance == 'on'" id="adminBar" class="container-fluid bg-dark position-fixed top-0 z-3">
-            <div class="container d-flex justify-content-center align-items-center gap-2 py-1">
-                <p class="m-0 text-white-50 fs-7">{{ showText('MAINTENANCE_ALERT') }}</p>
-                <button class="btn btn-sm btn-outline-primary">{{ showText('PUBLISH') }}</button>
-            </div>
-        </div>
-
+        <appAdminBar/>
         <AppHeader/>
         <main>
             <router-view></router-view>
@@ -19,6 +13,7 @@
 import AppHeader from '@/components/public/appHeader.vue';
 import appFooter from '@/components/public/appFooter.vue';
 import SiteInfoService from "@/services/SiteInfoService";
+import appAdminBar from "@/components/admin/appAdminBar.vue";
 import { settingsStore } from "@/store/SettingsStore";
 import { siteInfoStore } from "@/store/siteInfoStore";
 import { onMounted } from 'vue';
