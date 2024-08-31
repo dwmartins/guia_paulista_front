@@ -119,7 +119,7 @@
                                         {{ showText('PROFILE_PAGE') }}
                                     </router-link>
                                 </el-dropdown-item>
-                                <el-dropdown-item divided @click="logout">
+                                <el-dropdown-item divided @click="AuthService.logout(true)">
                                     <i class="fa-solid fa-right-from-bracket me-2"></i>
                                     {{ showText('LOGOUT_PAGE') }}
                                 </el-dropdown-item>
