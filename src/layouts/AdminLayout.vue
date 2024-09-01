@@ -144,9 +144,11 @@ const leave = (el) =>  {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #313A46;
-    color: #a2afbe;
+    background-color: #fff;
+    color: #7a7a7a;
+    font-weight: 500;
     transition: transform 0.3s ease, width 0.3s ease;
+    box-shadow: 4px 4px 10px rgba(87, 87, 87, 0.158);
 }
 
 .sidebar.collapsed {
@@ -180,7 +182,8 @@ const leave = (el) =>  {
 }
 
 .menu-item:hover, .menu-item a:hover{
-    color: #d0def0;
+    color: var(--bs-primary);
+    background-color: #ffffff;
 }
 
 .menu-item > i, .menu-item > div > i {
@@ -189,7 +192,7 @@ const leave = (el) =>  {
 }
 
 .menu-item a {
-    color: #a2afbe;
+    color: #7a7a7a;
     text-decoration: none;
 }
 
@@ -208,6 +211,7 @@ const leave = (el) =>  {
 .content {
     margin-left: 250px;
     transition: margin-left 0.3s ease;
+    background-color: #f3f6f9;
 }
 
 .sidebar.collapsed+.content {
@@ -216,6 +220,7 @@ const leave = (el) =>  {
 
 header {
     height: 50px;
+    background-color: #fff;
 }
 
 .logo {
@@ -270,11 +275,11 @@ header {
 .submenu {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 24px;
 }
 
 .submenu:hover, .submenu a:hover{
-    color: #AEBFD4;
+    color: var(--bs-primary);
 }
 
 .submenu a {
@@ -285,11 +290,11 @@ header {
 }
 
 .active-link {
-    color: #AEBFD4;
+    color: #AEBFD4 !important;
 }
 
 .active-link, .active-link i {
-    color: #AEBFD4;
+    color: #AEBFD4 !important;
 }
 
 .sidebar.collapsed .submenu {

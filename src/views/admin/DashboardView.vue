@@ -5,16 +5,17 @@
 </template>
 
 <script setup>
+import SEOManager from '@/helpers/SEOManager';
 import { siteInfoStore } from '@/store/siteInfoStore';
 import { showText } from '@/translation';
 import { onMounted, onUnmounted  } from 'vue';
 
 onMounted(() => {
-    document.title = `${showText('DASHBOARD_PAGE')} | ${siteInfoStore.constants.webSiteName}`;
+    SEOManager.setTitle(`${showText('DASHBOARD_PAGE')} | ${siteInfoStore.constants.webSiteName}`)
 });
 
 onUnmounted(() => {
-    document.title = siteInfoStore.constants.webSiteName;
+    SEOManager.setTitle();
 });
 
 </script>
