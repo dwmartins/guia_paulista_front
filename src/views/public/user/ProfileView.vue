@@ -211,7 +211,7 @@
 </template>
 
 <script setup>
-import { computed, ref, reactive } from 'vue';
+import { computed, ref, reactive, onMounted, onUnmounted } from 'vue';
 import { showText } from '@/translation';
 import { userStore } from '@/store/userStore';
 import { simpleDate } from '@/helpers/dateHelper';
@@ -219,6 +219,16 @@ import UserService from '@/services/UserService';
 import { showAlert } from '@/helpers/showAlert';
 import AuthService from '@/services/AuthService';
 import { settingsStore } from '@/store/SettingsStore';
+import { siteInfoStore } from '@/store/siteInfoStore';
+import SEOManager from '@/helpers/SEOManager';
+
+onMounted(() => {
+    SEOManager.setTitle(`${showText('PROFILE_PAGE')} | ${siteInfoStore.constants.webSiteName}`);
+});
+
+onUnmounted(() => {
+    SEOManager.setTitle();
+});
 
 const user = computed(() => userStore.user);
 const formRefBasicInfo = ref(null);

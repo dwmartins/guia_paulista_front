@@ -65,15 +65,16 @@ import AuthService from '@/services/AuthService';
 import { showAlert } from '@/helpers/showAlert';
 import { router } from '@/router';
 import btnPrimary from '@/components/shared/buttons/btnPrimary.vue';
+import SEOManager from '@/helpers/SEOManager';
 
 onMounted(() => {
-    document.title = `${showText('LOGIN_PAGE')} | ${siteInfoStore.constants.webSiteName}`;
+    SEOManager.setTitle(`${showText('LOGIN_PAGE')} | ${siteInfoStore.constants.webSiteName}`);
     isNewUser();
     checkIfLogged();
 });
 
 onUnmounted(() => {
-    document.title = siteInfoStore.constants.webSiteName;
+    SEOManager.setTitle();
 });
  
 const route = useRoute();

@@ -13,6 +13,7 @@ import { onMounted, onUnmounted  } from 'vue';
 import { siteInfoStore } from '@/store/siteInfoStore';
 import { settingsStore } from '@/store/SettingsStore';
 import { router } from '@/router';
+import SEOManager from '@/helpers/SEOManager';
 
 onMounted(() => {
     if(settingsStore.getSetting('maintenance') == 'off') {
@@ -20,11 +21,11 @@ onMounted(() => {
         return;
     }
 
-    document.title = `${showText('MAINTENANCE_PAGE')} | ${siteInfoStore.constants.webSiteName}`;
+    SEOManager.setTitle(`${showText('MAINTENANCE_PAGE')} | ${siteInfoStore.constants.webSiteName}`);
 });
 
 onUnmounted(() => {
-    document.title = siteInfoStore.constants.webSiteName;
+    SEOManager.setTitle();
 });
 
 </script>

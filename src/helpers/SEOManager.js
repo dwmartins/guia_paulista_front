@@ -1,6 +1,6 @@
 import { siteInfoStore } from "@/store/siteInfoStore";
 
-class MetaManager {
+class SEOManager {
     API_URL;
 
     constructor() {
@@ -10,7 +10,9 @@ class MetaManager {
     setAllMeta() {
         this.setIcon();
         this.setTitle();
-        this.setMeta();
+        this.setDescription();
+        this.setKeywords();
+        this.setAuthor();
     }
 
     setIcon() {
@@ -22,27 +24,44 @@ class MetaManager {
         }
     }
 
-    setTitle() {
+    setTitle(title = "") {
+
+        if(title) {
+            document.title = title;
+            return;
+        }
+
         if(siteInfoStore.constants.webSiteName) {
             document.title = siteInfoStore.constants.webSiteName;
+            return;
         }
     }
 
-    setMeta() {
-        if(siteInfoStore.constants.description) {
-            let metaTag = document.createElement('meta');
-            metaTag.setAttribute('name', 'description');
-            metaTag.setAttribute('content', siteInfoStore.constants.description);
-            document.head.appendChild(metaTag); 
-        }
+    setDescription(description = "") {
+        const metaName = 'description';
+        const descriptionContent = description || siteInfoStore.constants.description;
 
-        if(siteInfoStore.constants.keywords) {
+        if(descriptionContent) {
             let metaTag = document.createElement('meta');
-            metaTag.setAttribute('name', 'keywords');
-            metaTag.setAttribute('content', siteInfoStore.constants.keywords);
-            document.head.appendChild(metaTag); 
+            metaTag.setAttribute('name', metaName);
+            metaTag.setAttribute('content', descriptionContent);
+            document.head.appendChild(metaTag);
         }
+    }
 
+    setKeywords(keywords = "") {
+        const metaName = 'keywords';
+        const keywordsContent = keywords || siteInfoStore.constants.keywords;
+
+        if(keywordsContent) {
+            let metaTag = document.createElement('meta');
+            metaTag.setAttribute('name', metaName);
+            metaTag.setAttribute('content', keywordsContent);
+            document.head.appendChild(metaTag);
+        }
+    }
+
+    setAuthor() {
         let metaTag = document.createElement('meta');
         metaTag.setAttribute('name', 'author');
         metaTag.setAttribute('content', 'Dwmcode Desenvolvimento de sites e otimizações - www.dwmcode.com');
@@ -50,4 +69,4 @@ class MetaManager {
     }
 }
 
-export default new MetaManager();
+export default new SEOManager();

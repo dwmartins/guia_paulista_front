@@ -61,13 +61,14 @@ import UserService from '@/services/UserService';
 import { showAlert } from '@/helpers/showAlert';
 import { router } from '@/router';
 import btnPrimary from '@/components/shared/buttons/btnPrimary.vue';
+import SEOManager from '@/helpers/SEOManager';
 
 onMounted(() => {
-    document.title = `${showText('REGISTER_PAGE')} | ${siteInfoStore.constants.webSiteName}`;
+    SEOManager.setTitle(`${showText('REGISTER_PAGE')} | ${siteInfoStore.constants.webSiteName}`)
 });
 
 onUnmounted(() => {
-    document.title = siteInfoStore.constants.webSiteName;
+    SEOManager.setTitle();
 });
 
 const formRef = ref(null);

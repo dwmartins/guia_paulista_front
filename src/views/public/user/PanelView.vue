@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { showText } from '@/translation';
 import { userStore } from '@/store/userStore';
 import defaultImg from '@/assets/img/default/user.jpg'
@@ -71,6 +71,16 @@ import AuthService from '@/services/AuthService';
 import { getDateAsString } from '@/helpers/dateHelper';
 import { settingsStore } from '@/store/SettingsStore';
 import { compressImage } from '@/helpers/imageHelper';
+import SEOManager from '@/helpers/SEOManager';
+import { siteInfoStore } from '@/store/siteInfoStore';
+
+onMounted(() => {
+    SEOManager.setTitle(`${showText('PANEL_PAGE')} | ${siteInfoStore.constants.webSiteName}`);
+});
+
+onUnmounted(() => {
+    SEOManager.setTitle();
+});
 
 const imgExtensions = "image/jpeg, image/jpg, image/png";
 

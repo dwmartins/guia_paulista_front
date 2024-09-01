@@ -8,7 +8,7 @@ import 'element-plus/dist/index.css';
 import '@/assets/css/global.css';
 import '@/assets/css/animations.css';
 import ElementPlus from 'element-plus'
-import MetaManager from '@/helpers/MetaManager';
+import SEOManager from '@/helpers/SEOManager';
 import { settingsStore } from '@/store/SettingsStore';
 import en from 'element-plus/es/locale/lang/en';
 import ptBr from 'element-plus/es/locale/lang/pt-br';
@@ -49,7 +49,7 @@ async function startApp() {
         app.use(ElementPlus, { locale: getElementPlusLocale() });
         app.mount('#app');
 
-        MetaManager.setAllMeta();
+        SEOManager.setAllMeta();
 
         loadingPageStore.hide();
         LoadingPage.unmount('#loading');

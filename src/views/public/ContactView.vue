@@ -58,9 +58,19 @@
 <script setup>
 import { showText } from '@/translation';
 import { showAlert } from '@/helpers/showAlert';
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted, onUnmounted  } from 'vue';
 import EmailService from '@/services/EmailService';
 import btnPrimaryOutline from '@/components/shared/buttons/btnPrimaryOutline.vue';
+import SEOManager from '@/helpers/SEOManager';
+import { siteInfoStore } from '@/store/siteInfoStore';
+
+onMounted(() => {
+    SEOManager.setTitle(`${showText('CONTACT_PAGE')} | ${siteInfoStore.constants.webSiteName}`);
+});
+
+onUnmounted(() => {
+    SEOManager.setTitle();
+})
 
 let isLoading = ref(false);
 
