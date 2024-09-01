@@ -6,6 +6,17 @@ import { showError } from '@/helpers/showError';
 import { showText } from '@/translation';
 
 class AuthService {
+    isAdmin() {
+        const allowedRoles = ["support", "admin", "mod", "test"];
+        const user = this.getUserLogged();
+
+        if(user) {
+            return allowedRoles.includes(user.role);
+        }
+
+        return false;
+    }
+
     getUserLogged() {
         let user = sessionStorage.getItem('userData');
 
