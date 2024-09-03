@@ -4,7 +4,8 @@
             @submit.prevent="submitForm"
             ref="formRef"    
             :model="formValidation"
-            label-position="left">
+            label-position="left"
+            class="w-100">
 
             <h4 class="text-secondary text-center">{{ showText('PANEL_PAGE') }}</h4>
 
@@ -132,5 +133,9 @@ const validForm = () => {
 </script>
 
 <style scoped>
+
+form {
+    max-width: 420px;
+}
 
 </style>
