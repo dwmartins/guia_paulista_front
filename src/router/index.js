@@ -77,8 +77,12 @@ export function initializeRoutes() {
             component: () => import('@/views/public/MaintenanceView.vue'),
         },
         {
+            path: showText('PATH_PAGE_NOT_FOUND'),
+            component: () => import('@/views/PageNotFoundView.vue')
+        },
+        {
             path: '/:pathMatch(.*)*',
-            redirect: '/'
+            redirect: showText('PATH_PAGE_NOT_FOUND')
         },
         {
             path: '/app/:pathMatch(.*)*',

@@ -14,6 +14,7 @@ export const PATH_BLOG = "/blog";
 export const PATH_CONTACT = "/contato";
 export const PATH_MAINTENANCE = "/manutencao";
 export const PATH_USER_PANEL = "/usuario/painel";
+export const PATH_PAGE_NOT_FOUND = "/pagina-nao-encontrada";
 
 // restricted pages 
 export const PATH_ADM_LOGIN = "/painel/entrar";
@@ -109,6 +110,7 @@ export const NO_ADS = "Sem anúncios";
 export const ALT_ACCOUNT = "Imagem da conta do usuário";
 export const ALT_CONTACT = "Imagem de contato";
 export const ALT_MAINTENANCE = "Imagem de manutenção";
+export const ALT_PAGE_NOT_FOUND = "Página não encontrada";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Lanchonetes, pizzarias, hotel...";
@@ -175,3 +177,5 @@ export const MAINTENANCE_TEXT = "Estamos em manutenção, voltaremos em breve.";
 export const MAINTENANCE_ALERT = "Site em manutenção";
 export const PUBLISH = "Publicar";
 export const ERROR_PAGE = "Ops, algo deu errado! Nossa equipe já está investigando para resolver isso o mais rápido possível. Agradecemos sua paciência!";
+export const PAGE_NOT_FOUND = "Ops, não encontramos essa página";
+export const BACK_TO_HOME_PAGE = "Voltar para página inicial";
