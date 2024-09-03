@@ -1,5 +1,5 @@
 <template>
-    <section id="homeView">
+    <section id="homeView" class="show">
         <div class="cover-image container-fluid" :style="{backgroundImage: `url(${coverImage})`}">
             <div class="container-fluid d-flex align-items-center justify-content-center">
                 <div class="row justify-content-center gap-2">
