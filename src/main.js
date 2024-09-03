@@ -13,6 +13,7 @@ import { settingsStore } from '@/store/SettingsStore';
 import en from 'element-plus/es/locale/lang/en';
 import ptBr from 'element-plus/es/locale/lang/pt-br';
 import AppLoadingPage from '@/components/shared/AppLoadingPage.vue';
+import AppErrorPage from './components/shared/AppErrorPage.vue';
 import { loadingPageStore } from './store/loadingPageStore';
 
 const LoadingPage = createApp(AppLoadingPage);
@@ -58,6 +59,9 @@ async function startApp() {
         loadingPageStore.hide();
         LoadingPage.unmount('#loading');
         console.error("Error during app startup:", error);
+
+        const errorPage = createApp(AppErrorPage);
+        errorPage.mount('#errorPage');
     } 
 }
 

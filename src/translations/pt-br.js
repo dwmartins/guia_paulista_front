@@ -174,3 +174,4 @@ export const CONFIRM_DELETE_ACCOUNT = "Confirmo que gostaria de excluir minha co
 export const MAINTENANCE_TEXT = "Estamos em manutenção, voltaremos em breve.";
 export const MAINTENANCE_ALERT = "Site em manutenção";
 export const PUBLISH = "Publicar";
+export const ERROR_PAGE = "Ops, algo deu errado! Nossa equipe já está investigando para resolver isso o mais rápido possível. Agradecemos sua paciência!";
