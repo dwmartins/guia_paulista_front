@@ -78,7 +78,7 @@ const formValidation = reactive({
 
 const checkIfLogged = () => {
     if(AuthService.getUserLogged()) {
-        router.push('/app');
+        router.push(`/app/${showText('PATH_DASHBOARD')}`);
         showAlert('success', '', showText('USER_ALREADY_LOGGED'));
         return;
     }
@@ -98,7 +98,7 @@ const submitForm = async () => {
             if(allowedRoles.includes(response.data.role)) {
                 AuthService.setUserLogged(response.data, rememberMe.value);
                 showAlert('success', '', showText('LOGIN_SUCCESSFUL'));
-                router.push('/app');
+                router.push(`/app/${showText('PATH_DASHBOARD')}`);
                 return;
             }
 

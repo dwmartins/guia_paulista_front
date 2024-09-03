@@ -17,17 +17,17 @@ export const PATH_USER_PANEL = "/usuario/painel";
 export const PATH_PAGE_NOT_FOUND = "/pagina-nao-encontrada";
 
 // restricted pages 
-export const PATH_ADM_LOGIN = "/painel/entrar";
+export const PATH_ADM_LOGIN = "/app/entrar";
 export const PATH_ADM_DASHBOARD = "/app";
-export const PATH_DASHBOARD = "/dashboard";
-export const PATH_ADM_SETTINGS = "/configuracoes/configuracoes-gerais";
-export const PATH_ADM_ADVERTISEMENTS = "/conteudos/anuncios";
-export const PATH_ADM_EVENTS = "/conteudos/eventos";
-export const PATH_ADM_BLOG = "/conteudos/blog";
-export const PATH_ADM_BASIC_INFORMATION = "/configuracoes/informacoes-basicas";
-export const PATH_ADM_LANGUAGE = "/configuracoes/linguagem";
-export const PATH_ADM_MAIL = "/configuracoes/email";
-export const PATH_ADM_USERS = "/usuarios";
+export const PATH_DASHBOARD = "dashboard";
+export const PATH_ADM_SETTINGS = "configuracoes/configuracoes-gerais";
+export const PATH_ADM_ADVERTISEMENTS = "conteudos/anuncios";
+export const PATH_ADM_EVENTS = "conteudos/eventos";
+export const PATH_ADM_BLOG = "conteudos/blog";
+export const PATH_ADM_BASIC_INFORMATION = "configuracoes/informacoes-basicas";
+export const PATH_ADM_LANGUAGE = "configuracoes/linguagem";
+export const PATH_ADM_MAIL = "configuracoes/email";
+export const PATH_ADM_USERS = "usuarios";
 
 // Name of navigation
 export const LOGIN_PAGE = "Entrar";

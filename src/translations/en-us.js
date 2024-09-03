@@ -17,17 +17,17 @@ export const PATH_USER_PANEL = "/user/panel";
 export const PATH_PAGE_NOT_FOUND = "/page-not-found";
 
 // restricted pages 
-export const PATH_ADM_LOGIN = "/panel/login";
+export const PATH_ADM_LOGIN = "/app/login";
 export const PATH_ADM_DASHBOARD = "/app";
-export const PATH_DASHBOARD = "/dashboard";
-export const PATH_ADM_SETTINGS = "/settings/general-settings";
-export const PATH_ADM_ADVERTISEMENTS = "/contents/announcements";
-export const PATH_ADM_EVENTS = "/contents/events";
-export const PATH_ADM_BLOG = "/contents/blog";
-export const PATH_ADM_BASIC_INFORMATION = "/settings/basic-information";
-export const PATH_ADM_LANGUAGE = "/settings/language";
-export const PATH_ADM_MAIL = "/settings/email";
-export const PATH_ADM_USERS = "/users";
+export const PATH_DASHBOARD = "dashboard";
+export const PATH_ADM_SETTINGS = "settings/general-settings";
+export const PATH_ADM_ADVERTISEMENTS = "contents/announcements";
+export const PATH_ADM_EVENTS = "contents/events";
+export const PATH_ADM_BLOG = "contents/blog";
+export const PATH_ADM_BASIC_INFORMATION = "settings/basic-information";
+export const PATH_ADM_LANGUAGE = "settings/language";
+export const PATH_ADM_MAIL = "settings/email";
+export const PATH_ADM_USERS = "users";
 
 // Name of navigation
 export const LOGIN_PAGE = "Login";

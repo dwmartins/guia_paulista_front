@@ -1,5 +1,5 @@
 <template>
-    <section id="adminLayout" class="d-flex m-0 p-0">
+    <section id="adminLayout" class="d-flex m-0 p-0 show">
         <nav class="sidebar" :class="{ 'collapsed': menuClose }">
             <div class="logo px-2">
                 <img :src="logoImage" :alt="showText('WEBSITE_LOGO')">
@@ -8,8 +8,8 @@
             <ul class="menu">
                 <!-- Dashboard -->
                 <li class="menu-item">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <router-link to="/app" class="menu-link" active-class="active-link">{{ showText('DASHBOARD_PAGE') }}</router-link>
+                    <i class="fa-solid fa-chart-line" :class="{'active-link': isActive(showText('PATH_DASHBOARD'))}"></i>
+                    <router-link :to="'/app/' + showText('PATH_DASHBOARD')" class="menu-link" active-class="active-link">{{ showText('DASHBOARD_PAGE') }}</router-link>
                 </li>
                 
                 <!-- Contents with submenu -->
@@ -24,9 +24,9 @@
                 </li>
                 <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                     <div v-show="!isCollapsed.contents" class="submenu">
-                        <router-link :to="'app' + showText('PATH_ADM_ADVERTISEMENTS')" active-class="active-link">{{ showText('ADVERTISEMENTS_PAGE') }}</router-link>
-                        <router-link :to="'app' + showText('PATH_ADM_EVENTS')" active-class="active-link">{{ showText('EVENTS_PAGE') }}</router-link>
-                        <router-link :to="'app' + showText('PATH_ADM_BLOG')" active-class="active-link">{{ showText('BLOG_PAGE') }}</router-link>
+                        <router-link :to="'/app/' + showText('PATH_ADM_ADVERTISEMENTS')" active-class="active-link">{{ showText('ADVERTISEMENTS_PAGE') }}</router-link>
+                        <router-link :to="'/app/' + showText('PATH_ADM_EVENTS')" active-class="active-link">{{ showText('EVENTS_PAGE') }}</router-link>
+                        <router-link :to="'/app/' + showText('PATH_ADM_BLOG')" active-class="active-link">{{ showText('BLOG_PAGE') }}</router-link>
                     </div>
                 </transition>
 
@@ -42,17 +42,17 @@
                 </li>
                 <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                     <div v-show="!isCollapsed.configs" class="submenu">
-                        <router-link :to="'app' + showText('PATH_ADM_BASIC_INFORMATION')" active-class="active-link">{{ showText('BASIC_INFORMATION_PAGE') }}</router-link>
-                        <router-link :to="'app' + showText('PATH_ADM_SETTINGS')" active-class="active-link">{{ showText('GENERAL_SETTINGS_PAGE') }}</router-link>
-                        <router-link :to="'app' + showText('PATH_ADM_LANGUAGE')" active-class="active-link">{{ showText('LANGUAGE_PAGE') }}</router-link>
-                        <router-link :to="'app' + showText('PATH_ADM_MAIL')" active-class="active-link">{{ showText('EMAIL_PAGE') }}</router-link>
+                        <router-link :to="'/app/' + showText('PATH_ADM_BASIC_INFORMATION')" active-class="active-link">{{ showText('BASIC_INFORMATION_PAGE') }}</router-link>
+                        <router-link :to="'/app/' + showText('PATH_ADM_SETTINGS')" active-class="active-link">{{ showText('GENERAL_SETTINGS_PAGE') }}</router-link>
+                        <router-link :to="'/app/' + showText('PATH_ADM_LANGUAGE')" active-class="active-link">{{ showText('LANGUAGE_PAGE') }}</router-link>
+                        <router-link :to="'/app/' + showText('PATH_ADM_MAIL')" active-class="active-link">{{ showText('EMAIL_PAGE') }}</router-link>
                     </div>
                 </transition>
                 
                 <!-- Users  -->
                 <li class="menu-item">
-                    <i class="fa-regular fa-user"></i>
-                    <router-link :to="'app' + showText('PATH_ADM_USERS')" class="menu-link" active-class="active-link">{{ showText('USERS_PAGE') }}</router-link>
+                    <i class="fa-regular fa-user" :class="{'active-link': isActive(showText('PATH_ADM_USERS'))}"></i>
+                    <router-link :to="'/app/' + showText('PATH_ADM_USERS')" class="menu-link" active-class="active-link">{{ showText('USERS_PAGE') }}</router-link>
                 </li>
             </ul>
         </nav>
@@ -80,9 +80,15 @@ import defaultLogo from '@/assets/img/default/defaultLogo.png';
 import { siteInfoStore } from '@/store/siteInfoStore';
 import { showText } from '@/translation';
 import { onMounted  } from 'vue';
-const logoImage = siteInfoStore.constants.logoImage ? `${this.$API_URL}/uploads/systemImages/${siteInfoStore.constants.logoImage}` : defaultLogo;
+import { useRoute } from 'vue-router';
 
+const logoImage = siteInfoStore.constants.logoImage ? `${this.$API_URL}/uploads/systemImages/${siteInfoStore.constants.logoImage}` : defaultLogo;
+const route = useRoute();
 const menuClose = ref(false);
+
+const isActive = (path) => {
+    return route.path === `/app/${path}`;
+}
 
 const isCollapsed = ref({
     contents: true,
@@ -289,12 +295,8 @@ header {
     font-size: 15px;
 }
 
-.active-link {
-    color: #AEBFD4 !important;
-}
-
 .active-link, .active-link i {
-    color: #AEBFD4 !important;
+    color: var(--bs-primary) !important;
 }
 
 .sidebar.collapsed .submenu {

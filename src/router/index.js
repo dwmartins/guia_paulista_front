@@ -55,15 +55,11 @@ export function initializeRoutes() {
             meta: { requiresAuthAdmin: true },
             children: [
                 {
-                    path: '',
-                    component: () => import('@/views/admin/DashboardView.vue')
-                },
-                {
                     path: showText('PATH_DASHBOARD'),
                     component: () => import('@/views/admin/DashboardView.vue')
                 },
                 {
-                    path: 'usuarios',
+                    path: showText('PATH_ADM_USERS'),
                     component: () => import('@/views/admin/UsersView.vue')
                 }
             ]
@@ -86,7 +82,7 @@ export function initializeRoutes() {
         },
         {
             path: '/app/:pathMatch(.*)*',
-            redirect: `/app`
+            redirect: `/app/${showText('PATH_DASHBOARD')}`
         }
     ];
 
