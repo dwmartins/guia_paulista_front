@@ -105,7 +105,7 @@ export const NOT_HAVE_PERMISSION_ACCESS_AREA = "You do not have permission to ac
 // Alts
 export const ALT_LOGIN_IMG = "Login image";
 export const ALT_REGISTER_IMG = "Register image";
-export const ALT_USER_IMG = "User Image";
+export const ALT_USER_IMG = "User";
 export const NO_ADS = "Sem anúncios";
 export const ALT_ACCOUNT = "User account image";
 export const ALT_CONTACT = "Contact Image";

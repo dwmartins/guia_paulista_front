@@ -57,15 +57,49 @@
             </ul>
         </nav>
         <div class="content flex-grow-1" :class="{ 'bg_content': menuClose }">
-            <header class="px-0 mx-0 shadow-sm d-flex align-items-center">
-                <button class="btn border-0 mx-2" @click="openMenu">
-                    <i class="fa-solid fa-bars fs-5"></i>
-                </button>
-                <router-link to="/">
-                    <button class="btn btn-sm btn-outline-primary">
-                        Site
+            <header class="px-2 mx-0 shadow-sm d-flex justify-content-between align-items-center">
+                <div class="item_center">
+                    <button class="btn border-0 mx-2 item_center" @click="openMenu">
+                        <i class="fa-solid fa-bars fs-4"></i>
                     </button>
-                </router-link>
+                    <router-link to="/">
+                        <button class="btn btn-sm btn-outline-primary">
+                            Site
+                            <i class="fa-solid fa-globe ms-1"></i>
+                        </button>
+                    </router-link>
+                </div>
+                <div class="px-2 item_center gap-3">
+                    <div class="px-2">
+                        <el-badge :value="22">
+                            <i class="fa-regular fa-bell fs-5 text-secondary"></i>
+                        </el-badge>
+                    </div>
+                    <div class="user_contents item_center gap-2">
+                        <el-dropdown>
+                            <span class="el-dropdown-link">
+                                <img :src="userImg" :alt="showText('ALT_USER_IMG')">
+                                <span class="firstName">{{ user.name }}</span>
+                                <span class="lastName">&nbsp;{{ user.lastName }}</span>
+                                <i class="fa-solid fa-chevron-down ms-2"></i>
+                            </span>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item class="px-0">
+                                        <router-link :to="showText('PATH_PROFILE')" class="nav-link px-3 w-100">
+                                            <i class="fa-regular fa-user me-2"></i>
+                                            {{ showText('PROFILE_PAGE') }}
+                                        </router-link>
+                                    </el-dropdown-item>
+                                    <el-dropdown-item divided @click="AuthService.logout(true)">
+                                        <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                        {{ showText('LOGOUT_PAGE') }}
+                                    </el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                    </div>
+                </div>
             </header>
             <main class="px-3">
                 <router-view></router-view>
@@ -75,14 +109,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import defaultLogo from '@/assets/img/default/defaultLogo.png';
 import { siteInfoStore } from '@/store/siteInfoStore';
 import { showText } from '@/translation';
 import { onMounted  } from 'vue';
 import { useRoute } from 'vue-router';
+import { userStore } from '@/store/userStore';
+import defaultUserImg from '@/assets/img/default/user.jpg'
+import AuthService from '@/services/AuthService';
+
+const API_URL = process.env.VUE_APP_API_URL;
 
 const logoImage = siteInfoStore.constants.logoImage ? `${this.$API_URL}/uploads/systemImages/${siteInfoStore.constants.logoImage}` : defaultLogo;
+const user = computed(() => userStore.user);
+const userImg = ref(userStore.user.photo ? `${API_URL}/uploads/users/${userStore.user.photo}` : defaultUserImg)
+
 const route = useRoute();
 const menuClose = ref(false);
 
@@ -225,7 +267,7 @@ const leave = (el) =>  {
 }
 
 header {
-    height: 50px;
+    height: 60px;
     background-color: #fff;
 }
 
@@ -308,5 +350,24 @@ header {
 .rotate {
     transform: rotate(-90deg);
     transition: transform 0.3s ease;
+}
+
+.user_contents img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media (max-width: 398px) {
+    .user_contents .lastName {
+        display: none;
+    } 
+}
+
+@media (max-width: 325px) {
+    .user_contents .firstName, .user_contents .fa-chevron-down {
+        display: none;
+    } 
 }
 </style>
