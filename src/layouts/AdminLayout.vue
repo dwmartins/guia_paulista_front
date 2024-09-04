@@ -24,7 +24,7 @@
                 </li>
                 <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                     <div v-show="!isCollapsed.contents" class="submenu">
-                        <router-link :to="'/app/' + showText('PATH_ADM_ADVERTISEMENTS')" active-class="active-link">{{ showText('ADVERTISEMENTS_PAGE') }}</router-link>
+                        <router-link :to="'/app/' + showText('PATH_ADM_LISTINGS')" active-class="active-link">{{ showText('ADVERTISEMENTS_PAGE') }}</router-link>
                         <router-link :to="'/app/' + showText('PATH_ADM_EVENTS')" active-class="active-link">{{ showText('EVENTS_PAGE') }}</router-link>
                         <router-link :to="'/app/' + showText('PATH_ADM_BLOG')" active-class="active-link">{{ showText('BLOG_PAGE') }}</router-link>
                     </div>
@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </header>
-            <main class="px-3">
+            <main class="p-2">
                 <router-view></router-view>
             </main>
         </div>

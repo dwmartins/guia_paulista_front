@@ -21,13 +21,14 @@ export const PATH_ADM_LOGIN = "/app/login";
 export const PATH_ADM_DASHBOARD = "/app";
 export const PATH_DASHBOARD = "dashboard";
 export const PATH_ADM_SETTINGS = "settings/general-settings";
-export const PATH_ADM_ADVERTISEMENTS = "contents/announcements";
-export const PATH_ADM_EVENTS = "contents/events";
-export const PATH_ADM_BLOG = "contents/blog";
+export const PATH_ADM_EVENTS = "events";
+export const PATH_ADM_BLOG = "blog";
 export const PATH_ADM_BASIC_INFORMATION = "settings/basic-information";
 export const PATH_ADM_LANGUAGE = "settings/language";
 export const PATH_ADM_MAIL = "settings/email";
 export const PATH_ADM_USERS = "users";
+export const PATH_ADM_LISTINGS = "listings";
+export const PATH_ADM_LISTINGS_CATEGORY = "listings/categories";
 
 // Name of navigation
 export const LOGIN_PAGE = "Login";
@@ -52,6 +53,7 @@ export const GENERAL_SETTINGS_PAGE = "General Settings";
 export const LANGUAGE_PAGE = "Language";
 export const EMAIL_PAGE = "Email";
 export const USERS_PAGE = "Users";
+export const CATEGORIES_LISTING_PAGE = "listing categories";
 
 // Form Labels
 export const EMAIL_LABEL = "Email";
@@ -179,3 +181,7 @@ export const PUBLISH = "Publish";
 export const ERROR_PAGE = "Oops, something went wrong! Our team is already investigating to resolve this as soon as possible. We appreciate your patience!";
 export const PAGE_NOT_FOUND = "Oops, we couldn't find that page";
 export const BACK_TO_HOME_PAGE = "Back to home page";
+export const CATEGORY_TITLE = "Categories";
+export const ADD_NEW_CATEGORY = "New";
+export const LISTINGS_TITLE = "Listings";
+export const CATEGORY_NOT_FOUND = "Oops! It looks like you don't have any categories registered.";

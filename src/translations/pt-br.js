@@ -21,13 +21,14 @@ export const PATH_ADM_LOGIN = "/app/entrar";
 export const PATH_ADM_DASHBOARD = "/app";
 export const PATH_DASHBOARD = "dashboard";
 export const PATH_ADM_SETTINGS = "configuracoes/configuracoes-gerais";
-export const PATH_ADM_ADVERTISEMENTS = "conteudos/anuncios";
-export const PATH_ADM_EVENTS = "conteudos/eventos";
-export const PATH_ADM_BLOG = "conteudos/blog";
+export const PATH_ADM_EVENTS = "eventos";
+export const PATH_ADM_BLOG = "blog";
 export const PATH_ADM_BASIC_INFORMATION = "configuracoes/informacoes-basicas";
 export const PATH_ADM_LANGUAGE = "configuracoes/linguagem";
 export const PATH_ADM_MAIL = "configuracoes/email";
 export const PATH_ADM_USERS = "usuarios";
+export const PATH_ADM_LISTINGS = "anuncios";
+export const PATH_ADM_LISTINGS_CATEGORY = "anuncios/categorias";
 
 // Name of navigation
 export const LOGIN_PAGE = "Entrar";
@@ -52,6 +53,7 @@ export const GENERAL_SETTINGS_PAGE = "Configurações gerais";
 export const LANGUAGE_PAGE = "Linguagem";
 export const EMAIL_PAGE = "E-mail";
 export const USERS_PAGE = "Usuários";
+export const CATEGORIES_LISTING_PAGE = "Categorias de anuncio";
 
 // Form Labels
 export const EMAIL_LABEL = "E-mail";
@@ -179,3 +181,7 @@ export const PUBLISH = "Publicar";
 export const ERROR_PAGE = "Ops, algo deu errado! Nossa equipe já está investigando para resolver isso o mais rápido possível. Agradecemos sua paciência!";
 export const PAGE_NOT_FOUND = "Ops, não encontramos essa página";
 export const BACK_TO_HOME_PAGE = "Voltar para página inicial";
+export const CATEGORY_TITLE = "Categorias";
+export const ADD_NEW_CATEGORY = "Adicionar";
+export const LISTINGS_TITLE = "Anúncios";
+export const CATEGORY_NOT_FOUND = "Ops! Parece que você não possui categorias cadastradas.";

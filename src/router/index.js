@@ -61,6 +61,14 @@ export function initializeRoutes() {
                 {
                     path: showText('PATH_ADM_USERS'),
                     component: () => import('@/views/admin/UsersView.vue')
+                },
+                {
+                    path: showText('PATH_ADM_LISTINGS'),
+                    component: () => import('@/views/admin/listings/listingsView.vue')
+                },
+                {
+                    path: showText('PATH_ADM_LISTINGS_CATEGORY'),
+                    component: () => import('@/views/admin/listings/listingCategoriesView.vue')
                 }
             ]
         },
