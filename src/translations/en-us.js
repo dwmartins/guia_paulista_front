@@ -113,6 +113,7 @@ export const ALT_ACCOUNT = "User account image";
 export const ALT_CONTACT = "Contact Image";
 export const ALT_MAINTENANCE = "Maintenance image";
 export const ALT_PAGE_NOT_FOUND = "Page not found";
+export const ALT_CATEGORY = "Category";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Snack bars, pizzerias, hotel...";
