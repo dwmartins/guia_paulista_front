@@ -13,7 +13,7 @@
             <hr class="text-secondary mt-0">
 
             <div v-if="searchingCategories" class="alert alert-info fadeIn p-2 mb-5 show" role="alert">
-                <AppSearchSpinner message="Buscando categorias..." width="big"/>
+                <AppSearchSpinner :message="showText('SEARCHING_CATEGORIES')" width="big"/>
             </div>
 
             <div v-if="emptyCategories">
@@ -21,6 +21,7 @@
             </div>
 
             <div v-if="categories.length" class="p-3 show">
+                <p class="text-secondary fs-7 text-end m-0">{{ categories.length }} {{ showText('CATEGORY_TITLE') }}</p>
                 <div class="base_table">
                     <table class="table table-hover">
                         <thead>
@@ -28,11 +29,11 @@
                                 <th>
                                     <el-checkbox size="large" @change="selectAll($event)" />
                                 </th>
-                                <th scope="col">Icon</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col" class="text-center">Status</th>
-                                <th scope="col">Última Atualização</th>
-                                <th scope="col" class="text-center">Ações</th>
+                                <th scope="col">{{ showText('ICON') }}</th>
+                                <th scope="col">{{ showText('NAME_LABEL') }}</th>
+                                <th scope="col" class="text-center">{{ showText('STATUS') }}</th>
+                                <th scope="col">{{ showText('LAST_UPDATE') }}</th>
+                                <th scope="col" class="text-center">{{ showText('ACTIONS') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,11 +51,11 @@
                                 <td>
                                     <div class="text-center">
                                         <span v-if="category.status == 'Y'" class="active">
-                                            Ativa
+                                            {{ showText('CATEGORY_ACTIVE') }}
                                             <i class="fa-solid fa-check ms-1"></i>
                                         </span>
                                         <span v-if="category.status == 'N'" class="inactive">
-                                            Inativa
+                                            {{ showText('CATEGORY_INACTIVE') }}
                                             <i class="fa-regular fa-circle-xmark ms-1"></i>
                                         </span>
                                     </div>
