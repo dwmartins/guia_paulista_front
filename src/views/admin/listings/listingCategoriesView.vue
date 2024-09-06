@@ -1,13 +1,19 @@
 <template>
     <section id="listingCategoriesView" class="p-2 show">
         <div class="categories bg-white container">
-            <div class="p-3 p-2 d-flex justify-content-between bg-ice-white">
+            <div class="p-2 py-3 d-flex justify-content-between">
                 <h5 class="custom_dark m-0">{{ showText('CATEGORY_TITLE') }}</h5>
 
                 <button class="btn btn-sm btn-primary text-nowrap">
                     <i class="fa-solid fa-plus"></i>
                     {{ showText('ADD_NEW_CATEGORY') }}
                 </button>
+            </div>
+
+            <hr class="text-secondary mt-0">
+
+            <div v-if="searchingCategories" class="alert alert-info fadeIn p-2 mb-5 show" role="alert">
+                <AppSearchSpinner message="Buscando categorias..." width="big"/>
             </div>
 
             <div v-if="emptyCategories">
@@ -88,12 +94,14 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import ListingCategoryService from '@/services/ListingCategoryService';
 import defaultImg from '@/assets/img/default/defaultImg.png';
 import { simpleDateTime } from '@/helpers/dateHelper.js';
+import AppSearchSpinner from '@/components/admin/AppSearchSpinner.vue';
 
 const API_URL = process.env.VUE_APP_API_URL;
 
 let categories = ref([]);
 let filteredCategories = ref([]);
 let emptyCategories = ref(false);
+const searchingCategories = ref(false);
 const categoriesSelected = ref([]);
 const pagination = ref({
     currentPage: 1,
@@ -111,13 +119,18 @@ onUnmounted(() => {
 
 const getCategories = async () => {
     try {
+        searchingCategories.value = true;
+
         const response = await ListingCategoryService.fetch();
+        searchingCategories.value = false;
         categories.value = response.data;
         filteredCategories.value = response.data;
 
         emptyCategories.value = !categories.value.length;
 
+
     } catch (error) {
+        searchingCategories.value = false;
         console.error('Error fetching categories', error);
     }
 }
@@ -159,6 +172,7 @@ const showIcon = (category) => {
 <style scoped>
 .categories {
     min-width: 250px;
+    min-height: 170px;
     border-radius: 5px;
     box-shadow: var(--box-shadow-cards);
 }

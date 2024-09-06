@@ -372,7 +372,7 @@ header {
 }
 
 main {
-    max-height: calc(100vh - 70px);
+    height: calc(100vh - 70px);
     overflow-y: scroll;
 }
 </style>
