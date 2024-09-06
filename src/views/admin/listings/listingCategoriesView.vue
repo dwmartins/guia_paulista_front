@@ -205,8 +205,8 @@ table tbody td {
 }
 
 table .categoryIcon {
-    width: 45px;
-    height: 45px;
+    width: 38px;
+    height: 38px;
     object-fit: cover;
     border-radius: 50%;
 }

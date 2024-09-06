@@ -269,6 +269,7 @@ const leave = (el) =>  {
 header {
     height: 60px;
     background-color: #fff;
+    box-shadow: var(--box-shadow-cards);
 }
 
 .logo {
@@ -372,6 +373,7 @@ header {
 }
 
 main {
+    margin-top: 6px;
     height: calc(100vh - 70px);
     overflow-y: scroll;
 }
