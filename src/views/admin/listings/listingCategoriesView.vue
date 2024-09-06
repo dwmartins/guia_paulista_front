@@ -1,10 +1,10 @@
 <template>
     <section id="listingCategoriesView" class="p-2 show">
-        <div class="categories bg-white">
-            <div class="px-3 p-2 d-flex justify-content-between bg-ice-white">
+        <div class="categories bg-white container">
+            <div class="p-3 p-2 d-flex justify-content-between bg-ice-white">
                 <h5 class="custom_dark m-0">{{ showText('CATEGORY_TITLE') }}</h5>
 
-                <button class="btn btn-sm btn-primary">
+                <button class="btn btn-sm btn-primary text-nowrap">
                     <i class="fa-solid fa-plus"></i>
                     {{ showText('ADD_NEW_CATEGORY') }}
                 </button>
@@ -14,39 +14,59 @@
                 <el-empty :description="showText('CATEGORY_NOT_FOUND')" :image-size="200" />
             </div>
 
-            <div v-if="categories.length" class="contents p-3 show">
-                <div class="overflow-x-auto">
-                    <table class="table">
+            <div v-if="categories.length" class="p-3 show">
+                <div class="base_table">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>
-                                    <el-checkbox size="large" @change="selectAll($event)"/>
+                                    <el-checkbox size="large" @change="selectAll($event)" />
                                 </th>
                                 <th scope="col">Icon</th>
                                 <th scope="col">Nome</th>
-                                <th scope="col">Status</th>
+                                <th scope="col" class="text-center">Status</th>
                                 <th scope="col">Última Atualização</th>
+                                <th scope="col" class="text-center">Ações</th>
                             </tr>
                         </thead>
-                        <tbody v-for="category in paginatedCategories()" :key="category.id">
-                            <th>
-                                <el-checkbox size="large" v-model="category.selected" @change="setCategorySelected(category)"/>
-                            </th>
-                            <th>
-                                <img :src="showIcon(category)" :alt="showText('ALT_CATEGORY')" class="categoryIcon">
-                            </th>
-                            <th>
-                                {{ category.name }}
-                            </th>
-                            <th>
-                                <div>
-                                    <span v-if="category.status == 'Y'" class="active">Ativa<i class="fa-solid fa-check ms-1"></i></span>
-                                    <span v-if="category.status == 'N'" class="inactive">Inativa<i class="fa-solid fa-check ms-1"></i></span>
-                                </div>
-                            </th>
-                            <th>
-                                {{ simpleDateTime(category.updatedAt) }}
-                            </th>
+                        <tbody>
+                            <tr v-for="category in paginatedCategories()" :key="category.id">
+                                <td>
+                                    <el-checkbox size="large" v-model="category.selected"
+                                        @change="setCategorySelected(category)" />
+                                </td>
+                                <td>
+                                    <img :src="showIcon(category)" :alt="showText('ALT_CATEGORY')" class="categoryIcon">
+                                </td>
+                                <td>
+                                    {{ category.name }}
+                                </td>
+                                <td>
+                                    <div class="text-center">
+                                        <span v-if="category.status == 'Y'" class="active">
+                                            Ativa
+                                            <i class="fa-solid fa-check ms-1"></i>
+                                        </span>
+                                        <span v-if="category.status == 'N'" class="inactive">
+                                            Inativa
+                                            <i class="fa-regular fa-circle-xmark ms-1"></i>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="fs-7">
+                                    {{ simpleDateTime(category.updatedAt) }}
+                                </td>
+                                <td>
+                                    <div class="text-center d-flex justify-content-center gap-2">
+                                        <button class="btn">
+                                            <i class="fa-solid fa-pen-to-square text-primary"></i>
+                                        </button>
+                                        <button class="btn">
+                                            <i class="fa-solid fa-trash-can text-danger"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -77,7 +97,7 @@ let emptyCategories = ref(false);
 const categoriesSelected = ref([]);
 const pagination = ref({
     currentPage: 1,
-    categoryPerPage: 8
+    categoryPerPage: 10
 });
 
 onMounted(() => {
@@ -119,12 +139,12 @@ const selectAll = (event) => {
 }
 
 const setCategorySelected = (categorySelected) => {
-    if(categorySelected.selected) {
+    if (categorySelected.selected) {
         categoriesSelected.value.push(categorySelected);
     } else {
         const index = categoriesSelected.value.findIndex(category => category.id === categorySelected.id);
 
-        if(index !== -1) {
+        if (index !== -1) {
             categoriesSelected.value.splice(index, 1);
         }
     }
@@ -138,6 +158,7 @@ const showIcon = (category) => {
 
 <style scoped>
 .categories {
+    min-width: 250px;
     border-radius: 5px;
     box-shadow: var(--box-shadow-cards);
 }
@@ -146,12 +167,12 @@ const showIcon = (category) => {
     border-radius: 5px;
 }
 
-table {
-    min-width: 650px;
+.base_table {
+    overflow-x: auto !important;
 }
 
-table th {
-    vertical-align: middle;
+table {
+    min-width: 650px;
 }
 
 table thead th {
@@ -159,7 +180,11 @@ table thead th {
     font-size: 14px;
 }
 
-table tbody th {
+table td, table th {
+    vertical-align: middle;
+}
+
+table tbody td {
     color: #727272;
     font-weight: 400;
 }

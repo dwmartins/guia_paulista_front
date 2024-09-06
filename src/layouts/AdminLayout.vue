@@ -1,5 +1,5 @@
 <template>
-    <section id="adminLayout" class="d-flex m-0 p-0 show">
+    <section id="adminLayout" class="m-0 p-0 show">
         <nav class="sidebar" :class="{ 'collapsed': menuClose }">
             <div class="logo px-2">
                 <img :src="logoImage" :alt="showText('WEBSITE_LOGO')">
@@ -63,7 +63,7 @@
                         <i class="fa-solid fa-bars fs-4"></i>
                     </button>
                     <router-link to="/">
-                        <button class="btn btn-sm btn-outline-primary">
+                        <button class="btn btn-sm btn-outline-primary text-nowrap">
                             Site
                             <i class="fa-solid fa-globe ms-1"></i>
                         </button>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="user_contents item_center gap-2">
                         <el-dropdown>
-                            <span class="el-dropdown-link">
+                            <span class="el-dropdown-link text-nowrap">
                                 <img :src="userImg" :alt="showText('ALT_USER_IMG')">
                                 <span class="firstName">{{ user.name }}</span>
                                 <span class="lastName">&nbsp;{{ user.lastName }}</span>
@@ -369,5 +369,10 @@ header {
     .user_contents .firstName, .user_contents .fa-chevron-down {
         display: none;
     } 
+}
+
+main {
+    max-height: calc(100vh - 70px);
+    overflow-y: scroll;
 }
 </style>
