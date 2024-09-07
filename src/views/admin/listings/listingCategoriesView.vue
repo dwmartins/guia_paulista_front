@@ -25,20 +25,20 @@
                     <div class="col-12 col-sm-7 col-md-6 mb-3">
                         <el-input
                             v-model="filters.keywords"
-                            placeholder="Buscar"
+                            :placeholder="showText('SEARCH')"
                             :prefix-icon="Search"
                             @input="filter()"
                         />
                     </div>
                     <div class="col-12 col-sm-5 col-md-2 mb-3">
                         <el-select v-model="filters.status" id="filter_status" placeholder="Status">
-                            <el-option label="Ativo" value="Y" />
-                            <el-option label="Inativo" value="N"  />
+                            <el-option :label="showText('CATEGORY_ACTIVE')" value="Y" />
+                            <el-option :label="showText('CATEGORY_INACTIVE')" value="N"  />
                         </el-select>
                     </div>
                     <div class="col-12 col-md-4 d-flex justify-content-end">
-                        <el-button @click="filter()" type="primary"><i class="fa-solid fa-magnifying-glass me-1"></i>Filtrar</el-button>
-                        <el-button @click="cleanFilter()"><i class="fa-solid fa-eraser me-1"></i>Limpar</el-button>
+                        <el-button @click="filter()" type="primary"><i class="fa-solid fa-magnifying-glass me-1"></i>{{ showText('FILTER') }}</el-button>
+                        <el-button @click="cleanFilter()"><i class="fa-solid fa-eraser me-1"></i>{{ showText('CLEAN') }}</el-button>
                     </div>
                 </div>
 

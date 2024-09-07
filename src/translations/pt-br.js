@@ -194,3 +194,5 @@ export const ACTIONS = "Ações";
 export const CATEGORY_ACTIVE = "Ativa";
 export const CATEGORY_INACTIVE = "Inativa";
 export const SEARCHING_CATEGORIES = "Buscando categorias...";
+export const FILTER = "Filtrar";
+export const CLEAN = "Limpar";
