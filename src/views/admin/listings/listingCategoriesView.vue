@@ -17,12 +17,36 @@
             </div>
 
             <div v-if="emptyCategories">
-                <el-empty :description="showText('CATEGORY_NOT_FOUND')" :image-size="200" />
+                <el-empty :description="showText('CATEGORY_EMPTY')" :image-size="200" />
             </div>
 
-            <div v-if="categories.length" class="p-3 show">
-                <p class="text-secondary fs-7 text-end m-0">{{ categories.length }} {{ showText('CATEGORY_TITLE') }}</p>
-                <div class="base_table">
+            <div v-if="categories.length" class="show container py-3">
+                <div class="row mb-3">
+                    <div class="col-12 col-sm-7 col-md-6 mb-3">
+                        <el-input
+                            v-model="filters.keywords"
+                            placeholder="Buscar"
+                            :prefix-icon="Search"
+                            @input="filter()"
+                        />
+                    </div>
+                    <div class="col-12 col-sm-5 col-md-2 mb-3">
+                        <el-select v-model="filters.status" id="filter_status" placeholder="Status">
+                            <el-option label="Ativo" value="Y" />
+                            <el-option label="Inativo" value="N"  />
+                        </el-select>
+                    </div>
+                    <div class="col-12 col-md-4 d-flex justify-content-end">
+                        <el-button @click="filter()" type="primary"><i class="fa-solid fa-magnifying-glass me-1"></i>Filtrar</el-button>
+                        <el-button @click="cleanFilter()"><i class="fa-solid fa-eraser me-1"></i>Limpar</el-button>
+                    </div>
+                </div>
+
+                <div v-if="filterEmpty">
+                    <el-empty :description="showText('CATEGORY_NOT_FOUND')" :image-size="200" />
+                </div>
+
+                <div v-if="filteredCategories.length" class="base_table">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -78,10 +102,11 @@
                     </table>
                 </div>
 
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-end align-items-center gap-2 mt-3">
+                    <p class="text-secondary fs-8 text-end m-0">{{ categories.length }} {{ showText('CATEGORY_TITLE') }}</p>
                     <el-pagination size="small" background layout="prev, pager, next"
                         :total="filteredCategories.length ? filteredCategories.length : categories.length"
-                        :page-size="pagination.categoryPerPage" @current-change="handlePageChange" class="mt-4" />
+                        :page-size="pagination.categoryPerPage" @current-change="handlePageChange"/>
                 </div>
             </div>
         </div>
@@ -96,17 +121,24 @@ import ListingCategoryService from '@/services/ListingCategoryService';
 import defaultImg from '@/assets/img/default/defaultImg.png';
 import { simpleDateTime } from '@/helpers/dateHelper.js';
 import AppSearchSpinner from '@/components/admin/AppSearchSpinner.vue';
+import { Search } from '@element-plus/icons-vue';
 
 const API_URL = process.env.VUE_APP_API_URL;
 
 let categories = ref([]);
 let filteredCategories = ref([]);
 let emptyCategories = ref(false);
+const filterEmpty = ref(false);
 const searchingCategories = ref(false);
 const categoriesSelected = ref([]);
 const pagination = ref({
     currentPage: 1,
     categoryPerPage: 10
+});
+
+const filters = ref({
+    keywords: "",
+    status: ""
 });
 
 onMounted(() => {
@@ -168,6 +200,25 @@ const showIcon = (category) => {
     return category.icon ? `${API_URL}uploads/categories/${category.icon}` : defaultImg;
 }
 
+const filter = () => {
+    filteredCategories.value = categories.value.filter(category => {
+        const matchesInput = category.name.toLowerCase().includes(filters.value.keywords.toLowerCase());
+        const matchesStatus = filters.value.status ? (category.status === filters.value.status) : true;
+
+        return matchesStatus && matchesInput;
+    });
+
+    filterEmpty.value = !filteredCategories.value.length
+}
+
+const cleanFilter = () => {
+    filters.value.keywords = "";
+    filters.value.status = "";
+
+    filteredCategories.value = categories.value;
+    filterEmpty.value = false;
+}
+
 </script>
 
 <style scoped>
@@ -225,5 +276,16 @@ table .categoryIcon {
     border-radius: 10px;
     padding: 2px 10px;
     font-size: 12px;
+}
+
+.search_by_keywords {
+    position: relative;
+}
+
+.search_by_keywords i {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translate(-50%, -50%);
 }
 </style>

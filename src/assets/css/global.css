@@ -46,6 +46,10 @@ input[type="number"] {
     background-color: #999999;
 }
 
+::placeholder {
+    color: #b1b1b1 !important;
+}
+
 /* Botões */
 .btn-primary {
     color: var(--bs-primary-text);
