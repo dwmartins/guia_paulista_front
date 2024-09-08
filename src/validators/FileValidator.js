@@ -3,14 +3,18 @@ import { showText } from "@/translation";
 
 class FileValidator {
     imgExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
-    fileSize = 5 * 1024 * 1024; // 5MB
+    imgSize = 5 * 1024 * 1024; // 5MB
 
     iconExtensions = ['image/vnd.microsoft.icon', 'image/x-icon', 'image/jpeg', 'image/jpg', 'image/png'];
     iconFileSize = 5 * 1024 * 1024; // 5MB
 
-    img(image) {
-        if (image.size > this.fileSize) {
-            showAlert('warning', '', showText('IMG_5MB') );
+    img(image, size = 5) {
+        if(size) {
+            this.imgSize = size * 1024 * 1024;
+        }  
+
+        if (image.size > this.imgSize) {
+            showAlert('warning', '', showText('IMG_MAX_SIZE').replace('{size}', size));
             return false;
         }
 
@@ -22,14 +26,18 @@ class FileValidator {
         return true;
     }
 
-    icon(icon) {
+    icon(icon, size = 5) {
+        if(size){
+            this.iconFileSize = size * 1024 * 1024;
+        }
+
         if (icon.size > this.iconFileSize) {
-            showAlert('warning', '', showText('ICON_5MB'));
+            showAlert('warning', '', showText('ICON_MAX_SIZE').replace('{size}', size));
             return false;
         }
     
         if (!this.iconExtensions.includes(icon.type)) {
-            showAlert('warning', 'O formato do ico deve ser um ícone ICO ou JPG, JPEG ou PNG.', );
+            showAlert('warning', '', showText('ICON_FORMAT') );
             return false;
         }
     

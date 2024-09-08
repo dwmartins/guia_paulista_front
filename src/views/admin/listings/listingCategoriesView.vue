@@ -4,7 +4,7 @@
             <div class="p-2 py-3 d-flex justify-content-between">
                 <h5 class="custom_dark m-0">{{ showText('CATEGORY_TITLE') }}</h5>
 
-                <button class="btn btn-sm btn-primary text-nowrap">
+                <button @click="openModal('newCategory')" class="btn btn-sm btn-primary text-nowrap">
                     <i class="fa-solid fa-plus"></i>
                     {{ showText('ADD_NEW_CATEGORY') }}
                 </button>
@@ -111,6 +111,106 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" data-bs-backdrop="static" id="category" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content p-4 py-2">
+                <div class="d-flex justify-content-between mb-3">
+                    <h1 class="modal-title fs-5">{{ dialogs.category.label }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form @submit.prevent="submitForm(dialogs.category.action)" class="formNewCategory">
+                    <div class="d-flex justify-content-end align-items-center gap-2">
+                        <template v-if="categoryToUpdate.status">
+                            <span class="text-secondary">Ativada</span>
+                        </template>
+                        <template v-if="!categoryToUpdate.status">
+                            <span class="text-secondary">Desativada</span>
+                        </template>
+
+                        <el-switch v-model="categoryToUpdate.status" />
+                    </div>
+                    <div class="mb-4">
+                        <label for="name" class="form-label text-secondary">{{ showText('CATEGORY_NAME_LABEL') }}</label>
+                        <input v-model="categoryToUpdate.name" @input="validNameEmpty($event)" ref="inputCategoryName" type="text" name="name" id="name" class="form-control custom_focus form-control-sm">
+                    </div>
+
+                    <el-collapse accordion>
+                        <el-collapse-item title="Mais opções">
+
+                            <div class="mb-3">
+                                <p class="text-secondary fs-6 mb-1">{{ showText('ICON') }}</p>
+                                <el-upload v-if="!hideUpload" drag :accept="imgExtensions" :on-change="handleFileChange" :auto-upload="false" :show-file-list="false">
+                                    <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+                                        <div class="el-upload__text">
+                                            {{ showText('DROP_FILE_HERE') }} <em>{{ showText('CLICK_TO_UPLOAD') }}</em>
+                                        </div>
+                                    <template #tip>
+                                        <div class="el-upload__tip">
+                                            {{ showText('FORMAT_IMG_TO_UPLOAD_TO_CATEGORY') }}
+                                        </div>
+                                    </template>
+                                </el-upload>
+
+                                <div class="d-flex justify-content-center">
+                                    <AppSearchSpinner v-if="loadingUploadIcon" width="big"/>
+
+                                    <div v-if="previewIcon" class="previewIcon">
+                                        <img :src="previewIcon" :alt="showText('ALT_CATEGORY')">
+                                        <button @click="removeIcon()" type="button" class="btn btn-danger deleteIcon p-1 px-2"><i class="fa-solid fa-trash-can"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="slugUrl" class="form-label text-secondary">{{ showText('SLUG_URL_LABEL') }}</label>
+                                <input v-model="categoryToUpdate.slugUrl" type="text" name="slugUrl" id="slugUrl" class="form-control custom_focus form-control-sm">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="keywords" class="form-label text-secondary">{{ showText('KEYWORDS_LABEL') }}</label>
+                                <el-select
+                                    v-model="categoryToUpdate.keywords"
+                                    multiple
+                                    filterable
+                                    allow-create
+                                    default-first-option
+                                    :reserve-keyword="false"
+                                    :placeholder="showText('PRESS_ENTER_TO_ADD')"
+                                    name="keywords"
+                                    id="keywords"
+                                >
+                                </el-select>
+                            </div>
+
+                            <div>
+                                <label for="metaDescription" class="form-label text-secondary">{{ showText('META_DESCRIPTION_LABEL') }}</label>
+                                <el-input
+                                    v-model="categoryToUpdate.metaDescription"
+                                    maxlength="200"
+                                    show-word-limit
+                                    type="textarea" 
+                                    :rows="4"
+                                    name="metaDescription"
+                                    id="metaDescription"
+                                />
+                            </div>
+                        </el-collapse-item>
+                    </el-collapse>
+
+                    <div class="my-4 d-flex justify-content-end gap-2">
+                        <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-sm btn-light">{{ showText('CANCEL') }}</button>
+                        <btnPrimary 
+                            :loading="isLoading"
+                            :text="showText('SAVE')"
+                            type="submit"
+                            width="sm"
+                        />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -122,24 +222,59 @@ import defaultImg from '@/assets/img/default/defaultImg.png';
 import { simpleDateTime } from '@/helpers/dateHelper.js';
 import AppSearchSpinner from '@/components/admin/AppSearchSpinner.vue';
 import { Search } from '@element-plus/icons-vue';
+import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.min';
+import { UploadFilled } from '@element-plus/icons-vue'
+import FileValidator from '@/validators/FileValidator';
+import { settingsStore } from '@/store/SettingsStore';
+import { compressImage } from '@/helpers/imageHelper';
+import { showAlert } from '@/helpers/showAlert';
+import btnPrimary from '@/components/shared/buttons/btnPrimary.vue';
+
+const imgExtensions = "image/jpeg, image/jpg, image/png";
+const previewIcon = ref("");
 
 const API_URL = process.env.VUE_APP_API_URL;
-
 let categories = ref([]);
 let filteredCategories = ref([]);
 let emptyCategories = ref(false);
 const filterEmpty = ref(false);
 const searchingCategories = ref(false);
 const categoriesSelected = ref([]);
+const loadingUploadIcon = ref(false);
+const hideUpload = ref(false);
+const isLoading = ref(false);
 const pagination = ref({
     currentPage: 1,
     categoryPerPage: 10
 });
 
+const categoryToUpdate = ref({
+    status: true,
+    name: "",
+    icon: null,
+    slugUrl: "",
+    keywords: [],
+    metaDescription: ""
+});
+
+const dialogs = ref({
+    delete: {
+        active: false,
+        multiples: false
+    },
+    category: {
+        active: false,
+        label: "",
+        action: ""
+    }
+})
+
 const filters = ref({
     keywords: "",
     status: ""
 });
+
+const inputCategoryName = ref(null);
 
 onMounted(() => {
     SEOManager.setTitle(showText('CATEGORIES_LISTING_PAGE'));
@@ -219,6 +354,87 @@ const cleanFilter = () => {
     filterEmpty.value = false;
 }
 
+const openModal = (action, category = null) => {
+    hideUpload.value = false;
+    inputCategoryName.value.classList.remove('field_invalid');
+
+    switch (action) {
+        case 'newCategory':
+            previewIcon.value = "";
+            dialogs.value.category.label = "Nova categoria";
+            dialogs.value.category.action = "create";
+            break;
+        case 'updateCategory':
+            dialogs.value.category.label = "Atualizar categoria";
+            dialogs.value.category.action = "update";
+            break;
+        default:
+            break;
+    }
+
+    if(category) {
+        categoryToUpdate.value = {...category}
+    }
+
+    const categoryModal = new Modal(document.getElementById('category'));
+    categoryModal.show();
+}
+
+const handleFileChange = async (file) => {
+    try {
+        if (!file || !file.raw) return;
+
+        if(!FileValidator.img(file.raw, 1)) {
+            return;
+        }
+
+        loadingUploadIcon.value = true;
+        hideUpload.value = true;
+
+        if(settingsStore.getSetting("compressImage") == "on") {
+            categoryToUpdate.value.icon = await compressImage(file.raw);
+        } else {
+            categoryToUpdate.value.icon = file.raw;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            previewIcon.value = reader.result.toString();
+            loadingUploadIcon.value = false;
+        }
+
+        reader.readAsDataURL(file.raw);
+        
+    } catch (error) {
+        loadingUploadIcon.value = false;
+        showAlert('error', '', showText('FATAL_ERROR'));
+        console.error("Error loading image", error);
+    }
+}
+
+const removeIcon = () => {
+    previewIcon.value = "";
+    categoryToUpdate.value.icon = "";
+    hideUpload.value = false;
+}
+
+const submitForm = (action) => {
+    console.log(action)
+    if(!categoryToUpdate.value.name) {
+        inputCategoryName.value.classList.add('field_invalid');
+        showAlert('error', '', showText('CATEGORY_NAME_REQUIRE'));
+    }
+}
+
+const validNameEmpty = (event) => {
+    if(!event.target.value) {
+        event.target.classList.add('field_invalid');
+    } else {
+        event.target.classList.remove('field_invalid');
+    }
+}
+
 </script>
 
 <style scoped>
@@ -287,5 +503,34 @@ table .categoryIcon {
     top: 50%;
     right: 15px;
     transform: translate(-50%, -50%);
+}
+
+.dialog_category {
+    max-width: 200px !important;
+}
+
+.el-upload-dragger {
+    padding: 5px !important;
+}
+
+.previewIcon {
+    width: 160px;
+    height: 150px;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 3px 3px 13px 0px #00000044;
+}
+
+.previewIcon button {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+
+.previewIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 </style>

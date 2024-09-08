@@ -17,6 +17,18 @@ html {
     overflow-x: hidden;
 }
 
+.modal-backdrop  {
+    display: none;
+}
+
+.modal  {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    border: none;
+}
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -203,4 +215,12 @@ input[type="checkbox"]:focus {
 
 .field_invalid {
     border: 1px solid rgb(247, 69, 69);
+}
+
+.formNewCategory .el-collapse-item__header {
+    color: var(--bs-primary) !important;
+}
+
+.formNewCategory .el-upload-dragger {
+    padding: 15px;
 }
