@@ -20,7 +20,7 @@
                 <el-empty :description="showText('CATEGORY_EMPTY')" :image-size="200" />
             </div>
 
-            <div v-if="filteredCategories.length" class="show container py-3">
+            <div v-if="categories.length" class="show container py-3">
                 <div class="row mb-3">
                     <div class="col-12 col-sm-7 col-md-6 mb-3">
                         <el-input
@@ -328,6 +328,8 @@ onUnmounted(() => {
 const getCategories = async () => {
     try {
         filteredCategories.value = [];
+        categories.value = [];
+        
         searchingCategories.value = true;
 
         const response = await ListingCategoryService.fetch();
