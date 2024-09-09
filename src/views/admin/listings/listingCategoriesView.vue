@@ -20,7 +20,7 @@
                 <el-empty :description="showText('CATEGORY_EMPTY')" :image-size="200" />
             </div>
 
-            <div v-if="categories.length" class="show container py-3">
+            <div v-if="filteredCategories.length" class="show container py-3">
                 <div class="row mb-3">
                     <div class="col-12 col-sm-7 col-md-6 mb-3">
                         <el-input
@@ -117,7 +117,7 @@
             <div class="modal-content p-4 py-2">
                 <div class="d-flex justify-content-between mb-3">
                     <h1 class="modal-title fs-5">{{ dialogs.category.label }}</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" :disabled="buttonLoading.createOrUpdate"></button>
                 </div>
                 <form @submit.prevent="submitForm(dialogs.category.action)" class="formNewCategory">
                     <div class="d-flex justify-content-end align-items-center gap-2">
@@ -199,9 +199,9 @@
                     </el-collapse>
 
                     <div class="my-4 d-flex justify-content-end gap-2">
-                        <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-sm btn-light">{{ showText('CANCEL') }}</button>
+                        <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-sm btn-light" :disabled="buttonLoading.createOrUpdate">{{ showText('CANCEL') }}</button>
                         <btnPrimary 
-                            :loading="isLoading"
+                            :loading="buttonLoading.createOrUpdate"
                             :text="showText('SAVE')"
                             type="submit"
                             width="sm"
@@ -242,7 +242,6 @@ const searchingCategories = ref(false);
 const categoriesSelected = ref([]);
 const loadingUploadIcon = ref(false);
 const hideUpload = ref(false);
-const isLoading = ref(false);
 const pagination = ref({
     currentPage: 1,
     categoryPerPage: 10
@@ -274,11 +273,19 @@ const filters = ref({
     status: ""
 });
 
+const buttonLoading = ref({
+    createOrUpdate: false,
+    delete: false
+});
+
 const inputCategoryName = ref(null);
+let categoryModal = null;
 
 onMounted(() => {
     SEOManager.setTitle(showText('CATEGORIES_LISTING_PAGE'));
     getCategories();
+
+    categoryModal = new Modal(document.getElementById('category'));
 });
 
 onUnmounted(() => {
@@ -287,6 +294,7 @@ onUnmounted(() => {
 
 const getCategories = async () => {
     try {
+        filteredCategories.value = [];
         searchingCategories.value = true;
 
         const response = await ListingCategoryService.fetch();
@@ -376,7 +384,6 @@ const openModal = (action, category = null) => {
         categoryToUpdate.value = {...category}
     }
 
-    const categoryModal = new Modal(document.getElementById('category'));
     categoryModal.show();
 }
 
@@ -419,11 +426,31 @@ const removeIcon = () => {
     hideUpload.value = false;
 }
 
-const submitForm = (action) => {
-    console.log(action)
+const submitForm = async (action) => {
     if(!categoryToUpdate.value.name) {
         inputCategoryName.value.classList.add('field_invalid');
         showAlert('error', '', showText('CATEGORY_NAME_REQUIRE'));
+        return;
+    }
+    
+    const data = {...categoryToUpdate.value};
+    data.status = data.status ? "Y" : "N";
+
+    try {
+        buttonLoading.value.createOrUpdate = true;
+
+        if(action == "create") {
+            const response = await ListingCategoryService.create(data);
+            showAlert('success', '', response.data.message);
+        }
+
+        buttonLoading.value.createOrUpdate = false;
+        categoryModal.hide();
+        cleanCategory();
+        getCategories();
+    } catch (error) {
+        buttonLoading.value.createOrUpdate = false;
+        console.error('Error creating category', error);
     }
 }
 
@@ -433,6 +460,19 @@ const validNameEmpty = (event) => {
     } else {
         event.target.classList.remove('field_invalid');
     }
+
+    let value = event.target.value.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-').trim();
+
+    categoryToUpdate.value.slugUrl = value;
+}
+
+const cleanCategory = () => {
+    categoryToUpdate.value.status = true;
+    categoryToUpdate.value.name = "";
+    categoryToUpdate.value.icon = "";
+    categoryToUpdate.value.keywords = "";
+    categoryToUpdate.value.slugUrl = "";
+    categoryToUpdate.value.metaDescription = "";
 }
 
 </script>
