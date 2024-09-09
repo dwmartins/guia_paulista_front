@@ -118,6 +118,7 @@ export const ALT_CONTACT = "Contact Image";
 export const ALT_MAINTENANCE = "Maintenance image";
 export const ALT_PAGE_NOT_FOUND = "Page not found";
 export const ALT_CATEGORY = "Category";
+export const ALT_ATTENTION = "Attention";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Snack bars, pizzerias, hotel...";
@@ -205,3 +206,5 @@ export const CLICK_TO_UPLOAD = "click to upload";
 export const FORMAT_IMG_TO_UPLOAD_TO_CATEGORY = "jpg/png/jpeg files smaller than 1mb";
 export const PRESS_ENTER_TO_ADD = "Press enter to add";
 export const CATEGORY_NAME_REQUIRE = "Category name is required";
+export const DELETE_CATEGORY_TITLE = "Delete category";
+export const WANT_TO_DELETE_CATEGORY = "Do you really want to delete the category";

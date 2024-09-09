@@ -92,7 +92,7 @@
                                         <button class="btn">
                                             <i class="fa-solid fa-pen-to-square text-primary"></i>
                                         </button>
-                                        <button class="btn">
+                                        <button @click="opemModalToDelete(category)" class="btn">
                                             <i class="fa-solid fa-trash-can text-danger"></i>
                                         </button>
                                     </div>
@@ -211,6 +211,34 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" data-bs-backdrop="static" id="deleteCategory" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content p-4 py-2">
+                <div class="d-flex justify-content-between mb-3">
+                    <h1 class="modal-title fs-5">{{ showText('DELETE_CATEGORY_TITLE') }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" :disabled="buttonLoading.delete"></button>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <img class="img_attention" src="@/assets/img/attention.png" :alt="showText('ALT_ATTENTION')">
+                </div>
+
+                <p class="text-secondary text-center">{{ showText('WANT_TO_DELETE_CATEGORY') }} <span class="text-primary">{{ categoryToDelete.name }}</span>?</p>
+
+                <div class="my-4 d-flex justify-content-end gap-2">
+                    <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-sm btn-light" :disabled="buttonLoading.delete">{{ showText('CANCEL') }}</button>
+                    <btnDanger 
+                        @click="deleteCategory()"
+                        :loading="buttonLoading.delete"
+                        :text="showText('DELETE')"
+                        type="submit"
+                        width="sm"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -229,6 +257,7 @@ import { settingsStore } from '@/store/SettingsStore';
 import { compressImage } from '@/helpers/imageHelper';
 import { showAlert } from '@/helpers/showAlert';
 import btnPrimary from '@/components/shared/buttons/btnPrimary.vue';
+import btnDanger from '@/components/shared/buttons/btnDanger.vue';
 
 const imgExtensions = "image/jpeg, image/jpg, image/png";
 const previewIcon = ref("");
@@ -242,6 +271,7 @@ const searchingCategories = ref(false);
 const categoriesSelected = ref([]);
 const loadingUploadIcon = ref(false);
 const hideUpload = ref(false);
+const categoryToDelete = ref({});
 const pagination = ref({
     currentPage: 1,
     categoryPerPage: 10
@@ -279,13 +309,16 @@ const buttonLoading = ref({
 });
 
 const inputCategoryName = ref(null);
+
 let categoryModal = null;
+let deleteCategoryModal = null;
 
 onMounted(() => {
     SEOManager.setTitle(showText('CATEGORIES_LISTING_PAGE'));
     getCategories();
 
     categoryModal = new Modal(document.getElementById('category'));
+    deleteCategoryModal = new Modal(document.getElementById('deleteCategory'));
 });
 
 onUnmounted(() => {
@@ -386,6 +419,35 @@ const openModal = (action, category = null) => {
 
     categoryModal.show();
 }
+
+const opemModalToDelete = (category) => {
+    categoryToDelete.value = category;
+    deleteCategoryModal.show();
+}
+
+const deleteCategory = async () => {
+    try {
+        buttonLoading.value.delete = true;
+        const response = await ListingCategoryService.delete(categoryToDelete.value.id);
+
+        showAlert('success', '', response.data.message);
+        buttonLoading.value.delete = false;
+
+        const index = categories.value.findIndex(item => item.id === categoryToDelete.value.id);
+        if(index !== -1) {
+            categories.value.splice(index, 1);
+        }
+
+        if(!categories.value.length) {
+            emptyCategories.value = true;
+        }
+
+        deleteCategoryModal.hide();
+    } catch (error) {
+        console.error('Error deleting category', error);
+        buttonLoading.value.delete = false;
+    }
+} 
 
 const handleFileChange = async (file) => {
     try {
@@ -572,5 +634,9 @@ table .categoryIcon {
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+}
+
+.img_attention {
+    width: 130px;
 }
 </style>

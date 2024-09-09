@@ -37,6 +37,24 @@ class ListingCategoryService {
             throw error;
         }
     }
+
+    async delete(categoryId) {
+        const user = AuthService.checkAuth();
+        if (!user) return false;
+
+        try {
+            const response = await axios.delete(`/listing/category/${categoryId}`, {
+                headers: {
+                    'Authorization': AuthService.getBearer()
+                }
+            });
+
+            return response;
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
+    }
 }
 
 export default new ListingCategoryService();

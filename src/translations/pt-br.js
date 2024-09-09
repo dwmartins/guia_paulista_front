@@ -118,6 +118,7 @@ export const ALT_CONTACT = "Imagem de contato";
 export const ALT_MAINTENANCE = "Imagem de manutenção";
 export const ALT_PAGE_NOT_FOUND = "Página não encontrada";
 export const ALT_CATEGORY = "Categoria";
+export const ALT_ATTENTION = "Atenção";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Lanchonetes, pizzarias, hotel...";
@@ -205,3 +206,5 @@ export const CLICK_TO_UPLOAD = "clique para fazer upload";
 export const FORMAT_IMG_TO_UPLOAD_TO_CATEGORY = "Arquivos jpg/png/jpeg com tamanho menor que 1mb";
 export const PRESS_ENTER_TO_ADD = "Pressione enter para adicionar";
 export const CATEGORY_NAME_REQUIRE = "Nome da categoria é obrigatório";
+export const DELETE_CATEGORY_TITLE = "Excluir categoria";
+export const WANT_TO_DELETE_CATEGORY = "Você realmente quer excluir a categoria";
