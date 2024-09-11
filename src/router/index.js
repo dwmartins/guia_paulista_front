@@ -69,6 +69,10 @@ export function initializeRoutes() {
                 {
                     path: showText('PATH_ADM_LISTINGS_CATEGORY'),
                     component: () => import('@/views/admin/listings/listingCategoriesView.vue')
+                },
+                {
+                    path: showText('PATH_ADM_MAIL'),
+                    component: () => import('@/views/admin/settings/EmailSettingsView.vue')
                 }
             ]
         },
