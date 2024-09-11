@@ -460,7 +460,8 @@ const openModal = (action, category = null) => {
 
     if(category) {
         categoryToUpdate.value = {...category}
-
+        
+        categoryToUpdate.value.keywords = categoryToUpdate.value.keywords ? JSON.parse(categoryToUpdate.value.keywords) : "";
         categoryToUpdate.value.status = category.status === "Y" ? true : false;
 
         if(categoryToUpdate.value.icon) {

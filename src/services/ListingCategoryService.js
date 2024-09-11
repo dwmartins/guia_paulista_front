@@ -20,7 +20,11 @@ class ListingCategoryService {
 
         for (let key in category) {
             if(category[key]) {
-                formData.append(key, category[key]);
+                if(Array.isArray(category[key])) {
+                    formData.append(key, JSON.stringify(category[key]));
+                } else {
+                    formData.append(key, category[key]);
+                }
             }
         }
 
@@ -46,7 +50,11 @@ class ListingCategoryService {
 
         for (let key in category) {
             if(category[key]) {
-                formData.append(key, category[key]);
+                if(Array.isArray(category[key])) {
+                    formData.append(key, JSON.stringify(category[key]));
+                } else {
+                    formData.append(key, category[key]);
+                }
             }
         }
 
