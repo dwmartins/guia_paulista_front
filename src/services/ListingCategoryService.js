@@ -38,6 +38,32 @@ class ListingCategoryService {
         }
     }
 
+    async update(category) {
+        const user = AuthService.checkAuth();
+        if (!user) return false;
+
+        const formData = new FormData();
+
+        for (let key in category) {
+            if(category[key]) {
+                formData.append(key, category[key]);
+            }
+        }
+
+        try {
+            const response = await axios.post('/listing/category/update', formData, {
+                headers: {
+                    'Authorization': AuthService.getBearer()
+                }
+            });
+
+            return response;
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
+    }
+
     async delete(categoryId) {
         const user = AuthService.checkAuth();
         if (!user) return false;

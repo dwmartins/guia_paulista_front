@@ -209,3 +209,5 @@ export const CATEGORY_NAME_REQUIRE = "Category name is required";
 export const DELETE_CATEGORY_TITLE = "Delete category";
 export const WANT_TO_DELETE_CATEGORY = "Do you really want to delete the category";
 export const WANT_TO_DELETE_CATEGORY_SELECTED = "Do you really want to delete the selected categories?";
+export const STATUS_CATEGORY_ACTIVE = "Active";
+export const STATUS_CATEGORY_INACTIVE = "Inactive";

@@ -95,7 +95,7 @@
                                 </td>
                                 <td>
                                     <div class="text-center d-flex justify-content-center gap-2">
-                                        <button class="btn">
+                                        <button @click="openModal('updateCategory', category)" class="btn">
                                             <i class="fa-solid fa-pen-to-square text-primary"></i>
                                         </button>
                                         <button @click="opemModalToDelete(category)" class="btn">
@@ -128,10 +128,10 @@
                 <form @submit.prevent="submitForm(dialogs.category.action)" class="formNewCategory">
                     <div class="d-flex justify-content-end align-items-center gap-2">
                         <template v-if="categoryToUpdate.status">
-                            <span class="text-secondary">Ativada</span>
+                            <span class="text-secondary">{{ showText('STATUS_CATEGORY_ACTIVE') }}</span>
                         </template>
                         <template v-if="!categoryToUpdate.status">
-                            <span class="text-secondary">Desativada</span>
+                            <span class="text-secondary">{{ showText('STATUS_CATEGORY_INACTIVE') }}</span>
                         </template>
 
                         <el-switch v-model="categoryToUpdate.status" />
@@ -439,7 +439,9 @@ const cleanFilter = () => {
 }
 
 const openModal = (action, category = null) => {
+    cleanCategory();
     hideUpload.value = false;
+    previewIcon.value = "";
     inputCategoryName.value.classList.remove('field_invalid');
 
     switch (action) {
@@ -458,6 +460,13 @@ const openModal = (action, category = null) => {
 
     if(category) {
         categoryToUpdate.value = {...category}
+
+        categoryToUpdate.value.status = category.status === "Y" ? true : false;
+
+        if(categoryToUpdate.value.icon) {
+            previewIcon.value = showIcon(categoryToUpdate.value);
+            hideUpload.value = true;
+        }
     }
 
     categoryModal.show();
@@ -570,6 +579,9 @@ const submitForm = async (action) => {
 
         if(action == "create") {
             const response = await ListingCategoryService.create(data);
+            showAlert('success', '', response.data.message);
+        } else {
+            const response = await ListingCategoryService.update(data);
             showAlert('success', '', response.data.message);
         }
 

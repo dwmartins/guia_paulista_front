@@ -209,3 +209,5 @@ export const CATEGORY_NAME_REQUIRE = "Nome da categoria é obrigatório";
 export const DELETE_CATEGORY_TITLE = "Excluir categoria";
 export const WANT_TO_DELETE_CATEGORY = "Você realmente quer excluir a categoria";
 export const WANT_TO_DELETE_CATEGORY_SELECTED = "Você realmente deseja excluir as categorias selecionadas?";
+export const STATUS_CATEGORY_ACTIVE = "Ativa";
+export const STATUS_CATEGORY_INACTIVE = "Inativa";
