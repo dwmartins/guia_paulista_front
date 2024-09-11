@@ -55,6 +55,22 @@ class ListingCategoryService {
             throw error;
         }
     }
+
+    async deleteMultiples(ids) {
+        const user = AuthService.checkAuth();
+        if (!user) return false;
+        
+        try {
+            return await axios.post('/listing/category/delete-multiples', ids, {
+                headers: {
+                    'Authorization': AuthService.getBearer()
+                }
+            });
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
+    }
 }
 
 export default new ListingCategoryService();

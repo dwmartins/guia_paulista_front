@@ -4,10 +4,16 @@
             <div class="p-2 py-3 d-flex justify-content-between">
                 <h5 class="custom_dark m-0">{{ showText('CATEGORY_TITLE') }}</h5>
 
-                <button @click="openModal('newCategory')" class="btn btn-sm btn-primary text-nowrap">
-                    <i class="fa-solid fa-plus"></i>
-                    {{ showText('ADD_NEW_CATEGORY') }}
-                </button>
+                <div class="d-flex justify-content-between gap-2">
+                    <button v-if="hasCategorySelected" type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMultiples">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+
+                    <button @click="openModal('newCategory')" class="btn btn-sm btn-primary text-nowrap">
+                        <i class="fa-solid fa-plus"></i>
+                        {{ showText('ADD_NEW_CATEGORY') }}
+                    </button>
+                </div>
             </div>
 
             <hr class="text-secondary mt-0">
@@ -239,6 +245,34 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" data-bs-backdrop="static" id="deleteMultiples" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content p-4 py-2">
+                <div class="d-flex justify-content-between mb-3">
+                    <h1 class="modal-title fs-5">{{ showText('DELETE_CATEGORY_TITLE') }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" :disabled="buttonLoading.deleteMultiples"></button>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <img class="img_attention" src="@/assets/img/attention.png" :alt="showText('ALT_ATTENTION')">
+                </div>
+
+                <p class="text-secondary text-center">{{ showText('WANT_TO_DELETE_CATEGORY_SELECTED') }}</p>
+
+                <div class="my-4 d-flex justify-content-end gap-2">
+                    <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-sm btn-light" :disabled="buttonLoading.deleteMultiples">{{ showText('CANCEL') }}</button>
+                    <btnDanger 
+                        @click="deleteMultiples()"
+                        :loading="buttonLoading.deleteMultiples"
+                        :text="showText('DELETE')"
+                        type="submit"
+                        width="sm"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -272,6 +306,7 @@ const categoriesSelected = ref([]);
 const loadingUploadIcon = ref(false);
 const hideUpload = ref(false);
 const categoryToDelete = ref({});
+const hasCategorySelected = ref(false);
 const pagination = ref({
     currentPage: 1,
     categoryPerPage: 10
@@ -305,13 +340,15 @@ const filters = ref({
 
 const buttonLoading = ref({
     createOrUpdate: false,
-    delete: false
+    delete: false,
+    deleteMultiples: false
 });
 
 const inputCategoryName = ref(null);
 
 let categoryModal = null;
 let deleteCategoryModal = null;
+let deleteMultiplesModal = null;
 
 onMounted(() => {
     SEOManager.setTitle(showText('CATEGORIES_LISTING_PAGE'));
@@ -319,6 +356,7 @@ onMounted(() => {
 
     categoryModal = new Modal(document.getElementById('category'));
     deleteCategoryModal = new Modal(document.getElementById('deleteCategory'));
+    deleteMultiplesModal = new Modal(document.getElementById('deleteMultiples'));
 });
 
 onUnmounted(() => {
@@ -359,6 +397,7 @@ const paginatedCategories = () => {
 const selectAll = (event) => {
     filteredCategories.value.forEach(category => {
         event ? category.selected = true : category.selected = false;
+        setCategorySelected(category);
     });
 }
 
@@ -372,6 +411,8 @@ const setCategorySelected = (categorySelected) => {
             categoriesSelected.value.splice(index, 1);
         }
     }
+
+    hasCategorySelected.value = categoriesSelected.value.length ? true : false;
 }
 
 const showIcon = (category) => {
@@ -450,6 +491,30 @@ const deleteCategory = async () => {
         buttonLoading.value.delete = false;
     }
 } 
+
+const deleteMultiples = async () => {
+    let ids = [];
+
+    for(const category of categoriesSelected.value) {
+        ids.push(category.id);
+    }
+
+    buttonLoading.value.deleteMultiples = true;
+
+    try {
+        const response = await ListingCategoryService.deleteMultiples(ids);
+        showAlert('success', '', response.data.message);
+        buttonLoading.value.deleteMultiples = false;
+
+        hasCategorySelected.value = false;
+        getCategories();
+        deleteMultiplesModal.hide();
+
+    } catch (error) {
+        console.error('Error deleting categories', error);
+        buttonLoading.value.deleteMultiples = false;
+    }
+}
 
 const handleFileChange = async (file) => {
     try {
