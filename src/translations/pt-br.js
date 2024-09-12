@@ -219,3 +219,4 @@ export const WANT_TO_DELETE_CATEGORY_SELECTED = "Você realmente deseja excluir 
 export const STATUS_CATEGORY_ACTIVE = "Ativa";
 export const STATUS_CATEGORY_INACTIVE = "Inativa";
 export const EMAIL_SETTINGS_TITLE = "Propriedades do servidor SMTP";
+export const SEARCHING_SETTINGS = "Buscando configurações...";

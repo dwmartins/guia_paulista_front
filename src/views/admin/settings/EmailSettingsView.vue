@@ -15,7 +15,11 @@
                 </div>
             </div>
 
-            <form @submit.prevent="updateSettings()">
+            <div v-if="isLoading.searchingSettings" class="alert alert-info fadeIn p-2 mb-5 show" role="alert">
+                <AppSearchSpinner :message="showText('SEARCHING_SETTINGS')" width="big"/>
+            </div>
+
+            <form v-if="!hideForm" @submit.prevent="updateSettings()">
                 <div class="container-fluid">
                     <fieldset :disabled="!emailSettingsActive" class="row">
                         <div class="mb-4 col-sm-6" :class="{'opacity-75': !emailSettingsActive}">
@@ -75,11 +79,15 @@ import EmailService from '@/services/EmailService';
 import { settingsStore } from '@/store/SettingsStore';
 import SettingsService from '@/services/SettingsService';
 import { showAlert } from '@/helpers/showAlert';
+import AppSearchSpinner from '@/components/admin/AppSearchSpinner.vue';
 
 const isLoading = ref({
     updateSettings: false,
-    updateStatus: false
+    updateStatus: false,
+    searchingSettings: false
 });
+
+const hideForm = ref(true);
 
 const emailSettingsActive = ref(false);
 
@@ -106,12 +114,17 @@ onUnmounted(() => {
 
 const getEmailSettings = async () => {
     try {
+        isLoading.value.searchingSettings = true;
+
         const response = await EmailService.getEmailSettings();
         emailSettings.value = response.data;
 
         emailSettingsActive.value = settingsStore.getSetting('emailSending') == "on" ? true : false;
-
+        
+        isLoading.value.searchingSettings = false;
+        hideForm.value = false;
     } catch (error) {
+        isLoading.value.searchingSettings = false;
         console.error('Error Fetching email settings', error);
     }
 }
