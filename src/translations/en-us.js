@@ -77,6 +77,11 @@ export const CATEGORY_NAME = "Category name"
 export const SLUG_URL_LABEL = "Slug URL";
 export const META_DESCRIPTION_LABEL = "Meta description";
 export const KEYWORDS_LABEL = "Keywords";
+export const SERVER_LABEL = "Servidor";
+export const PORT_LABEL = "Port";
+export const AUTHENTICATION_LABEL = "Authentication";
+export const EMAIL_ADDRESS_LABEL = "Email address";
+export const USERNAME_EMAIL_LABEL = "Username/Email";
 
 // Form Validations
 export const EMAIL_INVALID = "Please input correct email address";
@@ -167,6 +172,7 @@ export const DONT_HAVE_ADS = "It looks like you don't have any ads on our site."
 export const ADVERTISE_NOW = "Advertise now";
 export const EDIT_PROFILE = "Edit profile";
 export const SAVE = "Save";
+export const SAVE_CHANGES = "Save Changes";
 export const CANCEL = "Cancel";
 export const DELETE = "Delete";
 export const SEND_MESSAGE = "Send Message";

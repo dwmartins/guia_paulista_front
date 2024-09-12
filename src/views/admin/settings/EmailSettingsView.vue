@@ -19,17 +19,17 @@
                 <div class="container-fluid">
                     <fieldset :disabled="!emailSettingsActive" class="row">
                         <div class="mb-4 col-sm-6" :class="{'opacity-75': !emailSettingsActive}">
-                            <label for="server" class="form-label text-secondary text-secondary">Servidor:</label>
+                            <label for="server" class="form-label text-secondary text-secondary">{{ showText('SERVER_LABEL') }}</label>
                             <input v-model="emailSettings.server" type="text" class="form-control form-control-sm custom_focus text-secondary" id="server">
                         </div>
 
                         <div class="mb-4 col-sm-3" :class="{'opacity-75': !emailSettingsActive}">
-                            <label for="port" class="form-label text-secondary">Porta:</label>
+                            <label for="port" class="form-label text-secondary">{{ showText('PORT_LABEL') }}</label>
                             <input v-model="emailSettings.port" type="number" class="form-control form-control-sm custom_focus text-secondary" id="port">
                         </div>
 
                         <div class="mb-4 col-sm-3" :class="{'opacity-75': !emailSettingsActive}">
-                            <label class="form-label text-secondary fs-7">Autenticação:</label>
+                            <label class="form-label text-secondary fs-7">{{ showText('AUTHENTICATION_LABEL') }}</label>
                             <el-select :disabled="!emailSettingsActive" v-model="emailSettings.authentication" placeholder="Status">
                                 <el-option :selected="emailSettings.authentication === 'SSL'" value="SSL" />
                                 <el-option :selected="emailSettings.authentication === 'TLS'" value="TLS" />
@@ -37,24 +37,24 @@
                         </div>
 
                         <div class="mb-4 col-sm-4" :class="{'opacity-75': !emailSettingsActive}">
-                            <label for="emailAddress" class="form-label text-secondary">Endereço de e-mail:</label>
+                            <label for="emailAddress" class="form-label text-secondary">{{ showText('EMAIL_ADDRESS_LABEL') }}</label>
                             <input v-model="emailSettings.emailAddress" type="text" class="form-control form-control-sm custom_focus text-secondary" id="emailAddress">
                         </div>
 
                         <div class="mb-4 col-sm-4" :class="{'opacity-75': !emailSettingsActive}">
-                            <label for="username" class="form-label text-secondary">Usuário/E-mail:</label>
+                            <label for="username" class="form-label text-secondary">{{ showText('USERNAME_EMAIL_LABEL') }}</label>
                             <input v-model="emailSettings.username" type="text" class="form-control form-control-sm custom_focus text-secondary" id="username">
                         </div>
 
                         <div class="mb-4 col-sm-4" :class="{'opacity-75': !emailSettingsActive}">
-                            <label for="password" class="form-label text-secondary">Senha:</label>
+                            <label for="password" class="form-label text-secondary">{{ showText('PASSWORD_LABEL') }}</label>
                             <input v-model="emailSettings.password" type="password" class="form-control form-control-sm custom_focus text-secondary" id="password">
                         </div>
 
                         <div class="mb-2 d-flex justify-content-end" :class="{'opacity-75': !emailSettingsActive}">
                             <btnPrimary 
                                 :loading="isLoading.updateSettings"
-                                :text="showText('SAVE')"
+                                :text="showText('SAVE_CHANGES')"
                                 type="submit"
                                 width="sm"
                             />
