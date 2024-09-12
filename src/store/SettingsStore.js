@@ -14,6 +14,13 @@ export const settingsStore = reactive({
         return setting ? setting.value : null;
     },
 
+    updateSetting(name, newValue) {
+        const setting = this.settings.find(setting => setting.name === name);
+        if(setting) {
+            setting.value = newValue;
+        }
+    },
+
     getAll() {
         return this.settings;
     }

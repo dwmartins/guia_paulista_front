@@ -3,7 +3,7 @@
         <div id="appSpinnerLoading" class="d-flex justify-content-center">
             <div class="spinner-border" :class="[color, width]" role="status"></div>
         </div>  
-        <p class="m-0 fs-6" :class="color">{{ message }}</p>
+        <p class="m-0 fs-7" :class="color">{{ message }}</p>
     </div>
 </template>
 

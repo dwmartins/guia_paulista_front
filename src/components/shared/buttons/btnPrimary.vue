@@ -4,7 +4,7 @@
             <AppSpinner :message="textLoading" color="text-white" />
         </template>
         <template v-else>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center p-0">
                 {{ text }}
                 <i v-if="icon" :class="[icon, 'ms-1']"></i>
             </div>

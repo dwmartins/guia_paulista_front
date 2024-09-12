@@ -54,6 +54,7 @@ export const LANGUAGE_PAGE = "Language";
 export const EMAIL_PAGE = "Email";
 export const USERS_PAGE = "Users";
 export const CATEGORIES_LISTING_PAGE = "listing categories";
+export const EMAIL_SETTINGS_PAGE = "Email Settings";
 
 // Form Labels
 export const EMAIL_LABEL = "Email";
