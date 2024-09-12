@@ -52,7 +52,10 @@
 
                         <div class="mb-4 col-sm-4" :class="{'opacity-75': !emailSettingsActive}">
                             <label for="password" class="form-label text-secondary">{{ showText('PASSWORD_LABEL') }}</label>
-                            <input v-model="emailSettings.password" type="password" class="form-control form-control-sm custom_focus text-secondary" id="password">
+                            <div class="position-relative">
+                                <input v-model="emailSettings.password" :type="inputPassword" class="form-control form-control-sm custom_focus text-secondary" id="password">
+                                <i v-if="emailSettings.password" @click="showPassword()" :class="viewPassword ? 'fa-eye' : 'fa-eye-slash'" class="fa-regular icon-password text-black-50 cursor_pointer"></i>
+                            </div>
                         </div>
 
                         <div class="mb-2 d-flex justify-content-end" :class="{'opacity-75': !emailSettingsActive}">
@@ -87,6 +90,9 @@ const isLoading = ref({
     searchingSettings: false
 });
 
+const viewPassword = ref(false);
+const inputPassword = ref('password');
+
 const hideForm = ref(true);
 
 const emailSettingsActive = ref(false);
@@ -112,6 +118,11 @@ onUnmounted(() => {
     SEOManager.setTitle();
 });
 
+const showPassword = () => {
+    viewPassword.value = !viewPassword.value;
+    inputPassword.value = viewPassword.value ? 'text' : 'password';
+}
+
 const getEmailSettings = async () => {
     try {
         isLoading.value.searchingSettings = true;
@@ -120,7 +131,7 @@ const getEmailSettings = async () => {
         emailSettings.value = response.data;
 
         emailSettingsActive.value = settingsStore.getSetting('emailSending') == "on" ? true : false;
-        
+
         isLoading.value.searchingSettings = false;
         hideForm.value = false;
     } catch (error) {
@@ -174,5 +185,13 @@ const updateStatus = async () => {
 .email_settings {
     border-radius: 5px;
     box-shadow: var(--box-shadow-cards);
+}
+
+.icon-password {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
 }
 </style>
