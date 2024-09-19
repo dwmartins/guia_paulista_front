@@ -158,6 +158,12 @@ const toggleCollapse = (section) => {
         menuClose.value = false;
     }
 
+    for(const key in isCollapsed.value) {
+        if(key !== section) {
+            isCollapsed.value[key] = true;
+        }
+    } 
+    
     isCollapsed.value[section] = !isCollapsed.value[section];
 }
 
