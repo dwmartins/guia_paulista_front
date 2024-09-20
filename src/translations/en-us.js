@@ -125,6 +125,7 @@ export const ALT_MAINTENANCE = "Maintenance image";
 export const ALT_PAGE_NOT_FOUND = "Page not found";
 export const ALT_CATEGORY = "Category";
 export const ALT_ATTENTION = "Attention";
+export const ALT_LOGO = "Logo"
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Snack bars, pizzerias, hotel...";
@@ -220,3 +221,9 @@ export const STATUS_CATEGORY_ACTIVE = "Active";
 export const STATUS_CATEGORY_INACTIVE = "Inactive";
 export const EMAIL_SETTINGS_TITLE = "SMTP Server Properties";
 export const SEARCHING_SETTINGS = "Searching for settings...";
+export const SEARCHING_BASIC_INFO = "Searching for basic information...";
+export const BASIC_INFO_TITLE = "Basic Information";
+export const WEBSITE_IMAGES = "Website Images";
+export const CHOOSE_YOUR_LOGO_IMAGE = "Choose your logo image";
+export const FORMAT_LOGO_IMAGE = "Recommended size is 250px by 125px, maximum size 5 MB, (JPG, JPEG or PNG.)";
+export const CHOOSE_FILE = "Choose file";

@@ -73,6 +73,10 @@ export function initializeRoutes() {
                 {
                     path: showText('PATH_ADM_MAIL'),
                     component: () => import('@/views/admin/settings/EmailSettingsView.vue')
+                },
+                {
+                    path: showText('PATH_ADM_BASIC_INFORMATION'),
+                    component: () => import('@/views/admin/settings/BasicInformationView.vue')
                 }
             ]
         },
