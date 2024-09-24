@@ -126,6 +126,9 @@ export const ALT_PAGE_NOT_FOUND = "Página não encontrada";
 export const ALT_CATEGORY = "Categoria";
 export const ALT_ATTENTION = "Atenção";
 export const ALT_LOGO = "Logotipo"
+export const ALT_COVER = "Capa";
+export const ALT_ICON = "ico";
+export const ALT_DEFAULT_IMG = "Imagem padrão"; 
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Lanchonetes, pizzarias, hotel...";
@@ -227,3 +230,8 @@ export const WEBSITE_IMAGES = "Imagens do site";
 export const CHOOSE_YOUR_LOGO_IMAGE = "Escolha a imagem do seu logotipo";
 export const FORMAT_LOGO_IMAGE = "Recomenda-se dimensão de 250px por 125px, tamanho máximo 5 MB, (JPG, JPEG ou PNG.)";
 export const CHOOSE_FILE = "Escolher arquivo";
+export const CHOOSE_YOUR_COVER_IMAGE = "Escolha a imagem de capa";
+export const FORMAT_IMAGE = "tamanho máximo 5 MB, (JPG, JPEG ou PNG.)";
+export const CHOOSE_YOUR_ICON = "Escolha um favicon para o seu site";
+export const FORMAT_ICON = "Favicon são pequenas imagens de 16 x 16 pixels associadas a um site, geralmente mostradas na barra de endereços do navegador e na lista de favoritos.";
+export const NO_FILES_SELECTED = "Nenhum arquivo selecionado";

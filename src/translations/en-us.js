@@ -125,7 +125,10 @@ export const ALT_MAINTENANCE = "Maintenance image";
 export const ALT_PAGE_NOT_FOUND = "Page not found";
 export const ALT_CATEGORY = "Category";
 export const ALT_ATTENTION = "Attention";
-export const ALT_LOGO = "Logo"
+export const ALT_LOGO = "Logo";
+export const ALT_COVER = "Cover";
+export const ALT_ICON = "ico";
+export const ALT_DEFAULT_IMG = "Default image";
 
 // placeholders
 export const PLACEHOLDER_SEARCH_LOCATIONS = "Snack bars, pizzerias, hotel...";
@@ -227,3 +230,8 @@ export const WEBSITE_IMAGES = "Website Images";
 export const CHOOSE_YOUR_LOGO_IMAGE = "Choose your logo image";
 export const FORMAT_LOGO_IMAGE = "Recommended size is 250px by 125px, maximum size 5 MB, (JPG, JPEG or PNG.)";
 export const CHOOSE_FILE = "Choose file";
+export const CHOOSE_YOUR_COVER_IMAGE = "Choose cover image";
+export const FORMAT_IMAGE = "Maximum size 5 MB, (JPG, JPEG or PNG.)";
+export const CHOOSE_YOUR_ICON = "Choose a favicon for your site";
+export const FORMAT_ICON = "FaviconS are small 16 x 16 pixel images associated with a website, usually displayed in the browser's address bar and favorites list.";
+export const NO_FILES_SELECTED = "No files selected";

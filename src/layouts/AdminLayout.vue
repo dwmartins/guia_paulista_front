@@ -118,10 +118,11 @@ import { useRoute } from 'vue-router';
 import { userStore } from '@/store/userStore';
 import defaultUserImg from '@/assets/img/default/user.jpg'
 import AuthService from '@/services/AuthService';
+import { systemImagesUrl } from '@/helpers/constants';
 
 const API_URL = process.env.VUE_APP_API_URL;
 
-const logoImage = siteInfoStore.constants.logoImage ? `${this.$API_URL}/uploads/systemImages/${siteInfoStore.constants.logoImage}` : defaultLogo;
+const logoImage = computed(() => siteInfoStore.constants.logoImage ? `${systemImagesUrl}/${siteInfoStore.constants.logoImage}` : defaultLogo);
 const user = computed(() => userStore.user);
 const userImg = ref(userStore.user.photo ? `${API_URL}/uploads/users/${userStore.user.photo}` : defaultUserImg)
 
