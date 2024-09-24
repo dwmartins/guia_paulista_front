@@ -12,6 +12,7 @@ import ProfileView from '@/views/public/user/ProfileView.vue';
 import ContactView from '@/views/public/ContactView.vue';
 import { settingsStore } from '@/store/SettingsStore';
 import { showAlert } from '@/helpers/showAlert';
+import { allowedRoles } from '@/helpers/constants';
 
 let router = null;
 
@@ -118,7 +119,6 @@ export function initializeRoutes() {
         const { requiresAuth, requiresAuthAdmin } = to.meta;
         const isEnteringApp = to.path.startsWith('/app') && !from.path.startsWith('/app');
         const maintenanceMode = settingsStore.getSetting('maintenance') === "on";
-        const allowedRoles = ["support", "admin", "mod", "test"];
         
         // Function that handles authentication and displays the loading screen
         const handleAuth = () => {

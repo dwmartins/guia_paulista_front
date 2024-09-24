@@ -62,12 +62,10 @@
                     <button class="btn border-0 mx-2 item_center" @click="openMenu">
                         <i class="fa-solid fa-bars fs-4"></i>
                     </button>
-                    <router-link to="/">
-                        <button class="btn btn-sm btn-outline-primary text-nowrap">
-                            Site
-                            <i class="fa-solid fa-globe ms-1"></i>
-                        </button>
-                    </router-link>
+                    <a href="/" target="_blank" class="btn btn-sm btn-outline-primary text-nowrap">
+                        Site
+                        <i class="fa-solid fa-globe ms-1"></i>
+                    </a>
                 </div>
                 <div class="px-2 item_center gap-3">
                     <div class="px-2">

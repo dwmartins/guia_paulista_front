@@ -1,4 +1,5 @@
-const API_URL = process.env.VUE_APP_API_URL;
+export const API_URL = process.env.VUE_APP_API_URL;
+export const allowedRoles = ["support", "admin", "mod", "test"];
 
 export const defaultLogo = new URL('@/assets/img/default/defaultLogo.png', import.meta.url).href;
 export const defaultCover = new URL('@/assets/img/default/defaultCoverImage.jpg', import.meta.url).href;

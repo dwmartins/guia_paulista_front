@@ -47,6 +47,7 @@ import { showAlert } from '@/helpers/showAlert';
 import AuthService from '@/services/AuthService';
 import { reactive, ref } from 'vue';
 import btnPrimary from '@/components/shared/buttons/btnPrimary.vue';
+import { allowedRoles } from '@/helpers/constants';
 
 onMounted(() => {
     document.title = `${showText('PANEL_PAGE')} | ${showText('LOGIN_PAGE')}`;
@@ -92,8 +93,6 @@ const submitForm = async () => {
         try {
             const response = await AuthService.login({ ...formValidation, rememberMe: rememberMe.value });
             isLoading.value = false;
-
-            const allowedRoles = ["support", "admin", "mod", "test"];
 
             if(allowedRoles.includes(response.data.role)) {
                 AuthService.setUserLogged(response.data, rememberMe.value);

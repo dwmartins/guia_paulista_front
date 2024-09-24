@@ -29,7 +29,7 @@
 
                         <hr>
 
-                        <li v-if="allowedRolesToApp.includes(user.role)" class="nav-item logged_small">
+                        <li v-if="allowedRoles.includes(user.role)" class="nav-item logged_small">
                             <router-link :to="showText('PATH_USER_PANEL')" class="nav-link" @click="closeNavbar()">
                                 {{ showText('PANEL_PAGE') }}
                             </router-link>
@@ -152,11 +152,11 @@ import { showText } from '@/translation';
 import { userStore } from '@/store/userStore';
 import { siteInfoStore } from '@/store/siteInfoStore';
 import AuthService from '@/services/AuthService';
+import { systemImagesUrl, allowedRoles } from '@/helpers/constants';
 
-const allowedRolesToApp = ["support", "admin", "mod", "test"];
 const user = computed(() => userStore.user);
 
-const logoImage = siteInfoStore.constants.logoImage ? `${this.$API_URL}/uploads/systemImages/${siteInfoStore.constants.logoImage}` : defaultLogo;
+const logoImage = computed(() => siteInfoStore.constants.logoImage ? `${systemImagesUrl}/${siteInfoStore.constants.logoImage}` : defaultLogo);
 const isMenuOpen = ref(false);
 
 const menuOnClick = () => {

@@ -20,8 +20,7 @@ import { onMounted } from 'vue';
 import { router } from '@/router';
 import { showText } from '@/translation';
 import AuthService from '@/services/AuthService';
-
-const allowedRoles = ["support", "admin", "mod", "test"];
+import { allowedRoles } from '@/helpers/constants';
 
 onMounted( async () => {
     await getSiteInfo();

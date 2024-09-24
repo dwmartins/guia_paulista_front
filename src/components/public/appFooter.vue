@@ -85,10 +85,12 @@
 
 <script setup>
 import defaultLogo from '@/assets/img/default/defaultLogo.png';
+import { systemImagesUrl } from '@/helpers/constants';
 import { siteInfoStore } from '@/store/siteInfoStore';
 import { showText } from '@/translation';
+import { computed } from 'vue';
 
-const logoImage = siteInfoStore.constants.logoImage ? `${this.$API_URL}/uploads/systemImages/${siteInfoStore.constants.logoImage}` : defaultLogo;
+const logoImage = computed(() => siteInfoStore.constants.logoImage ? `${systemImagesUrl}/${siteInfoStore.constants.logoImage}` : defaultLogo);
 
 const urls = {
     twitter: siteInfoStore.constants.twitter,

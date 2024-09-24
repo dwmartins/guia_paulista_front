@@ -4,10 +4,10 @@ import { showAlert } from '@/helpers/showAlert';
 import { router } from '@/router';
 import { showError } from '@/helpers/showError';
 import { showText } from '@/translation';
+import { allowedRoles } from '@/helpers/constants';
 
 class AuthService {
     isAdmin() {
-        const allowedRoles = ["support", "admin", "mod", "test"];
         const user = this.getUserLogged();
 
         if(user) {
