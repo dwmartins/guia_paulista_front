@@ -1,8 +1,8 @@
 <template>
     <section id="basicInfoView" class="p-2 show">
-        <div class="bg-white container px-4 pb-4 basicInfoView">
+        <div class="bg-white container px-4 pb-2 basicInfoView mb-4">
             <div class="py-3 mb-2">
-                <h6 class="custom_dar m-0">{{ showText('BASIC_INFO_TITLE') }}</h6>
+                <h6 class="custom_dar m-0">{{ showText('VISUAL_IDENTITY') }}</h6>
             </div>
 
             <div v-if="isLoading.searchingBasicInfo" class="alert alert-info fadeIn p-2 mb-5 show" role="alert">
@@ -124,6 +124,91 @@
 
             </div>
         </div>
+        
+        <div class="bg-white container px-4 pb-4 basicInfoView">
+            <div class="py-3 mb-2">
+                <h6 class="custom_dar m-0">{{ showText('BASIC_INFO_TITLE') }}</h6>
+            </div>
+
+            <form class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="webSiteName" class="form-label">{{ showText('SITE_NAME_LABEL') }}</label>
+                    <input v-model="siteInfo.webSiteName" type="text" class="form-control form-control-sm custom_focus text-secondary" id="webSiteName">
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label for="email" class="form-label">{{ showText('EMAIL_LABEL') }}</label>
+                    <input v-model="siteInfo.email" type="text" class="form-control form-control-sm custom_focus text-secondary" id="email">
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label for="phone" class="form-label">{{ showText('PHONE_LABEL') }}</label>
+                    <input v-model="siteInfo.phone" type="number" class="form-control form-control-sm custom_focus text-secondary" id="phone">
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label for="city" class="form-label">{{ showText('CITY_LABEL') }}</label>
+                    <input v-model="siteInfo.city" type="text" class="form-control form-control-sm custom_focus text-secondary" id="city">
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label for="state" class="form-label">{{ showText('STATE_LABEL') }}</label>
+                    <input v-model="siteInfo.state" type="text" class="form-control form-control-sm custom_focus text-secondary" id="state">
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label for="address" class="form-label">{{ showText('ADDRESS_LABEL') }}</label>
+                    <input v-model="siteInfo.address" type="text" class="form-control form-control-sm custom_focus text-secondary" id="address">
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label for="instagram" class="form-label">{{ showText('INSTAGRAM_LABEL') }}</label>
+                    <input v-model="siteInfo.instagram" type="text" class="form-control form-control-sm custom_focus text-secondary" id="instagram">
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label for="facebook" class="form-label">{{ showText('FACEBOOK_LABEL') }}</label>
+                    <input v-model="siteInfo.facebook" type="text" class="form-control form-control-sm custom_focus text-secondary" id="facebook">
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label for="twitter" class="form-label">{{ showText('TWITTER_LABEL') }}</label>
+                    <input v-model="siteInfo.twitter" type="text" class="form-control form-control-sm custom_focus text-secondary" id="twitter">
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label for="description" class="form-label">{{ showText('DESCRIPTION_LABEL') }} <span class="opacity-75 fs-8">(SEO)</span></label>
+                    <el-input
+                        v-model="siteInfo.description"
+                        maxlength="300"
+                        show-word-limit
+                        type="textarea"
+                        name="description"
+                        :rows="6"
+                        id="description"
+                        :input-style="{'color': '#6c757d'}"
+                    />
+                </div>
+
+                <div class="mb-4 col-md-6">
+                    <label for="keywords" class="form-label">{{ showText('KEYWORDS_LABEL') }}<span class="opacity-75 fs-8"> (SEO)</span></label>
+                    <el-input
+                        v-model="siteInfo.keywords"
+                        maxlength="300"
+                        show-word-limit
+                        type="textarea"
+                        name="description"
+                        :rows="6"
+                        id="keywords"
+                        :input-style="{'color': '#6c757d'}"
+                    />
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <btnPrimary @click="submitBasicInfos()" :loading="isLoading.basicInfos" width="sm" :text="showText('SAVE_CHANGES')"/>
+                </div>
+            </form>
+        </div>
     </section>
 </template>
 
@@ -145,6 +230,7 @@ const acceptIcon = "image/vnd.microsoft.icon, image/x-icon, image/jpeg, image/jp
 const isLoading = ref({
     searchingBasicInfo: false,
     images: false,
+    basicInfos: false,
     logo: false,
     cover: false,
     icon: false,
@@ -171,6 +257,8 @@ const imagesToSave = {
     icon: null,
     default: null
 }
+
+const siteInfo = computed(() => siteInfoStore.constants);
 
 onMounted(() => {
     SEOManager.setTitle(showText('BASIC_INFORMATION_PAGE'));
@@ -250,6 +338,28 @@ const cleanPreviewImgs = () => {
         imagesToSave[img] = null;
     }
 }
+
+const submitBasicInfos = async ()  => {
+    let data = {...siteInfo.value};
+
+    delete data.ico;
+    delete data.logoImage;
+    delete data.coverImage;
+    delete data.defaultImage;
+
+    try {
+        isLoading.value.basicInfos = true;
+        const response = await SiteInfoService.update(data);
+
+        siteInfoStore.updateConstants(response.data.siteInfoData);
+        SEOManager.setAllMeta();
+        showAlert('success', '', response.data.message);
+        isLoading.value.basicInfos = false;
+    } catch (error) {
+        isLoading.value.basicInfos = false;
+        console.error('An error occurred while updating the site information', error);
+    }
+} 
 
 </script>
 

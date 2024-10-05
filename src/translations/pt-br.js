@@ -82,6 +82,10 @@ export const PORT_LABEL = "Porta";
 export const AUTHENTICATION_LABEL = "Autenticação";
 export const EMAIL_ADDRESS_LABEL = "Endereço de e-mail";
 export const USERNAME_EMAIL_LABEL = "Usuário/E-mail";
+export const SITE_NAME_LABEL = "Nome do site";
+export const INSTAGRAM_LABEL = "Instagram";
+export const FACEBOOK_LABEL = "Facebook";
+export const TWITTER_LABEL = "twitter";
 
 // Form Validations
 export const EMAIL_INVALID = "Por favor, insira o endereço de e-mail correto";
@@ -226,6 +230,7 @@ export const EMAIL_SETTINGS_TITLE = "Propriedades do servidor SMTP";
 export const SEARCHING_SETTINGS = "Buscando configurações...";
 export const SEARCHING_BASIC_INFO = "Buscando informações básicas...";
 export const BASIC_INFO_TITLE = "Informações básicas";
+export const VISUAL_IDENTITY = "Identidade visual";
 export const WEBSITE_IMAGES = "Imagens do site";
 export const CHOOSE_YOUR_LOGO_IMAGE = "Escolha a imagem do seu logotipo";
 export const FORMAT_LOGO_IMAGE = "Recomenda-se dimensão de 250px por 125px, tamanho máximo 5 MB, (JPG, JPEG ou PNG.)";

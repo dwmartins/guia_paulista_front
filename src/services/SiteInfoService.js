@@ -32,24 +32,22 @@ class SiteInfoService {
         }
     }
 
-    // async updateBasicInfos(infos) {
-    //     const user = AuthService.validateLoggedUser();
-    //     if (!user) return false;
+    async update(infos) {
+        const user = AuthService.checkAuth();
+        if (!user) return false;
 
-    //     try {
-    //         const response = await axios.post('/siteinfo', infos, {
-    //             headers: {
-    //                 'Authorization': `Bearer userId:${user.id} token:${user.token}`,
-    //             }
-    //         });
+        try {
+            return await axios.post('/siteinfo', infos, {
+                headers: {
+                    'Authorization': AuthService.getBearer(),
+                }
+            });
 
-    //         return response;
-
-    //     } catch (error) {
-    //         showError(error);
-    //         throw error;
-    //     }
-    // }
+        } catch (error) {
+            showError(error);
+            throw error;
+        }
+    }
 }
 
 export default new SiteInfoService();
