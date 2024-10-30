@@ -93,42 +93,40 @@
 
                 </ul>
                 <div v-if="userStore.userLogged" class="logged_large">
-                    <button class="btn btn-light border btn-sm me-2">
+                    <button class="btn btn-light border btn-sm me-2 fw-semibold text-dark opacity-75">
                         <router-link :to="showText('PATH_PLANS')" class="nav-link">
                             {{ showText('ADVERTISE_HERE') }}
                         </router-link>
                     </button>
 
-                    <el-dropdown>
-                        <span class="el-dropdown-link">
-                            <el-button type="primary">
-                                {{ userStore.user.name }}<i class="fa-solid fa-chevron-down ms-2"></i>
-                            </el-button>
-                        </span>
-                        <template #dropdown>
-                            <el-dropdown-menu>
-                                <el-dropdown-item class="px-0">
-                                    <router-link :to="showText('PATH_USER_PANEL')" class="nav-link px-3 w-100">
-                                        <i class="fa-solid fa-chart-line me-2"></i>
-                                        {{ showText('PANEL_PAGE') }}
-                                    </router-link>
-                                </el-dropdown-item>
-                                <el-dropdown-item class="px-0">
-                                    <router-link :to="showText('PATH_PROFILE')" class="nav-link px-3 w-100">
-                                        <i class="fa-regular fa-user me-2"></i>
-                                        {{ showText('PROFILE_PAGE') }}
-                                    </router-link>
-                                </el-dropdown-item>
-                                <el-dropdown-item divided @click="AuthService.logout(true)">
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ userStore.user.name }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <router-link :to="showText('PATH_USER_PANEL')" class="dropdown-item px-3 w-100 text-secondary">
+                                    <i class="fa-solid fa-chart-line me-2"></i>
+                                    {{ showText('PANEL_PAGE') }}
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="showText('PATH_PROFILE')" class="dropdown-item px-3 w-100 text-secondary">
+                                    <i class="fa-regular fa-user me-2"></i>
+                                    {{ showText('PROFILE_PAGE') }}
+                                </router-link>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <span @click="AuthService.logout(true)" class="dropdown-item px-3 w-100 cursor_pointer text-secondary">
                                     <i class="fa-solid fa-right-from-bracket me-2"></i>
                                     {{ showText('LOGOUT_PAGE') }}
-                                </el-dropdown-item>
-                            </el-dropdown-menu>
-                        </template>
-                    </el-dropdown>
-
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div v-if="!userStore.userLogged" class="flex-column logged_large">
+                <div v-if="!userStore.userLogged" class="flex logged_large">
                     <router-link :to="showText('PATH_PLANS')"
                         class="btn btn-light border btn-sm me-2 fw-semibold text-dark opacity-75"
                         @click="closeNavbar()">
@@ -195,6 +193,21 @@ nav {
 
 .logged_small {
     display: none;
+}
+
+.logged_large {
+    display: flex;
+}
+
+.dropdown-menu {
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    border: 0 !important;
+}
+
+.dropdown-item:hover {
+    background-color: #d8ebfd;
+    color: #409EFF !important;
 }
 
 @media screen and (max-width: 992px) {

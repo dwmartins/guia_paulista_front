@@ -62,6 +62,11 @@ input[type="number"] {
     color: #b1b1b1 !important;
 }
 
+button:focus, .btn:focus {
+    outline: none;
+    box-shadow: none !important;
+}
+
 /* Botões */
 .btn-primary {
     color: var(--bs-primary-text);
